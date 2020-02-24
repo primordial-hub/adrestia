@@ -1,5 +1,5 @@
 #include "stdlib.h"
 int main() {
-printf("git chnhabet 5edmti leshaabi ");
+printf("git chmlk*mlfb,*f,bpskdjfbtnù ");
 return 0 ;
 }
