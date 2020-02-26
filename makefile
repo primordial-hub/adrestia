@@ -1,5 +1,5 @@
 LFLAGS = `sdl-config --libs` -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
-OBJS   = main.o initandload.o menu.o play.o option.o 
+OBJS   = main.o initandload.o menu.o play.o option.o enigmes.o settings.o
 programme = adrestia
 CXX = gcc
 
