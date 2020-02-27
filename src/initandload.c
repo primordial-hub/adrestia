@@ -97,12 +97,10 @@ void init_m()
     imgredb1 = IMG_Load("images/redb1.png");
     //***********************************************************************************************************************
     imageFULLSCREEN = IMG_Load("images/FULLSCREEN.png");
-    imageNORMAL = IMG_Load("images/NORMAL.png");
+    imageNORMAL = IMG_Load("images/NORMAL1.png");
     imageHIGH = IMG_Load("images/HIGH.png");
     imageLOW = IMG_Load("images/LOW.png");
     imageMEDIUM = IMG_Load("images/MEDIUM.png");
-    imageFULLSCREEN1 = IMG_Load("images/FULLSCREEN1.png");
-    imageNORMAL1 = IMG_Load("images/NORMAL1.png");
     imageHIGH1 = IMG_Load("images/HIGH1.png");
     imageLOW1 = IMG_Load("images/LOW1.png");
     imageMEDIUM1 = IMG_Load("images/MEDIUM1.png");
