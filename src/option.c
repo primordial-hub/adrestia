@@ -152,8 +152,7 @@ void choix_menu1(int *jouer,int *x1, int *y1, int box_x, int box_h, int box_w, i
         *y1 = 0;
         Mix_PlayChannel(1, son, 0);
         *jouer=1;
-        printf("pointer%dpointer",*jouer);
-    }
+    }  
     if ((*x1 > box_x) && (*x1 < box_x + box_w) && (*y1 > box_y1) && (*y1 < box_y1 + box_h))
     {
         SDL_BlitSurface(imageNEWGAME1, NULL, screen, &posNEWGAME);
