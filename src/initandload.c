@@ -11,7 +11,7 @@ SDL_Event event,event1;
 TTF_Font *fontTest;
 Mix_Chunk *son;
 Mix_Music *musique;
-SDL_Color fontColor = {150, 157, 255};
+SDL_Color fontColor = {148, 146, 146};
 SDL_Surface *texte;
 SDL_Rect textePosition;
 void init_m()
