@@ -1,9 +1,14 @@
 #include "main.h"
 #include "settings.h"
-int main ()
+int main()
 {
-menu();
-settings();
-
-return 0;
+    
+  
+       
+   
+   
+    
+        menu();
+   
+    return 0;
 }

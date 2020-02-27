@@ -1,7 +1,7 @@
 #include "menu.h"
 
 void menu()
-{
+{int jouer = 0;
   init_sm ();
 
   int continuer = 1;
@@ -171,10 +171,15 @@ settings_RETURN();
     //**********************************************************************************************
     choix_menu(x, y, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME, imageNEWGAME1, imageLOAD, imageLOAD1, imageEXIT, imageEXIT1, imageSETTINGS, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1);
     //*********************************************************************************************
-    choix_menu1(&x1, &y1, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME2, imageNEWGAME1, imageLOAD2, imageLOAD1, imageEXIT2, imageEXIT1, imageSETTINGS2, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1, son, &continuer, &s1);
+    choix_menu1(&jouer,&x1, &y1, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME2, imageNEWGAME1, imageLOAD2, imageLOAD1, imageEXIT2, imageEXIT1, imageSETTINGS2, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1, son, &continuer, &s1);
     //**************************************************************************************************
     SDL_BlitSurface(texte, NULL, screen, &textePosition);
     SDL_Flip(screen);
+    if (jouer==1)
+    {
+      play(&jouer);
+    }
+
   }
   //**********************************************************************
   SDL_FreeSurface(image);
