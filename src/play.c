@@ -7,7 +7,7 @@ void play(int *jouer)
     SDL_Rect poslogoo;
     poslogoo.x = 0;
     poslogoo.y = 0;
-    logoo = SDL_LoadBMP("images/img.bmp");
+    logoo = IMG_Load("images/st.jpg");
     SDL_BlitSurface(logoo, NULL, screen, &poslogoo);
     while (*jouer == 1)
     {
