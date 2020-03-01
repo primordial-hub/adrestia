@@ -1,12 +1,17 @@
 #include "setjouer.h"
 
-SDL_Surface *setjouer = NULL,*setjouer1=NULL;
+SDL_Surface *setjouer = NULL, *setjouer1 = NULL;
 SDL_Rect possetjouer;
 int sett = 0, x3, y3, setj = -1;
-SDL_Rect possetj,posexitj;
+SDL_Rect possetj, posexitj;
 void setjouersouris(int *jouer)
-{possetj.x=13;possetj.y=606;
-   posexitj.x=13;posexitj.y=695;
+{
+    possetj.x = 13;
+    possetj.y = 606;
+    posexitj.x = 13;
+    posexitj.y = 695;
+    possetjouer.x = 0;
+    possetjouer.y = 0;
     SDL_Event eventj1;
     SDL_WaitEvent(&eventj1);
     switch (eventj1.type)
@@ -66,31 +71,29 @@ void setjouersouris(int *jouer)
         *jouer = 0;
         break;
     }
-
-    possetjouer.x = 0;
-    possetjouer.y = 0;
     setjouer = IMG_Load("images/setjouer0.png");
+    setjouer1 = IMG_Load(" ");
     SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+    SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
 
     if (setj == -1)
     {
-      
         SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
     }
 
     if (setj % 2 == 0)
     {
-          setjouer1=IMG_Load("images/settingsjouer.png");
-          SDL_BlitSurface(setjouer,NULL,screen,&possetjouer);
-          SDL_BlitSurface(setjouer1,NULL,screen,&possetj);
+        setjouer1 = IMG_Load("images/settingsjouer.png");
+        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+        SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
     }
 
     if (setj % 2 == 1)
     {
-        
-          setjouer1=IMG_Load("images/exitjouer.png");
-          SDL_BlitSurface(setjouer,NULL,screen,&possetjouer);
-          SDL_BlitSurface(setjouer1,NULL,screen,&posexitj);
+
+        setjouer1 = IMG_Load("images/exitjouer.png");
+        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+        SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
     }
     if ((x3 > 10) && (x3 < 10 + 64) && (y3 > 594) && (y3 < 594 + 68))
     {
@@ -98,7 +101,8 @@ void setjouersouris(int *jouer)
         setj = 0;
         x3 = 0;
         y3 = 0;
-        setjouer = IMG_Load("images/settingsjouer.png");
+        setjouer1 = IMG_Load("images/settingsjouer.png");
+        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
         SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
     }
     if ((x3 > 10) && (x3 < 10 + 64) && (y3 > 682) && (y3 < 682 + 68))
@@ -107,7 +111,8 @@ void setjouersouris(int *jouer)
         x3 = 0;
         y3 = 0;
         *jouer = 0;
-        setjouer1= IMG_Load("images/exitjouer.png");
+        setjouer1 = IMG_Load("images/exitjouer.png");
+        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
         SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
     }
     if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y1 > posredb.y) && (y1 < posredb.y + 27))
@@ -124,9 +129,9 @@ void setjouersouris(int *jouer)
     {
         s1 = 1;
         exitsetting = 1;
-        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
     }
 
     SDL_Flip(screen);
-   SDL_FreeSurface(setjouer); SDL_FreeSurface(setjouer1); 
+    SDL_FreeSurface(setjouer);
+    SDL_FreeSurface(setjouer1);
 }
