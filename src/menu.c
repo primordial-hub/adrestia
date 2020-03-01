@@ -1,17 +1,18 @@
 #include "menu.h"
 
 void menu()
-{int jouer = 0;
-  init_sm ();
+{
+  int jouer = 0;
+  init_sm();
 
   int continuer = 1;
   SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
   TTF_Init();
-   init_m();
+  init_m();
   screen = SDL_SetVideoMode(1300, 800, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 
   SDL_EnableKeyRepeat(100, 100);
-  init_tm ();
+  init_tm();
   SDL_SetColorKey(imageLOGO, SDL_SRCCOLORKEY, SDL_MapRGB(imageLOGO->format, 255, 255, 255));
   SDL_SetColorKey(imageLOGO2, SDL_SRCCOLORKEY, SDL_MapRGB(imageLOGO2->format, 255, 255, 255));
   SDL_BlitSurface(image, NULL, screen, &posback);
@@ -95,8 +96,8 @@ void menu()
         {
           down_menu(&n, &l, &s, &e, &e1);
         }
-        
-if (s1 == 2)
+
+        if (s1 == 2)
         {
           down_menusettings(&sb1, &sb2, &sb3, &sb4);
         }
@@ -106,44 +107,48 @@ if (s1 == 2)
         {
           up_menu(&n, &l, &s, &e, &e1);
         }
-       if (s1 == 2)
+        if (s1 == 2)
         {
           up_menusettings(&sb1, &sb2, &sb3, &sb4);
         }
         break;
       case SDLK_RIGHT:
-   
-    settings_RIGHT();
-          break;
-        case SDLK_LEFT:
-     settings_LEFT();      
-          break;
-        case SDLK_ESCAPE:
-          s1 = 1;
-          exitsetting = 1;
-          sb1 = 1;
-          sb2 = 2;
-          sb3 = 1;
-          sb4 = 1;
-          break;
-        case SDLK_RETURN:
-          //exit
-          if (e1 == 3)
-          {
-            continuer = 0;
-          }
-          //ouverture settings
-          if (s == 2)
-          {
-            s1 = 2;
-          }
-       
-settings_RETURN();
 
-          break;
-          //***************************************************************************
+        settings_RIGHT();
+        break;
+      case SDLK_LEFT:
+        settings_LEFT();
+        break;
+      case SDLK_ESCAPE:
+        s1 = 1;
+        exitsetting = 1;
+        sb1 = 1;
+        sb2 = 2;
+        sb3 = 1;
+        sb4 = 1;
+        break;
+      case SDLK_RETURN:
+        //exit
+        if (e1 == 3)
+        {
+          continuer = 0;
         }
-      
+        //ouverture settings
+        if (s == 2)
+        {
+          s1 = 2;
+        }
+        //ouverture jouer
+        if (n == 2)
+        {
+          jouer = 1;
+        }
+
+        settings_RETURN();
+
+        break;
+        //***************************************************************************
+      }
 
       break;
     case SDL_MOUSEBUTTONUP:
@@ -164,22 +169,19 @@ settings_RETURN();
     //******************************************************************************************
     choix_menu0(n, l, s, s1, e, screen, imageNEWGAME, imageNEWGAME1, imageLOAD, imageLOAD1, imageEXIT, imageEXIT1, imageSETTINGS, imageSETTINGS1, img0, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1);
     //**********************************************************************************************
-  settings_affichage();
-    
-
+    settings_affichage();
 
     //**********************************************************************************************
     choix_menu(x, y, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME, imageNEWGAME1, imageLOAD, imageLOAD1, imageEXIT, imageEXIT1, imageSETTINGS, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1);
     //*********************************************************************************************
-    choix_menu1(&jouer,&x1, &y1, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME2, imageNEWGAME1, imageLOAD2, imageLOAD1, imageEXIT2, imageEXIT1, imageSETTINGS2, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1, son, &continuer, &s1);
+    choix_menu1(&jouer, &x1, &y1, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME2, imageNEWGAME1, imageLOAD2, imageLOAD1, imageEXIT2, imageEXIT1, imageSETTINGS2, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1, son, &continuer, &s1);
     //**************************************************************************************************
     SDL_BlitSurface(texte, NULL, screen, &textePosition);
     SDL_Flip(screen);
-    if (jouer==1)
+    if (jouer == 1)
     {
       play(&jouer);
     }
-
   }
   //**********************************************************************
   SDL_FreeSurface(image);
@@ -212,6 +214,4 @@ settings_RETURN();
   Mix_FreeChunk(son);
   Mix_CloseAudio();
   //***********************************************************************
-
- 
 }

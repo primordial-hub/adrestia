@@ -2,13 +2,8 @@
 #include "settings.h"
 int main()
 {
-    
-  
-       
-   
-   
-    
-        menu();
-   
+
+    menu();
+
     return 0;
 }
