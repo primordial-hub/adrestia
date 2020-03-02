@@ -39,4 +39,5 @@ void play(int *jouer)
     sb3 = 1;
     sb4 = 1;
   }
+  
 }
