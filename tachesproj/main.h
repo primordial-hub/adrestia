@@ -21,4 +21,13 @@ struct Enemy
   int position_initiale;
  };
 typedef struct Enemy enemy;
-enemy deplacement_aleatoire(enemy enemy1);
+
+struct boxx
+ {
+  SDL_Surface *box;
+  SDL_Rect posbox;
+   
+ };
+typedef struct boxx box;
+enemy deplacement_aleatoire(enemy enemyy);
+personnage access_box1 (box boxx,personnage persbox1, int access_box1);
