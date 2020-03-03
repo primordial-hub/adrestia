@@ -31,3 +31,4 @@ struct boxx
 typedef struct boxx box;
 enemy deplacement_aleatoire(enemy enemyy);
 personnage access_box1 (box boxx,personnage persbox1, int access_box1);
+personnage access_box2(box boxx,personnage persbox2,int access_box1);

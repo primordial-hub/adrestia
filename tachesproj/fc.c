@@ -32,3 +32,22 @@ personnage access_box1 (box boxx,personnage persbox1, int access_box1)
 
   return persbox1 ;
   }
+personnage access_box2(box boxx,personnage persbox2,int access_box1)
+{
+
+      if (access_box1 == 2)
+         {
+             if (persbox2.posperso.x != 2612)
+                  {
+                     persbox2.posperso.y+=30;
+                  }
+             else if (persbox2.posperso.y > 800)      
+                {
+                  persbox2.posperso.y=0;persbox2.posperso.x= 2612;}
+                   
+                   if ( (persbox2.posperso.y < 400  )&&(persbox2.posperso.x == 2612))
+                         { persbox2.posperso.y+=28;}
+           }
+
+  return persbox2 ;
+ }

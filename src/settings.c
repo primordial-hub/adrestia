@@ -1,5 +1,5 @@
 #include "defs.h"
-#include "initandload.h"
+#include "initandloadmenu.h"
 #include "settings.h"
 
 void down_menusettings(int *sb1, int *sb2, int *sb3, int *sb4)
