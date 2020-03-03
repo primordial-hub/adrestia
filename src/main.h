@@ -1,7 +1,7 @@
 #include "defs.h"
-#include "initandload.h"
-#include "option.h"
-#include "play.h"
+#include "initandloadmenu.h"
+
+
 
 
 void menu();
