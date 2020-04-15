@@ -30,13 +30,13 @@ void enregistrer_enigme(FILE *fic)
             gets(enigme);
             printf("Donner le choix A \n");
             fflush(stdin);
-            scanf("%s",choix_A);
+            gets(choix_A);
             printf("Donner le choix B \n");
             fflush(stdin);
-            scanf("%s",choix_B);
+            gets(choix_B);
             printf("Donner le choix C \n");
             fflush(stdin);
-            scanf("%s",choix_C);
+            gets(choix_C);
             fprintf(fic,"%s %s %s %s\n",enigme,choix_A,choix_B,choix_C);
             fclose(fic);
         }
