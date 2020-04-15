@@ -18,8 +18,9 @@ void enregistrer_enigme(FILE *fic)
     char choix_A[20];
     char choix_B[20];
     char choix_C[20];
-    
-     fic = fopen("fichier_enigme","a+");
+    printf("donner le nombre d enigme a ajouter cette foix SVP \n");
+    scanf("%d",&n);
+    fic = fopen("fichier_enigme","a");
     if (fic != NULL)
     {
         for(i=0; i<n; i++)
@@ -29,15 +30,14 @@ void enregistrer_enigme(FILE *fic)
             gets(enigme);
             printf("Donner le choix A \n");
             fflush(stdin);
-            gets(choix_A);
+            scanf("%s",choix_A);
             printf("Donner le choix B \n");
             fflush(stdin);
-            gets(choix_B);
+            scanf("%s",choix_B);
             printf("Donner le choix C \n");
             fflush(stdin);
-            gets(choix_C);
-     
-            fprintf(fic,"%s ? %s %s %s .\n",enigme,choix_A,choix_B,choix_C);
+            scanf("%s",choix_C);
+            fprintf(fic,"%s %s %s %s\n",enigme,choix_A,choix_B,choix_C);
             fclose(fic);
         }
     }
@@ -48,50 +48,11 @@ void enregistrer_enigme(FILE *fic)
 }
 void extrere_enigme(FILE *fic,Enigme *enig)
 {
-    char tmp_enig[150];
-    int i=0,test=0,p1,p2,p3;
     fic = fopen("fichier_enigme","r");
     if (fic!= NULL)
     {
-        while((gets(tmp_enig)!=0)||(i==enig->nb_enig))
-            i++;
-        if(i==enig->nb_enig)
-        {
-            for(i=0; ((i<strlen(tmp_enig))||(test==1)); i++)
-            {
-                if(tmp_enig[i]=='?')
-                {
-                    test==1;
-                    p1=i;
-                }
-                else
-                    enig->enigme_extr[i]=tmp_enig[i];
-            }
-            for(i=p1;((i<strlen(tmp_enig))||(test==1)); i++)
-            {
-                if(tmp_enig[i]==' ')
-                {
-                    test==1;
-                    p2=i;
-                }
-                else
-                    enig->choix_extr.choix_A[i]=tmp_enig[i];
-            }
-            for(i=p2;((i<strlen(tmp_enig))||(test==1)); i++)
-            {
-                if(tmp_enig[i]==' ')
-                {
-                    test==1;
-                    p3=i;
-                }
-                else
-                    enig->choix_extr.choix_B[i]=tmp_enig[i];
-            }
-            for(i=p3;((i<strlen(tmp_enig))||(test==1)); i++)
-            {
-                enig->choix_extr.choix_C[i]=tmp_enig[i];
-            }
-        }
+        fseek(fic,enig->nb_enig,SEEK_SET);
+        fscanf(fic,"%s %s %s %s",enig->enigme_extr,enig->choix_extr.choix_A,enig->choix_extr.choix_B,enig->choix_extr.choix_C);
     }
     else
     {
@@ -101,15 +62,14 @@ void extrere_enigme(FILE *fic,Enigme *enig)
 }
 void enregistrer_reponse_corr(FILE *fic1)
 {
-    char reponse_corr[50];
-    printf("Donner l enigme \n");
-    fflush(stdin);
-    gets(reponse_corr);
-    fic1 = fopen("fichier_reponse","a+");
+    char reponse_corr[3];
+    printf("Donner la reponse d enigme\n");
+    scanf("%s",reponse_corr);
+    fic1 = fopen("fichier_reponse","a");
     if (fic1 != NULL)
     {
-        fprintf(fic1,"%s\n",reponse_corr);
-        printf("%s est la reponse \n",reponse_corr);
+        fprintf(fic1,"%c",reponse_corr[0]);
+        printf("%c est la reponse \n",reponse_corr[0]);
         fclose(fic1);
     }
     else
@@ -122,7 +82,7 @@ void extrere_reponse(FILE *fic1,Enigme *enig)
     fic1 = fopen("fichier_reponse","r");
     if (fic1 != NULL)
     {
-        fseek(fic,enig->nb_enig+1,SEEK_SET);
+        fseek(fic1,enig->nb_enig,SEEK_SET);
         enig->reponse_corr=fgetc(fic1);
         fclose(fic1);
         (enig->nb_enig)++;
@@ -132,7 +92,6 @@ void extrere_reponse(FILE *fic1,Enigme *enig)
         printf("Impossible d'ouvrir le fichier_reponse  \n");
     }
 }
-
 
 
 
