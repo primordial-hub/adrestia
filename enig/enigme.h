@@ -47,8 +47,6 @@ int resolution(FILE *fic1,Enigme *enig);
 int resolution_image(FILE *fic1,Enigme *enig);
 void afficher_texte(Enigme enig,SDL_Surface *screen,FILE *fic);
 void afficher_img(Enigme enig,SDL_Surface *screen);
-void afficher_lin(Enigme enig,SDL_Surface *screen,FILE *fic, float *res_lin,char eq[20]);
-void afficher_suite(Enigme enig,SDL_Surface *screen,FILE *fic,char general[20],int *U0, int *U1,int *Un, int *n);
 int gestion_temp_enigme_img(Enigme enig,SDL_Surface *screen,FILE *fic1); 
 int gestion_temp_enigme_text(Enigme enig,SDL_Surface *screen,FILE *fic1);
 int gestion_temp_jeu(Enigme enig,SDL_Surface *screen);

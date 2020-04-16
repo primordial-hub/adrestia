@@ -274,6 +274,143 @@ SDL_FreeSurface(enig.surf_choix_C);
 SDL_Flip(screen);
 SDL_Quit();
 }
+void afficher_suite(Enigme enig,SDL_Surface *screen,FILE *fic,char general[20],int *U0, int *U1,int *Un, int *n)
+{
+int tmp_enig;
+char B[20];
+TTF_Font *fontTest;
+fontTest=TTF_OpenFont("DUSTY RANCH PERSONAL USE.ttf",10);
+SDL_Color Color_enigme={0,255,255};
+
+suite_arithmetique(general,U0,U1,Un,n);
+enig.surf_enig=TTF_RenderText_Solid(fontTest,general,Color_enigme);
+enig. enigme_position.x=500;
+enig. enigme_position.y=100;
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig. enigme_position);
+SDL_Flip(screen);
+
+enig.surf_choix_A=TTF_RenderText_Solid(fontTest,"10",Color_enigme);
+enig.choix_A_position.x=700;
+enig.choix_A_position.y=400;
+SDL_BlitSurface(enig.surf_choix_A,NULL,screen,&enig.choix_A_position);
+SDL_Flip(screen);
+
+sprintf(B,"%d",Un);
+enig.surf_choix_B=TTF_RenderText_Solid(fontTest,B,Color_enigme);
+enig.choix_B_position.x=700;
+enig.choix_B_position.y=600;
+SDL_BlitSurface(enig.surf_choix_B,NULL,screen,&enig.choix_B_position);
+SDL_Flip(screen);
+
+enig.surf_choix_C=TTF_RenderText_Solid(fontTest,"15",Color_enigme);
+enig.choix_C_position.x=700;
+enig.choix_C_position.y=800;
+SDL_BlitSurface(enig.surf_choix_C,NULL,screen,&enig.choix_C_position);
+SDL_Flip(screen);
+
+
+tmp_enig=gestion_temp_enigme_text(enig,screen,fic1); 
+if(tmp_enig==0)
+{
+enig.surf_enig=TTF_RenderText_Solid(fontTest,enig.enigme_extr,Color_enigme);
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig.enigme_position);
+
+}
+else
+{
+enig.surf_enig=TTF_RenderText_Solid(fontTest,enig.enigme_extr,Color_enigme);
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig.enigme_position);
+
+}
+
+while(1){
+SDL_Event event;
+SDL_PollEvent(&event);
+if(event.type==SDL_QUIT){break;}
+else if (event.type==SDL_KEYDOWN){
+if(event.key.keysym.sym==SDLK_ESCAPE){break;}
+}
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig.enigme_position);
+SDL_BlitSurface(enig.surf_choix_A,NULL,screen,&enig.choix_A_position);
+SDL_BlitSurface(enig.surf_choix_B,NULL,screen,&enig.choix_B_position);
+SDL_BlitSurface(enig.surf_choix_C,NULL,screen,&enig.choix_C_position);
+}
+
+SDL_FreeSurface(screen);
+SDL_Flip(screen);
+SDL_Quit();
+}
+
+void afficher_lin(Enigme enig,SDL_Surface *screen,FILE *fic, float *res_lin,char eq[20])
+{
+int tmp_enig;
+TTF_Font *fontTest;
+fontTest=TTF_OpenFont("DUSTY RANCH PERSONAL USE.ttf",10);
+SDL_Color Color_enigme={0,255,255};
+
+eq_linaire (res_lin,eq);
+enig.surf_enig=TTF_RenderText_Solid(fontTest,eq,Color_enigme);
+enig. enigme_position.x=500;
+enig. enigme_position.y=100;
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig. enigme_position);
+SDL_Flip(screen);
+
+enig.surf_choix_A=TTF_RenderText_Solid(fontTest,"10",Color_enigme);
+enig.choix_A_position.x=700;
+enig.choix_A_position.y=400;
+SDL_BlitSurface(enig.surf_choix_A,NULL,screen,&enig.choix_A_position);
+SDL_Flip(screen);
+
+sprintf(B,"%d",res_lin);
+enig.surf_choix_B=TTF_RenderText_Solid(fontTest,B,Color_enigme);
+enig.choix_B_position.x=700;
+enig.choix_B_position.y=600;
+SDL_BlitSurface(enig.surf_choix_B,NULL,screen,&enig.choix_B_position);
+SDL_Flip(screen);
+
+enig.surf_choix_C=TTF_RenderText_Solid(fontTest,"15",Color_enigme);
+enig.choix_C_position.x=700;
+enig.choix_C_position.y=800;
+SDL_BlitSurface(enig.surf_choix_C,NULL,screen,&enig.choix_C_position);
+SDL_Flip(screen);
+
+
+tmp_enig=gestion_temp_enigme_text(enig,screen,fic1); 
+if(tmp_enig==0)
+{
+enig.surf_enig=TTF_RenderText_Solid(fontTest,enig.enigme_extr,Color_enigme);
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig.enigme_position);
+
+}
+else
+{
+enig.surf_enig=TTF_RenderText_Solid(fontTest,enig.enigme_extr,Color_enigme);
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig.enigme_position);
+
+}
+
+while(1){
+SDL_Event event;
+SDL_PollEvent(&event);
+if(event.type==SDL_QUIT){break;}
+else if (event.type==SDL_KEYDOWN){
+if(event.key.keysym.sym==SDLK_ESCAPE){break;}
+}
+SDL_BlitSurface(enig.surf_enig,NULL,screen,&enig.enigme_position);
+SDL_BlitSurface(enig.surf_choix_A,NULL,screen,&enig.choix_A_position);
+SDL_BlitSurface(enig.surf_choix_B,NULL,screen,&enig.choix_B_position);
+SDL_BlitSurface(enig.surf_choix_C,NULL,screen,&enig.choix_C_position);
+}
+
+SDL_FreeSurface(screen);
+SDL_Flip(screen);
+SDL_Quit();
+}
+
+
+
+
+
 void polynome_2(char eq1[11])
 {
     char A[2],B[2],C[2];
