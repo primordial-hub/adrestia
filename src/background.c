@@ -1,4 +1,4 @@
-#include "initandloadmenu.h"
+#include "background.h"
 
 int n = 2,continuer = 1;
 int l = 1, s = 1, e = 1, e1, i, x, y, x1, y1, s1 = 1, sb1 = 1, sb2 = 2, sb3 = 1, sb4 = 1, BR = 7, SO = 7, MU = 7, exitsetting = 1, OK = 2, CANCEL = 1, scoff = 2, f = 0, display = 1, quality = 1;
@@ -129,3 +129,6 @@ void init_tm()
     textePosition.y = 50;
     SDL_BlitSurface(texte, NULL, screen, &textePosition);
 }
+
+
+

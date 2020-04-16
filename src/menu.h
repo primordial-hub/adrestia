@@ -1,7 +1,6 @@
 #include "defs.h"
-
-#include "play.h"
-#include "initandloadmenu.h"
+#include "entsec.h"
+#include "background.h"
 
 
 void down_menu(int *n, int *l, int *s, int *e, int *e1);
@@ -47,3 +46,4 @@ void settings_RIGHT();
 void settings_RETURN();
 void settings_affichage();
 void settings();
+

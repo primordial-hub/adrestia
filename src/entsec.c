@@ -1,5 +1,5 @@
 #include "defs.h"
-#include "play.h"
+#include "entsec.h"
 enemy deplacement_aleatoire(enemy enemyy)
 { 
  if (enemyy.direction % 2 ==1){  if (enemyy.posen.x<enemyy.position_initiale + enemyy.distance ) {enemyy.posen.x+=10;   }

@@ -785,7 +785,6 @@ void setjouersouris(int *jouer)
 
 
 
-typedef int bool;
 void play(int *jouer)
 {
   SDL_Surface *lvl1 = NULL, *lvll = NULL;
@@ -835,14 +834,14 @@ void play(int *jouer)
   enemy2.direction = 1;
   enemy3.direction = 1;
 
-  lvl1 = IMG_Load("tachesproj/lvl1.png");
-  enemy1.en = IMG_Load("tachesproj/en1.png");
-  enemy2.en = IMG_Load("tachesproj/en1.png");
-  box1.box = IMG_Load("tachesproj/lvl1box1.png");
-  mario.perso = IMG_Load("tachesproj/en2.png");
-  mario1.perso = IMG_Load("tachesproj/en2.png");
-  box2.box = IMG_Load("tachesproj/lvl1box2.png");
-  lvll = IMG_Load("tachesproj/lvl1.png");
+  lvl1 = IMG_Load("imlvl1/lvl1.png");
+  enemy1.en = IMG_Load("imlvl1/en1.png");
+  enemy2.en = IMG_Load("imlvl1/en1.png");
+  box1.box = IMG_Load("imlvl1/lvl1box1.png");
+  mario.perso = IMG_Load("imlvl1/en2.png");
+  mario1.perso = IMG_Load("imlvl1/en2.png");
+  box2.box = IMG_Load("imlvl1/lvl1box2.png");
+  lvll = IMG_Load("imlvl1/lvl1.png");
   if (*jouer == 1)
   {
     SDL_BlitSurface(lvl1, &camera, screen, NULL);
@@ -937,13 +936,13 @@ void play(int *jouer)
       SDL_BlitSurface(box2.box, NULL, lvl1, &box2.posbox);
       if (enemy3.direction % 2 == 0)
       {
-        enemy3.en = IMG_Load("tachesproj/en2.png");
+        enemy3.en = IMG_Load("imlvl1/en2.png");
         enemy3 = deplacement_aleatoire(enemy3);
         SDL_BlitSurface(enemy3.en, NULL, lvl1, &enemy3.posen);
       }
       else if (enemy3.direction % 2 == 1)
       {
-        enemy3.en = IMG_Load("tachesproj/en21.png");
+        enemy3.en = IMG_Load("imlvl1/en21.png");
         enemy3 = deplacement_aleatoire(enemy3);
         SDL_BlitSurface(enemy3.en, NULL, lvl1, &enemy3.posen);
       }

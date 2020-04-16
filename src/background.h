@@ -1,5 +1,6 @@
 #include "defs.h"
 
+
 extern int n,continuer;
 extern int l, s, e, e1, i, x, y, x1, y1, s1, sb1, sb2, sb3, sb4, BR, SO, MU, exitsetting, OK, CANCEL, scoff, f, display, quality;
 extern int box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3;
@@ -17,3 +18,5 @@ extern SDL_Rect textePosition;
 void init_m();
 void init_sm();
 void init_tm();
+
+
