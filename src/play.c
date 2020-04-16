@@ -1,8 +1,5 @@
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
-#include <stdio.h>
-#include "main.h"
+#include "defs.h"
+#include "play.h"
 enemy deplacement_aleatoire(enemy enemyy)
 { 
  if (enemyy.direction % 2 ==1){  if (enemyy.posen.x<enemyy.position_initiale + enemyy.distance ) {enemyy.posen.x+=10;   }

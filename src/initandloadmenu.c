@@ -17,7 +17,7 @@ SDL_Rect textePosition;
 void init_m()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    screen = SDL_SetVideoMode(1366, 768, 32, SDL_HWSURFACE);
+    screen = SDL_SetVideoMode(1366, 800, 32, SDL_HWSURFACE);
     poslogo.x = 1220;
     poslogo.y = 720;
     poslogo2.x = 40;

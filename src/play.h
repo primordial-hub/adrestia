@@ -1,8 +1,5 @@
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
-#include <stdio.h>
+#include "defs.h"
 struct perso
  { SDL_Surface *perso;
   SDL_Rect posperso;
