@@ -636,157 +636,144 @@ void settings()
   settings_affichage();
 }
 
-
-
-
-
-
-
-
 void setjouersouris(int *jouer)
 {
-    possetj.x = 13;
-    possetj.y = 606;
-    posexitj.x = 13;
-    posexitj.y = 695;
-    possetjouer.x = 0;
-    possetjouer.y = 0;
-    SDL_Event eventj1;
-    SDL_WaitEvent(&eventj1);
-    switch (eventj1.type)
-    {
+  possetj.x = 13;
+  possetj.y = 606;
+  posexitj.x = 13;
+  posexitj.y = 695;
+  possetjouer.x = 0;
+  possetjouer.y = 0;
+  SDL_Event eventj1;
+  SDL_WaitEvent(&eventj1);
+  switch (eventj1.type)
+  {
 
-    case SDL_MOUSEBUTTONUP:
-        x3 = eventj1.button.x;
-        y3 = eventj1.button.y;
-        x1 = eventj1.button.x;
-        y1 = eventj1.button.y;
-        break;
-    case SDL_MOUSEMOTION:
-        if (sett == 1)
-        {
-            x = eventj1.button.x;
-            y = eventj1.button.y;
-        }
-        break;
-    case SDL_KEYDOWN:
-    {
-        switch (eventj1.key.keysym.sym)
-        {
-        case SDLK_UP:
-            if (sett != 1)
-            {
-                setj++;
-            }
-
-            break;
-        case SDLK_DOWN:
-
-            if (sett != 1)
-            {
-                setj++;
-            }
-            break;
-        case SDLK_RETURN:
-            if (setj % 2 == 1)
-            {
-                *jouer = 0;
-            }
-            if (setj % 2 == 0)
-            {
-                sett = 1;
-            }
-            break;
-        case SDLK_ESCAPE:
-            if (sett == 1)
-            {
-                sett = 0;
-            }
-            break;
-        }
-    }
+  case SDL_MOUSEBUTTONUP:
+    x3 = eventj1.button.x;
+    y3 = eventj1.button.y;
+    x1 = eventj1.button.x;
+    y1 = eventj1.button.y;
     break;
-    case SDL_QUIT:
-        *jouer = 0;
-        break;
-    }
-    setjouer = IMG_Load("images/setjouer0.png");
-    setjouer1 = IMG_Load(" ");
-    SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
-    SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
-
-    if (setj == -1)
-    {
-        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
-    }
-
-    if (setj % 2 == 0)
-    {
-        setjouer1 = IMG_Load("images/settingsjouer.png");
-        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
-        SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
-    }
-
-    if (setj % 2 == 1)
-    {
-
-        setjouer1 = IMG_Load("images/exitjouer.png");
-        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
-        SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
-    }
-    if ((x3 > 10) && (x3 < 10 + 64) && (y3 > 594) && (y3 < 594 + 68))
-    {
-        sett = 1;
-        setj = 0;
-        x3 = 0;
-        y3 = 0;
-        setjouer1 = IMG_Load("images/settingsjouer.png");
-        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
-        SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
-    }
-    if ((x3 > 10) && (x3 < 10 + 64) && (y3 > 682) && (y3 < 682 + 68))
-    {
-        setj = 1;
-        x3 = 0;
-        y3 = 0;
-        *jouer = 0;
-        setjouer1 = IMG_Load("images/exitjouer.png");
-        SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
-        SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
-    }
-    if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y1 > posredb.y) && (y1 < posredb.y + 27))
-    {
-        sett = 0;
-    }
-
+  case SDL_MOUSEMOTION:
     if (sett == 1)
     {
-        s1 = 2;
-        settings();
+      x = eventj1.button.x;
+      y = eventj1.button.y;
     }
-    if (sett == 0)
+    break;
+  case SDL_KEYDOWN:
+  {
+    switch (eventj1.key.keysym.sym)
     {
-        s1 = 1;
-        exitsetting = 1;
+    case SDLK_UP:
+      if (sett != 1)
+      {
+        setj++;
+      }
+
+      break;
+    case SDLK_DOWN:
+
+      if (sett != 1)
+      {
+        setj++;
+      }
+      break;
+    case SDLK_RETURN:
+      if (setj % 2 == 1)
+      {
+        *jouer = 0;
+      }
+      if (setj % 2 == 0)
+      {
+        sett = 1;
+      }
+      break;
+    case SDLK_ESCAPE:
+      if (sett == 1)
+      {
+        sett = 0;
+      }
+      break;
     }
+  }
+  break;
+  case SDL_QUIT:
+    *jouer = 0;
+    break;
+  }
+  setjouer = IMG_Load("images/setjouer0.png");
+  setjouer1 = IMG_Load(" ");
+  SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+  SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
 
-    SDL_Flip(screen);
-    SDL_FreeSurface(setjouer);
-    SDL_FreeSurface(setjouer1);
+  if (setj == -1)
+  {
+    SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+  }
+
+  if (setj % 2 == 0)
+  {
+    setjouer1 = IMG_Load("images/settingsjouer.png");
+    SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+    SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
+  }
+
+  if (setj % 2 == 1)
+  {
+
+    setjouer1 = IMG_Load("images/exitjouer.png");
+    SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+    SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
+  }
+  if ((x3 > 10) && (x3 < 10 + 64) && (y3 > 594) && (y3 < 594 + 68))
+  {
+    sett = 1;
+    setj = 0;
+    x3 = 0;
+    y3 = 0;
+    setjouer1 = IMG_Load("images/settingsjouer.png");
+    SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+    SDL_BlitSurface(setjouer1, NULL, screen, &possetj);
+  }
+  if ((x3 > 10) && (x3 < 10 + 64) && (y3 > 682) && (y3 < 682 + 68))
+  {
+    setj = 1;
+    x3 = 0;
+    y3 = 0;
+    *jouer = 0;
+    setjouer1 = IMG_Load("images/exitjouer.png");
+    SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
+    SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
+  }
+  if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y1 > posredb.y) && (y1 < posredb.y + 27))
+  {
+    sett = 0;
+  }
+
+  if (sett == 1)
+  {
+    s1 = 2;
+    settings();
+  }
+  if (sett == 0)
+  {
+    s1 = 1;
+    exitsetting = 1;
+  }
+
+  SDL_Flip(screen);
+  SDL_FreeSurface(setjouer);
+  SDL_FreeSurface(setjouer1);
 }
-
-
-
-
-
-
-
-
-
-
 
 void play(int *jouer)
 {
+
+  personnage1 per;
+  per = init_perso();
+
   SDL_Surface *lvl1 = NULL, *lvll = NULL;
   SDL_Rect poslvl1;
   SDL_Rect camera;
@@ -834,6 +821,20 @@ void play(int *jouer)
   enemy2.direction = 1;
   enemy3.direction = 1;
 
+  per.posperso.x = 300;
+  per.posperso.y = 565;
+  per.posperso.w = 375;
+  per.posperso.h = 565 + 150;
+  per.position_init.x = 300;
+  per.position_init.y = 565;
+  per.position_init.w = 375;
+  per.position_init.h = 565 + 150;
+
+  int check;
+
+  SDL_Surface *map;
+  map = IMG_Load("imlvl1/maplvl1.png");
+
   lvl1 = IMG_Load("imlvl1/lvl1.png");
   enemy1.en = IMG_Load("imlvl1/en1.png");
   enemy2.en = IMG_Load("imlvl1/en1.png");
@@ -873,12 +874,24 @@ void play(int *jouer)
       {
       case SDLK_RIGHT:
         b[0] = 1;
+
         break;
       case SDLK_LEFT:
         b[1] = 1;
+
         break;
       case SDLK_DOWN:
         access = 2;
+        per.position_init.y = per.position_init.y + 5;
+        per.position_init.h = per.position_init.h + 5;
+        per.posperso.h = per.posperso.h + 5;
+        per.posperso.y = per.posperso.y + 5;
+        break;
+      case SDLK_UP:
+        per.position_init.h = per.position_init.h - 5;
+        per.position_init.y = per.position_init.y - 5;
+        per.posperso.h = per.posperso.h - 5;
+        per.posperso.y = per.posperso.y - 5;
 
         break;
       case SDLK_ESCAPE:
@@ -900,6 +913,12 @@ void play(int *jouer)
       case SDLK_LEFT:
         b[1] = 0;
         break;
+      case SDLK_UP:
+
+        break;
+      case SDLK_DOWN:
+
+        break;
       }
       break;
     }
@@ -909,18 +928,25 @@ void play(int *jouer)
       setjouersouris(jouer);
     }
 
+    check = tellmewhattodo(map, per.posperso.x, per.posperso.y, per.posperso.h, per.posperso.w);
+
     if (a % 2 != 0)
     {
-      if ((b[0]) && (camera.x < 5365 - 1300))
+      if ((b[0]) && (camera.x < 5365 - 1300) && check ==0)
       {
+        per.posperso.x = per.posperso.x + vitesse;
+        per.posperso.w = per.posperso.w + vitesse;
         x = x + vitesse;
         camera.x = camera.x + vitesse;
       }
-      if ((b[1]) && (camera.x > 0))
+      if ((b[1]) && (camera.x > 0) && check ==0 )
       {
+        per.posperso.w = per.posperso.w - vitesse;
+        per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
       }
+
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1);
       enemy1 = deplacement_aleatoire(enemy1);
@@ -934,6 +960,9 @@ void play(int *jouer)
       SDL_BlitSurface(mario1.perso, NULL, lvl1, &mario1.posperso);
       SDL_BlitSurface(box1.box, NULL, lvl1, &box1.posbox);
       SDL_BlitSurface(box2.box, NULL, lvl1, &box2.posbox);
+      //////////////////////////////
+      SDL_BlitSurface(per.perso, NULL, screen, &per.position_init);
+      //////////////////////////////
       if (enemy3.direction % 2 == 0)
       {
         enemy3.en = IMG_Load("imlvl1/en2.png");
@@ -950,7 +979,7 @@ void play(int *jouer)
     }
     SDL_Flip(screen);
   }
-  sb2=2;
+  sb2 = 2;
   if (*jouer == 0)
   {
     a = 1;
