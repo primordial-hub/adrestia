@@ -8,8 +8,7 @@ personnage1 init_perso()
 
     per.position_init.x = 300;
     per.position_init.y = 565;
-    
-  
+
     return per;
 }
 
@@ -25,90 +24,174 @@ SDL_Color GetPixel(SDL_Surface *pSurface, int x, int y)
     return (color);
 }
 
-int DoCollision(SDL_Surface *map,int xx, int yy,int hh,int ww)
+int DoCollision(SDL_Surface *map, int xx, int yy, int hh, int ww)
 {
-    
-    int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy, Ex, Ey, Fx, Fy, Gx, Gy, Hx, Hy;
+
+    int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy, Ex, Ey, Fx, Fy, Gx, Gy, Hx, Hy, Ix, Iy, Jx, Jy;
     SDL_Color Pixel;
     SDL_LockSurface(map);
-   // if (per.posperso.y > 84 && per.posperso.y < 684)
+    // if (per.posperso.y > 84 && per.posperso.y < 684)
     {
-        Ax = xx ;
-        Ay = yy ;
-        Dx = xx ;
-        Dy = hh ;
-        Bx = ww ;
-        By = yy ;
-        Cx = ww ;
-        Cy = hh ;
-        Ex = (ww/2) ;
-        Ey = yy ;
-        Fx = (ww/2) ;
-        Fy = hh ;
-        Gx = ww ;
-        Gy = (hh/2) ;
-        Hx = xx-1 ;
-        Hy = (hh/2) ;
-        Pixel = GetPixel(map, Fx, Fy);
-        if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 3;//G milouta fil wist                    3
-        if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milouta fil wist                    5 
+        Ax = xx + 10;
+        Ay = yy;
+        Dx = xx;
+        Dy = hh;
+        Bx = ww - 10;
+        By = yy;
+        Cx = ww;
+        Cy = hh;
+        Ex = ((ww - xx) / 2) + xx;
+        Ey = yy;
+        Fx = ((ww - xx) / 2) + xx;
+        Fy = hh;
+        Gx = ww;
+        Gy = ((hh - yy) / 2) + yy;
+        Hx = xx;
+        Hy = ((hh - yy) / 2) + yy;
+        Ix = ww;
+        Iy = hh - 10;
+        Jx = xx;
+        Jy = hh - 10;
+
         Pixel = GetPixel(map, Gx, Gy);
         if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 2;//G milkodam fil wist                   2
+            return 2; //G milkodam fil wist                   2
         if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milkodam fil wist                   5
-        Pixel = GetPixel(map, Ax, Ay);
+            return 5; //B milkodam fil wist                   5
+        Pixel = GetPixel(map, Ix, Iy);
         if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 1;//G milfouk 3al isar                    1
+            return 6; //G point louta ba7tha issak            6
         if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milfouk 3al isar                    5
-        Pixel = GetPixel(map, Dx, Dy);
+            return 5; //B point louta ba7tha issak            5
+        Pixel = GetPixel(map, Hx, Hy);
         if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 3;//G milouta 3al isar                    3 
+            return 4; //G miltali fil wist                    4
         if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milouta 3al isar                    5
-        Pixel = GetPixel(map, Bx, By);
+            return 5; //B miltali fil wist                    5
+        Pixel = GetPixel(map, Jx, Jy);
         if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 1;//G milfouk 3al imin                    1
+            return 7; //G point louta ba7tha sak ltali        7
         if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milfouk 3al imin                    5
-        Pixel = GetPixel(map, Cx, Cy);
-        if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 3;//G milouta 3al imin                    3
-        if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milouta 3al imin                    5
+            return 5; //B point louta ba7tha sak ltali        5
         Pixel = GetPixel(map, Ex, Ey);
         if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 1;//G milfouk fil wist                    1
+            return 1; //G milfouk fil wist                    1
         if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B milfouk fil wist                    5
-             Pixel = GetPixel(map, Hx, Hy);
+            return 5; //B milfouk fil wist                    5
+        Pixel = GetPixel(map, Ax, Ay);
         if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
-            return 4;//G miltali fil wist                    4 
+            return 9; //G milfouk 3al isar                    9
         if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
-            return 5;//B miltali fil wist                    5
+            return 5; //B milfouk 3al isar                    5
+        Pixel = GetPixel(map, Bx, By);
+        if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
+            return 8; //G milfouk 3al imin                    8
+        if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
+            return 5; //B milfouk 3al imin                    5
+        Pixel = GetPixel(map, Fx, Fy);
+        if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
+            return 3; //G milouta fil wist                    3
+        if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
+            return 5; //B milouta fil wist                    5
+        Pixel = GetPixel(map, Dx, Dy);
+        if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
+            return 3; //G milouta 3al isar                    3
+        if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
+            return 5; //B milouta 3al isar                    5
+        Pixel = GetPixel(map, Cx, Cy);
+        if (Pixel.r == 0 && Pixel.g == 200 && Pixel.b == 0)
+            return 3; //G milouta 3al imin                    3
+        if (Pixel.r == 1 && Pixel.g == 0 && Pixel.b == 200)
+            return 5; //B milouta 3al imin                    5
 
-
-SDL_UnlockSurface(map);
+        SDL_UnlockSurface(map);
         return 0;
     }
 }
 
-int tellmewhattodo(SDL_Surface *map,int xx,int yy,int hh,int ww)
+int tellmewhattodo(SDL_Surface *map, SDL_Rect x)
 {
-  if (DoCollision(map,xx,yy,hh,ww)==5)
-  {
-      return 1;
-  }
-  if (DoCollision(map,xx,yy,hh,ww)==1 || DoCollision(map,xx,yy,hh,ww)==2 || DoCollision(map,xx,yy,hh,ww)==3)
-  {
-      return 2;
-  }
-  if (DoCollision(map,xx,yy,hh,ww)==1 || DoCollision(map,xx,yy,hh,ww)==4 || DoCollision(map,xx,yy,hh,ww)==3)
-  {
-      return 3;
-  }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 5)
+    {
+        return 1;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 2)
+    {
+        return 2;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 4)
+    {
+        return 3;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 3)
+    {
+        return 4;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 1)
+    {
+        return 5;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 6)
+    {
+        return 6;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 7)
+    {
+        return 7;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 8)
+    {
+        return 8;
+    }
+    if (DoCollision(map, x.x, x.y, x.h, x.w) == 9)
+    {
+        return 9;
+    }
     return 0;
+}
+
+int graviti(int x, int c, int b)
+{
+
+    if (c != 4)
+    {
+        x = x + 20;
+    }
+    return x;
+}
+
+personnage1 tellmewhy(int check, int test1, personnage1 per)
+{
+    if (check == 0)
+    {
+        SDL_Delay(10);
+        per.posperso.y = graviti(per.posperso.y, check, test1);
+        per.posperso.h = graviti(per.posperso.h, check, test1);
+        per.position_init.h = per.posperso.h;
+        per.position_init.y = per.posperso.y;
+    }
+
+    if (check == 6)
+    {
+        per.position_init.h = per.position_init.h - 10;
+        per.position_init.y = per.position_init.y - 10;
+        per.posperso.y = per.posperso.y - 10;
+        per.posperso.h = per.posperso.h - 10;
+    }
+    if (check == 7)
+    {
+        per.position_init.h = per.position_init.h - 10;
+        per.position_init.y = per.position_init.y - 10;
+        per.posperso.y = per.posperso.y - 10;
+        per.posperso.h = per.posperso.h - 10;
+    }
+    if (check == 5||check==8||check==9)
+    {
+        per.posperso.y = per.posperso.y + 1;
+        per.posperso.h = per.posperso.h + 1;
+        per.position_init.h = per.position_init.h + 1;
+        per.position_init.y = per.position_init.y + 1;
+    }
+
+    return per;
 }
