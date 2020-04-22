@@ -856,10 +856,13 @@ void play(int *jouer)
 
   SDL_Event jj;
   int a = 1;
+  int die1, die2, die3;
 
   while (*jouer == 1)
   {
-
+    die1 = callenemy(per, enemy1);
+    die2 = callenemy(per, enemy2);
+    die3 = callenemy(per, enemy3);
     check = tellmewhattodo(map, per.posperso);
     SDL_PollEvent(&jj);
     switch (jj.type)
@@ -887,7 +890,7 @@ void play(int *jouer)
         access = 2;
         break;
       case SDLK_UP:
-        if (check == 4)
+        if (check == 4 && check != 6 && check != 7)
         {
 
           do
@@ -898,8 +901,8 @@ void play(int *jouer)
             per.position_init.y--;
             per.position_init.h--;
           } while (test != 250 && tellmewhattodo(map, per.posperso) != 5 && tellmewhattodo(map, per.posperso) != 9 && tellmewhattodo(map, per.posperso) != 8);
-          test = 0;
         }
+        test = 0;
 
         break;
       case SDLK_ESCAPE:
@@ -936,7 +939,20 @@ void play(int *jouer)
       setjouersouris(jouer);
     }
 
-    per = tellmewhy(check, test1, per);
+    if (die1 == 1 || die2 == 1 || die3 == 1)
+    {
+      SDL_Delay(1000);
+      per.posperso.x = per.posperso.x - 300;
+      per.posperso.w = per.posperso.w - 300;
+      x = x - 300;
+      camera.x = camera.x - 300;
+      per.posperso.y = per.posperso.y - 300;
+      per.posperso.h = per.posperso.h - 300;
+      per.position_init.y = per.position_init.y - 300;
+      per.position_init.h = per.position_init.h - 300;
+    }
+
+    per = tellmewhy(check, per);
     if (check == 2 || check == 8)
     {
       per.posperso.x = per.posperso.x - 2;
@@ -954,19 +970,35 @@ void play(int *jouer)
 
     if (a % 2 != 0)
     {
-      if ((b[0]) && (camera.x < 5365 - 1300) && check != 2 && check != 6 && check != 5 && check != 8)
+      if ((b[0]) && (camera.x < 5365 - 1366) && check != 2 && check != 6 && check != 5 && check != 8 && test1 == 0)
       {
         per.posperso.x = per.posperso.x + vitesse;
         per.posperso.w = per.posperso.w + vitesse;
         x = x + vitesse;
         camera.x = camera.x + vitesse;
       }
-      if ((b[1]) && (camera.x > 0) && check != 3 && check != 5 && check != 7 && check != 9)
+      if ((b[1]) && (camera.x > 0) && check != 3 && check != 5 && check != 7 && check != 9 && test1 == 0)
       {
         per.posperso.w = per.posperso.w - vitesse;
         per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
+      }
+      if ((b[1]) && (camera.x < 10||camera.x>5365-1366))
+      {
+        per.position_init.x = per.position_init.x - vitesse;
+        per.position_init.w = per.position_init.w - vitesse;
+        per.posperso.x = per.posperso.x - vitesse;
+        per.posperso.w = per.posperso.w - vitesse;
+        test1++;
+      }
+      if (b[0] && (camera.x < 10||camera.x>5365-1366))
+      {
+        per.position_init.x = per.position_init.x + vitesse;
+        per.position_init.w = per.position_init.w + vitesse;
+        per.posperso.x = per.posperso.x + vitesse;
+        per.posperso.w = per.posperso.w + vitesse;
+        test1--;
       }
 
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
@@ -997,6 +1029,7 @@ void play(int *jouer)
         enemy3 = deplacement_aleatoire(enemy3);
         SDL_BlitSurface(enemy3.en, NULL, lvl1, &enemy3.posen);
       }
+
       SDL_Flip(lvl1);
     }
     SDL_Flip(screen);
@@ -1022,6 +1055,7 @@ void play(int *jouer)
   SDL_FreeSurface(box2.box);
   SDL_FreeSurface(mario.perso);
   SDL_FreeSurface(mario1.perso);
+  SDL_FreeSurface(per.perso);
 }
 
 void down_menu(int *n, int *l, int *s, int *e, int *e1)

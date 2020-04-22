@@ -1,5 +1,5 @@
 #include "defs.h"
-#include "entsec.h"
+//#include "entsec.h"
 #include "background.h"
 #include "perso.h"
 

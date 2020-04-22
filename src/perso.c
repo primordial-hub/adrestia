@@ -150,7 +150,7 @@ int tellmewhattodo(SDL_Surface *map, SDL_Rect x)
     return 0;
 }
 
-int graviti(int x, int c, int b)
+int graviti(int x, int c)
 {
 
     if (c != 4)
@@ -160,13 +160,13 @@ int graviti(int x, int c, int b)
     return x;
 }
 
-personnage1 tellmewhy(int check, int test1, personnage1 per)
+personnage1 tellmewhy(int check, personnage1 per)
 {
     if (check == 0)
     {
         SDL_Delay(10);
-        per.posperso.y = graviti(per.posperso.y, check, test1);
-        per.posperso.h = graviti(per.posperso.h, check, test1);
+        per.posperso.y = graviti(per.posperso.y, check);
+        per.posperso.h = graviti(per.posperso.h, check);
         per.position_init.h = per.posperso.h;
         per.position_init.y = per.posperso.y;
     }
@@ -185,7 +185,7 @@ personnage1 tellmewhy(int check, int test1, personnage1 per)
         per.posperso.y = per.posperso.y - 10;
         per.posperso.h = per.posperso.h - 10;
     }
-    if (check == 5||check==8||check==9)
+    if (check == 5 || check == 8 || check == 9)
     {
         per.posperso.y = per.posperso.y + 1;
         per.posperso.h = per.posperso.h + 1;
@@ -195,3 +195,37 @@ personnage1 tellmewhy(int check, int test1, personnage1 per)
 
     return per;
 }
+
+int callenemy(personnage1 per, enemy en)
+{
+
+    if (((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
+         (per.posperso.h - 5 > en.posen.y) && (per.posperso.h - 5 < en.posen.y + en.en->h)) ||
+        ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
+         (per.posperso.h - 5 > en.posen.y) && (per.posperso.h - 5 < en.posen.y + en.en->h)))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/*int frapjump(personnage1 per, enemy en)
+{
+    if ((((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
+         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h)) ||
+        ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
+         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h)))
+         || (per.perso->w/2 > en.posen.x) && (per.perso->w/2 < en.posen.x + en.en->w) &&
+         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h))  
+    {
+       return 1;   
+    }
+    else
+    {
+        return 0;
+    }
+    
+}*/
