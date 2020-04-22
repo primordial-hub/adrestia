@@ -6,7 +6,7 @@
 
 
 //initialisation
-int gestionvie()
+int gestionvie(Enigme enig,SDL_Surface *screen,FILE *fic1)
 {
 personnage p;
 p.score=10;
@@ -21,7 +21,7 @@ Mix_AllocateChannels(32);
 Mix_Chunk *son;
 
 
-if ((tempsJeu == 30000) && (p.score == 0))
+if ((gestion_temp_enigme_img(enig,screen,fic1)== 30000) && (p.score == 0))
 { //vie no hearts
     p.vie = 0;
     //son gameover
@@ -30,7 +30,7 @@ if ((tempsJeu == 30000) && (p.score == 0))
 }
 else
 {
-    while ((tempsJeu != 300000) && (score != 0))
+    while ((gestion_temp_enigme_img(enig,screen,fic1)!= 300000) && (score != 0))
     {
         if (BoundingBox() == 1)
         {

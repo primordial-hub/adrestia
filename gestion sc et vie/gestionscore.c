@@ -6,21 +6,21 @@
 #include <SDL/SDL_audio.h>
 #include <SDL/SDL_video.h>
 #include "personnage.h"
+#include "enigme.h"
 
-
-int gestionscore()
+int gestionscore(Enigme enig,SDL_Surface *screen,FILE *fic1)
 {
 
 personnage p;
 p.score=50;
-    while ((tempsJeu != 300000) && (p.score != 0))
+    while ((gestion_temp_jeu(enig,screen)!= 300000) && (p.score != 0))
     {
 
         if (perfectpixel() == 1)
         {
-            while (tempsEnigme != 30000)
+            while (gestion_temp_jeu(enig,screen)!= 30000)
             {
-                if (resolutionEnigme == 1)
+                if (resolution(fic1,enig)== 1)
                 { //son reponse juste
                     son = Mix_LoadWAV(".wav");
                     Mix_PlayChannel(1, son, 0);
@@ -34,7 +34,7 @@ p.score=50;
                     p.score = p.score- 20;
                 }
             }
-            if ((tempsEnigme == 30000) &&(resolutionEnigme != 1))
+            if ((gestion_temp_jeu(enig,screen)== 30000) &&(resolution(fic1,enig)!= 1))
             {
                 son = Mix_LoadWAV(".wav");
                 Mix_PlayChannel(1, son, 0);

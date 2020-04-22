@@ -41,7 +41,7 @@ void afficherpersonnage()
 
     i = gestionvie();
     j = gestionscore();
-    sprintf(scorech, "Score du joueur :", j);
+    sprintf(scorech, "Score du joueur :%d", j);
     SDL_BlitSurface(texte, NULL, screen, &postxt);
     if (i == 2)
     { 
