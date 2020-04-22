@@ -81,7 +81,7 @@ int main(int argv, char **argc[])
         }
        
         if (pospersonnage.x == r)
-        {
+        {  
             test = 0;
         }
 
@@ -113,7 +113,6 @@ int main(int argv, char **argc[])
 
     SDL_FreeSurface(screen);
     SDL_FreeSurface(personnage);
-    Mix_FreeChunk(son);
     SDL_CloseAudio();
     SDL_Quit();
     return 0;
