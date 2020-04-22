@@ -833,6 +833,8 @@ void play(int *jouer)
   int check;
   int test = 0;
   int test1 = 0;
+  int r = 0;
+  int test2 = 370;
 
   SDL_Surface *map;
   map = IMG_Load("imlvl1/maplvl1.png");
@@ -873,6 +875,18 @@ void play(int *jouer)
       x = jj.button.x;
       y = jj.button.y;
       break;
+    case SDL_MOUSEBUTTONDOWN:
+
+      switch (jj.button.button)
+      {
+
+      case SDL_BUTTON_RIGHT:
+
+        r = jj.button.x - (jj.button.x % 10);
+
+        break;
+      }
+      break;
     case SDL_KEYDOWN:
     {
 
@@ -904,6 +918,21 @@ void play(int *jouer)
         }
         test = 0;
 
+        break;
+      case SDLK_SPACE:
+        if (check == 4 && check != 6 && check != 7)
+        {
+
+          do
+          {
+            test++;
+            per.posperso.y--;
+            per.posperso.h--;
+            per.position_init.y--;
+            per.position_init.h--;
+          } while (test != 250 && tellmewhattodo(map, per.posperso) != 5 && tellmewhattodo(map, per.posperso) != 9 && tellmewhattodo(map, per.posperso) != 8);
+        }
+        test = 0;
         break;
       case SDLK_ESCAPE:
         if (sett != 1)
@@ -939,6 +968,29 @@ void play(int *jouer)
       setjouersouris(jouer);
     }
 
+    if (r != 0 && test1 == 0)
+    {
+      test2 = depdouris(test2, depsouris(test2, r), check);
+      per.posperso.x = (depdouris(per.posperso.x, depsouris(test2, r), check));
+      per.posperso.w = (depdouris(per.posperso.w, depsouris(test2, r), check));
+      camera.x = (depdouris(camera.x, depsouris(test2, r), check));
+      x = (depdouris(x, depsouris(test2, r), check));
+
+      if (depsouris(test2, r) == 1)
+      {
+        per.perso = IMG_Load("imperso/per.png");
+      }
+
+      if (depsouris(test2, r) == 2)
+      {
+        per.perso = IMG_Load("imperso/per2.png");
+      }
+      if (test2 == r)
+      {
+        r = 0;
+        test2 = 370;
+      }
+    }
     if (die1 == 1 || die2 == 1 || die3 == 1)
     {
       SDL_Delay(1000);
@@ -984,7 +1036,7 @@ void play(int *jouer)
         x = x - vitesse;
         camera.x = camera.x - vitesse;
       }
-      if ((b[1]) && (camera.x < 10||camera.x>5365-1366)&&test1<29&& check != 3 && check != 5 && check != 7 && check != 9)
+      if ((b[1]) && (camera.x < 10 || camera.x > 5365 - 1366) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
       {
         per.position_init.x = per.position_init.x - vitesse;
         per.position_init.w = per.position_init.w - vitesse;
@@ -992,7 +1044,7 @@ void play(int *jouer)
         per.posperso.w = per.posperso.w - vitesse;
         test1++;
       }
-      if (b[0] && (camera.x < 10||camera.x>5365-1366)&& check != 2 && check != 6 && check != 5 && check != 8)
+      if (b[0] && (camera.x < 10 || camera.x > 5365 - 1366) && check != 2 && check != 6 && check != 5 && check != 8)
       {
         per.position_init.x = per.position_init.x + vitesse;
         per.position_init.w = per.position_init.w + vitesse;

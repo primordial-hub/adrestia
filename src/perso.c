@@ -202,11 +202,11 @@ int callenemy(personnage1 per, enemy en)
     if (((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
          (per.posperso.h - 15 > en.posen.y) && (per.posperso.h - 15 < en.posen.y + en.en->h)) ||
         ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
-         (per.posperso.h - 15 > en.posen.y) && (per.posperso.h - 15 < en.posen.y + en.en->h))||
-         ((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
-         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h))||
-         ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
-         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h)))
+         (per.posperso.h - 15 > en.posen.y) && (per.posperso.h - 15 < en.posen.y + en.en->h)) ||
+        ((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
+         (per.posperso.h > en.posen.y) && (per.posperso.h < en.posen.y + en.en->h)) ||
+        ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
+         (per.posperso.h > en.posen.y) && (per.posperso.h < en.posen.y + en.en->h)))
     {
         return 1;
     }
@@ -233,3 +233,37 @@ int callenemy(personnage1 per, enemy en)
     }
     
 }*/
+
+int depdouris(int x, int c, int check)
+{
+
+    if (c == 1 && check != 2 && check != 6 && check != 5 && check != 8)
+    {
+        x = x + 10;
+    }
+    else if (c == 2 && check != 3 && check != 5 && check != 7 && check != 9)
+    {
+        x = x - 10;
+    }
+
+    return x;
+}
+
+int depsouris(int cam, int r)
+
+{
+
+    if (cam < r)
+    {
+        return 1;
+    }
+    else if (cam > r)
+    {
+        return 2;
+    }
+
+    if (cam == r)
+    {
+        return 0;
+    }
+}

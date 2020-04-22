@@ -23,3 +23,5 @@ int graviti(int x, int c);
 personnage1 tellmewhy(int check, personnage1 per);
 int callenemy(personnage1 per, enemy en);
 //int frapjump(personnage1 per, enemy en);
+int depdouris(int x, int c,int check);
+int depsouris(int cam, int r);
