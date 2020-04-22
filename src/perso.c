@@ -200,9 +200,13 @@ int callenemy(personnage1 per, enemy en)
 {
 
     if (((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
-         (per.posperso.h - 5 > en.posen.y) && (per.posperso.h - 5 < en.posen.y + en.en->h)) ||
+         (per.posperso.h - 15 > en.posen.y) && (per.posperso.h - 15 < en.posen.y + en.en->h)) ||
         ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
-         (per.posperso.h - 5 > en.posen.y) && (per.posperso.h - 5 < en.posen.y + en.en->h)))
+         (per.posperso.h - 15 > en.posen.y) && (per.posperso.h - 15 < en.posen.y + en.en->h))||
+         ((per.posperso.x > en.posen.x) && (per.posperso.x < en.posen.x + en.en->w) &&
+         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h))||
+         ((per.posperso.w > en.posen.x) && (per.posperso.w < en.posen.x + en.en->w) &&
+         (per.posperso.h  > en.posen.y) && (per.posperso.h  < en.posen.y + en.en->h)))
     {
         return 1;
     }

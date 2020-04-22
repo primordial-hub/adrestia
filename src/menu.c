@@ -984,7 +984,7 @@ void play(int *jouer)
         x = x - vitesse;
         camera.x = camera.x - vitesse;
       }
-      if ((b[1]) && (camera.x < 10||camera.x>5365-1366))
+      if ((b[1]) && (camera.x < 10||camera.x>5365-1366)&&test1<29&& check != 3 && check != 5 && check != 7 && check != 9)
       {
         per.position_init.x = per.position_init.x - vitesse;
         per.position_init.w = per.position_init.w - vitesse;
@@ -992,7 +992,7 @@ void play(int *jouer)
         per.posperso.w = per.posperso.w - vitesse;
         test1++;
       }
-      if (b[0] && (camera.x < 10||camera.x>5365-1366))
+      if (b[0] && (camera.x < 10||camera.x>5365-1366)&& check != 2 && check != 6 && check != 5 && check != 8)
       {
         per.position_init.x = per.position_init.x + vitesse;
         per.position_init.w = per.position_init.w + vitesse;
