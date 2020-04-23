@@ -267,3 +267,4 @@ int depsouris(int cam, int r)
         return 0;
     }
 }
+

@@ -781,6 +781,20 @@ void play(int *jouer)
   box box1, box2, box3, box4;
   personnage mario, mario1;
 
+  SDL_Surface *vie11 = NULL, *texte1 = NULL;
+  SDL_Rect posvie;
+  posvie.x = 1366 - 220;
+  posvie.y = 1;
+  vie11 = IMG_Load("imlvl1/lives.png");
+
+  SDL_Color fontColor1 = {0, 0, 0};
+  TTF_Font *fontTest1;
+  fontTest1 = TTF_OpenFont("fon.otf", 30);
+  texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);", fontColor1);
+  SDL_Rect postexte;
+  postexte.x = 500;
+  postexte.y = 50;
+
   poslvl1.x = 0;
   poslvl1.y = 0;
   const int fps = 30;
@@ -830,6 +844,7 @@ void play(int *jouer)
   per.position_init.w = 375;
   per.position_init.h = 570 + 150;
 
+  int die = 0;
   int check;
   int test = 0;
   int test1 = 0;
@@ -859,9 +874,17 @@ void play(int *jouer)
   SDL_Event jj;
   int a = 1;
   int die1, die2, die3;
+  int aaa = 0;
 
   while (*jouer == 1)
   {
+    aaa++;
+
+    if (aaa == 1000)
+    {
+      texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
+    }
+
     die1 = callenemy(per, enemy1);
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
@@ -1002,6 +1025,7 @@ void play(int *jouer)
       per.posperso.h = per.posperso.h - 300;
       per.position_init.y = per.position_init.y - 300;
       per.position_init.h = per.position_init.h - 300;
+      die++;
     }
 
     per = tellmewhy(check, per);
@@ -1068,6 +1092,8 @@ void play(int *jouer)
       SDL_BlitSurface(box2.box, NULL, lvl1, &box2.posbox);
       //////////////////////////////
       SDL_BlitSurface(per.perso, NULL, screen, &per.position_init);
+      SDL_BlitSurface(vie11, NULL, screen, &posvie);
+      SDL_BlitSurface(texte1, NULL, screen, &postexte);
       //////////////////////////////
       if (enemy3.direction % 2 == 0)
       {
@@ -1080,6 +1106,21 @@ void play(int *jouer)
         enemy3.en = IMG_Load("imlvl1/en21.png");
         enemy3 = deplacement_aleatoire(enemy3);
         SDL_BlitSurface(enemy3.en, NULL, lvl1, &enemy3.posen);
+      }
+      if (die == 1)
+      {
+        vie11 = IMG_Load("imlvl1/lives1.png");
+        SDL_BlitSurface(vie11, NULL, screen, &posvie);
+      }
+      if (die == 2)
+      {
+        vie11 = IMG_Load("imlvl1/lives2.png");
+        SDL_BlitSurface(vie11, NULL, screen, &posvie);
+        texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);",fontColor1);
+      }
+      if (die == 3)
+      {
+        *jouer = 0;
       }
 
       SDL_Flip(lvl1);
@@ -1108,6 +1149,7 @@ void play(int *jouer)
   SDL_FreeSurface(mario.perso);
   SDL_FreeSurface(mario1.perso);
   SDL_FreeSurface(per.perso);
+  SDL_FreeSurface(vie11);
 }
 
 void down_menu(int *n, int *l, int *s, int *e, int *e1)
