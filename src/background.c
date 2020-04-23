@@ -1,7 +1,7 @@
 #include "background.h"
 
 int n = 2,continuer = 1;
-int l = 1, s = 1, e = 1, e1, i, x, y, x1, y1, s1 = 1, sb1 = 1, sb2 = 2, sb3 = 1, sb4 = 1, BR = 7, SO = 7, MU = 7, exitsetting = 1, OK = 2, CANCEL = 1, scoff = 2, f = 0, display = 1, quality = 1;
+int l = 1, s = 1, e = 1, e1, i, x, y, x1, y11, s1 = 1, sb1 = 1, sb2 = 2, sb3 = 1, sb4 = 1, BR = 7, SO = 7, MU = 7, exitsetting = 1, OK = 2, CANCEL = 1, scoff = 2, f = 0, display = 1, quality = 1;
 int box_x = 50, box_h = 50, box_w = 353, box_y = 400, box_y1 = 450, box_y2 = 500, box_y3 = 550;
 int fs = 1, sx, sy, fls = 0;
 SDL_Surface *screen = NULL, *image = NULL, *imageLOGO = NULL, *imageLOGO2 = NULL, *imageNEWGAME = NULL, *imageLOAD = NULL, *imageSETTINGS = NULL, *imageEXIT = NULL, *imageNEWGAME1 = NULL, *imageLOAD1 = NULL, *imageSETTINGS1 = NULL, *imageEXIT1 = NULL, *imageNEWGAME2 = NULL, *imageLOAD2 = NULL, *imageSETTINGS2 = NULL, *imageEXIT2 = NULL, *imageSETTINGSM = NULL, *img0 = NULL, *img61 = NULL, *img62 = NULL, *img63 = NULL, *img64 = NULL, *img01 = NULL, *img1 = NULL, *img5 = NULL, *img3 = NULL, *imgredb = NULL, *imgredb1 = NULL;

@@ -2,7 +2,7 @@
 
 
 extern int n,continuer;
-extern int l, s, e, e1, i, x, y, x1, y1, s1, sb1, sb2, sb3, sb4, BR, SO, MU, exitsetting, OK, CANCEL, scoff, f, display, quality;
+extern int l, s, e, e1, i, x, y, x1, y11, s1, sb1, sb2, sb3, sb4, BR, SO, MU, exitsetting, OK, CANCEL, scoff, f, display, quality;
 extern int box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3;
 extern int fs, sx, sy, fls;
 extern SDL_Surface *screen, *image, *imageLOGO, *imageLOGO2, *imageNEWGAME, *imageLOAD, *imageSETTINGS, *imageEXIT, *imageNEWGAME1, *imageLOAD1, *imageSETTINGS1, *imageEXIT1, *imageNEWGAME2, *imageLOAD2, *imageSETTINGS2, *imageEXIT2, *imageSETTINGSM, *img0, *img61, *img62, *img63, *img64, *img01, *img1, *img5, *img3, *imgredb, *imgredb1;

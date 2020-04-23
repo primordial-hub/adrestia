@@ -470,10 +470,10 @@ void settings_affichage()
     {
       SDL_BlitSurface(imgredb1, NULL, screen, &posredb);
     }
-    if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y1 > posredb.y) && (y1 < posredb.y + 27))
+    if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y11 > posredb.y) && (y11 < posredb.y + 27))
     {
       x1 = 0;
-      y1 = 0;
+      y11 = 0;
       s1 = 1;
       sb2 = 2;
       sb3 = 1;
@@ -511,7 +511,7 @@ void settings_affichage()
       sb2 = 1;
       sb3 = 1;
     }
-    if ((x1 > 552) && (x1 < 552 + 602) && (y1 > 492) && (y1 < 492 + 45))
+    if ((x1 > 552) && (x1 < 552 + 602) && (y11 > 492) && (y11 < 492 + 45))
     {
       if (sb4 == 2 && MU != 0)
       {
@@ -522,10 +522,10 @@ void settings_affichage()
         MU = 7;
       }
       x1 = 0;
-      y1 = 0;
+      y11 = 0;
     }
 
-    if ((x1 > 552) && (x1 < 552 + 602) && (y1 > 432) && (y1 < 432 + 45))
+    if ((x1 > 552) && (x1 < 552 + 602) && (y11 > 432) && (y11 < 432 + 45))
     {
       if (sb3 == 2 && SO != 0)
       {
@@ -536,10 +536,10 @@ void settings_affichage()
         SO = 7;
       }
       x1 = 0;
-      y1 = 0;
+      y11 = 0;
     }
 
-    if ((x1 > 552) && (x1 < 552 + 602) && (y1 > 229) && (y1 < 229 + 45))
+    if ((x1 > 552) && (x1 < 552 + 602) && (y11 > 229) && (y11 < 229 + 45))
     {
 
       if (fs == 1)
@@ -582,7 +582,7 @@ void settings_affichage()
       }
       SDL_Flip(screen);
       x1 = 0;
-      y1 = 0;
+      y11 = 0;
     }
   }
 }
@@ -628,7 +628,7 @@ void settings()
     case SDL_BUTTON_LEFT:
     {
       x1 = event1.button.x;
-      y1 = event1.button.y;
+      y11 = event1.button.y;
     }
     }
     break;
@@ -653,7 +653,7 @@ void setjouersouris(int *jouer)
     x3 = eventj1.button.x;
     y3 = eventj1.button.y;
     x1 = eventj1.button.x;
-    y1 = eventj1.button.y;
+    y11 = eventj1.button.y;
     break;
   case SDL_MOUSEMOTION:
     if (sett == 1)
@@ -747,7 +747,7 @@ void setjouersouris(int *jouer)
     SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
     SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
   }
-  if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y1 > posredb.y) && (y1 < posredb.y + 27))
+  if ((x1 > posredb.x) && (x1 < posredb.x + 31) && (y11 > posredb.y) && (y11 < posredb.y + 27))
   {
     sett = 0;
   }
@@ -850,6 +850,10 @@ void play(int *jouer)
   int test1 = 0;
   int r = 0;
   int test2 = 370;
+  Enigme enig;
+  float res_lin;
+  FILE *fic1;
+  char eq[20];
 
   SDL_Surface *map;
   map = IMG_Load("imlvl1/maplvl1.png");
@@ -889,6 +893,10 @@ void play(int *jouer)
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
     check = tellmewhattodo(map, per.posperso);
+    if (check == 1)
+    {
+      afficher_lin(&enig, screen, &res_lin, eq, fic1);
+    }
     SDL_PollEvent(&jj);
     switch (jj.type)
     {
@@ -1116,7 +1124,7 @@ void play(int *jouer)
       {
         vie11 = IMG_Load("imlvl1/lives2.png");
         SDL_BlitSurface(vie11, NULL, screen, &posvie);
-        texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);",fontColor1);
+        texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);", fontColor1);
       }
       if (die == 3)
       {
@@ -1496,7 +1504,7 @@ void menu()
       case SDL_BUTTON_LEFT:
       {
         x1 = event.button.x;
-        y1 = event.button.y;
+        y11 = event.button.y;
       }
       break;
       }
@@ -1513,7 +1521,7 @@ void menu()
     //**********************************************************************************************
     choix_menu(x, y, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME, imageNEWGAME1, imageLOAD, imageLOAD1, imageEXIT, imageEXIT1, imageSETTINGS, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1);
     //*********************************************************************************************
-    choix_menu1(&jouer, &x1, &y1, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME2, imageNEWGAME1, imageLOAD2, imageLOAD1, imageEXIT2, imageEXIT1, imageSETTINGS2, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1, son, &continuer, &s1);
+    choix_menu1(&jouer, &x1, &y11, box_x, box_h, box_w, box_y, box_y1, box_y2, box_y3, screen, imageNEWGAME2, imageNEWGAME1, imageLOAD2, imageLOAD1, imageEXIT2, imageEXIT1, imageSETTINGS2, imageSETTINGS1, posNEWGAME, posNEWGAME1, posLOAD, posLOAD1, posSETTINGS, posSETTINGS1, posEXIT, posEXIT1, son, &continuer, &s1);
     //**************************************************************************************************
     SDL_BlitSurface(texte, NULL, screen, &textePosition);
     SDL_Flip(screen);

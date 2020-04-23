@@ -1,7 +1,7 @@
 #include "defs.h"
-//#include "entsec.h"
 #include "background.h"
 #include "perso.h"
+#include "enigmes.h"
 
 
 void down_menu(int *n, int *l, int *s, int *e, int *e1);
