@@ -33,7 +33,8 @@ int test;
 char enigme_extr[100];
 CHOIX choix_extr;
 }Enigme;
-extern SDL_Surface *screen;
+void test(SDL_Surface *screen,char general[20], int *U0, int *U1, int *Un, int *n);
+
 void enregistrer_enigme(FILE *fic);
 void extrere_enigme(FILE *fic,Enigme *enig);
 void enregistrer_reponse_corr(FILE *fic1);
