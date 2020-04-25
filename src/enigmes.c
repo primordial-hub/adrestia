@@ -277,71 +277,7 @@ char B[4];
 
 /////////////////////////5edmet rima\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-void test(SDL_Surface *screen,char general[20], int *U0, int *U1, int *Un, int *n)
-{
-char B[20];
-TTF_Init();
-    TTF_Font *fontTest1;
-    fontTest1 = TTF_OpenFont("khal.otf", 30);
-    SDL_Color fontColor = {0, 255, 255};
 
-    SDL_Surface *khalil;
-suite_arithmetique(general, U0, U1, Un, n);
-    khalil = TTF_RenderText_Solid(fontTest1, general, fontColor);
-    SDL_Rect tmp_position;
-    tmp_position.x = 0;
-    tmp_position.y = 0;
-    SDL_BlitSurface(khalil, NULL, screen, &tmp_position);
-
-
-sprintf(B, "%d", *Un);
-SDL_Surface *kh;
- kh = TTF_RenderText_Solid(fontTest1,B, fontColor);
-    SDL_Rect kh_position;
-    kh_position.x = 0;
-    kh_position.y = 100;
-    SDL_BlitSurface(kh, NULL, screen, &kh_position);
-   SDL_Surface *khal;
-    khal = TTF_RenderText_Solid(fontTest1,"20", fontColor);
-    SDL_Rect a_position;
-    a_position.x = 50;
-    a_position.y = 100;
-    SDL_BlitSurface(khal, NULL, screen, &a_position);
-    
- while (1)
-    {
-        SDL_Event event;
-        if (SDL_PollEvent(&event))
-        {
-            if (event.type == SDL_QUIT)
-            {
-                break;
-            }
-            else if (event.type == SDL_KEYDOWN)
-            {
-                if (event.key.keysym.sym == SDLK_ESCAPE)
-                {
-                    break;
-                }
-            }
-
-            kh = TTF_RenderText_Solid(fontTest1,B, fontColor);
-            SDL_BlitSurface(kh, NULL, screen, &kh_position);
-            khalil= TTF_RenderText_Solid(fontTest1,general, fontColor);
-            SDL_BlitSurface(khalil, NULL, screen, &tmp_position);
-           khal = TTF_RenderText_Solid(fontTest1,"ashrefs", fontColor);
-           SDL_BlitSurface(khal, NULL, screen, &a_position);
-            SDL_Flip(screen);
-        }
-    }
-
-    SDL_FreeSurface(screen);
-    SDL_FreeSurface(khalil);
-    SDL_FreeSurface(kh);
-    TTF_Quit();
-    SDL_Quit();
-    
-}
 
 int gestion_temp_jeu(SDL_Surface *screen)
 {

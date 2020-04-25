@@ -26,7 +26,7 @@ typedef struct
     char enigme_extr[100];
     CHOIX choix_extr;
 } Enigme;
-void test(SDL_Surface *screen, char general[20], int *U0, int *U1, int *Un, int *n);
+
 
 void enregistrer_enigme(FILE *fic);
 void extrere_enigme(FILE *fic, Enigme *enig);
