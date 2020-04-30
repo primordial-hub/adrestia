@@ -772,19 +772,19 @@ void play(int *jouer)
 {
 
   personnage1 per;
-  SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL;
-  SDL_Rect camera, posvie, postexte, poslvl1, postexte2;
+  SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL, *texte4 = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL;
+  SDL_Rect camera, posvie, postexte, poslvl1, postexte2, postexte3, postexte4;
   enemy enemy1, enemy2, enemy3;
-  box box1, box2, box3, box4;
+  // box box1, box2, box3, box4;
   personnage mario, mario1;
-  TTF_Font *fontTest1,*fontTest2;
+  TTF_Font *fontTest1, *fontTest2;
   SDL_Color fontColor1 = {0, 0, 0};
   SDL_Color fontColor2 = {255, 0, 0};
   Uint32 start;
   bool b[2] = {0, 0};
 
   const int fps = 30;
-  int a = 1, vitesse = 10, x = 0, y = 0, j = 0, x1, y1, access = 1, access1 = 1, die = 0, check, test = 0, test1 = 0, r = 0, test2 = 370, aaa = 0, die1, die2, die3;
+  int a = 1, vitesse = 10, x = 0, y = 0, j = 0, x1, y1, die = 0, check, test = 0, test1 = 0, r = 0, test2 = 370, aaa = 0, die1, die2, die3;
 
   per = init_perso();
   posvie.x = 1;
@@ -793,6 +793,10 @@ void play(int *jouer)
   postexte.y = 50;
   postexte2.x = 400;
   postexte2.y = 300;
+  postexte3.x = 1;
+  postexte3.y = 37;
+  postexte4.x = 120;
+  postexte4.y = 37;
   poslvl1.x = 0;
   poslvl1.y = 0;
   camera.x = 0;
@@ -805,10 +809,10 @@ void play(int *jouer)
   enemy2.posen.y = 655.5;
   enemy3.posen.x = 3069;
   enemy3.posen.y = 628;
-  box1.posbox.x = 1578;
+  /*box1.posbox.x = 1578;
   box1.posbox.y = 600;
   box2.posbox.x = 2158;
-  box2.posbox.y = 544;
+  box2.posbox.y = 544;*/
   mario.posperso.x = 1578;
   mario.posperso.y = 514;
   mario1.posperso.x = 2160;
@@ -838,6 +842,7 @@ void play(int *jouer)
 
   int ii;
   int nitro = 0;
+  char str[12];
 
   map = IMG_Load("imlvl1/maplvl1.png");
   lvll = IMG_Load("imlvl1/lvl1.png");
@@ -846,8 +851,10 @@ void play(int *jouer)
   enemy2.en = IMG_Load("imlvl1/en1.png");
   vie11 = IMG_Load("imlvl1/lives.png");
   fontTest1 = TTF_OpenFont("font/fon.otf", 30);
-   fontTest2 = TTF_OpenFont("font/fon.otf", 90);
+  fontTest2 = TTF_OpenFont("font/fon.otf", 90);
   texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);", fontColor1);
+  texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
+  texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
 
   //box1.box = IMG_Load("imlvl1/lvl1box1.png");
   //mario.perso = IMG_Load("imlvl1/en2.png");
@@ -869,7 +876,7 @@ void play(int *jouer)
   {
     aaa++;
 
-    if (aaa == 1000)
+    if (aaa > 1000)
     {
       texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
     }
@@ -878,10 +885,7 @@ void play(int *jouer)
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
     check = tellmewhattodo(map, per.posperso);
-    /*if (check == 1)
-    {
-      afficher_lin(&enig, screen, &res_lin, eq, fic1);
-    }*/
+
     SDL_PollEvent(&jj);
     switch (jj.type)
     {
@@ -980,20 +984,10 @@ void play(int *jouer)
       case SDLK_DOWN:
 
         break;
-        /* case SDLK_n:
-      nitro=0;
-        break;*/
       }
       break;
     }
-    /* if (nitro==1)
-    {
-      vitesse=50;
-    }
-    if (nitro==0)
-    {
-      vitesse=10;
-    }*/
+
     if (nitro == 1)
     {
 
@@ -1012,6 +1006,7 @@ void play(int *jouer)
 
         vitesse = 50;
         ii++;
+        aaa = aaa + 30;
       }
 
       if (ii == 10)
@@ -1051,7 +1046,7 @@ void play(int *jouer)
         test2 = 370;
       }
     }
-    if (die1 == 1 || die2 == 1 )
+    if (die1 == 1 || die2 == 1 || die3 == 1)
     {
       SDL_Delay(1000);
       per.posperso.x = per.posperso.x - 300;
@@ -1063,6 +1058,14 @@ void play(int *jouer)
       per.position_init.y = per.position_init.y - 300;
       per.position_init.h = per.position_init.h - 300;
       die++;
+      if (aaa < 301)
+      {
+        aaa = 0;
+      }
+      if (aaa > 300)
+      {
+        aaa = aaa - 300;
+      }
     }
 
     per = tellmewhy(check, per);
@@ -1113,6 +1116,8 @@ void play(int *jouer)
         per.posperso.w = per.posperso.w + vitesse;
         test1--;
       }
+      sprintf(str, "%d", aaa);
+      texte4 = TTF_RenderText_Solid(fontTest1, str, fontColor1);
 
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1);
@@ -1130,6 +1135,8 @@ void play(int *jouer)
       //////////////////////////////
       SDL_BlitSurface(per.perso, NULL, screen, &per.position_init);
       SDL_BlitSurface(vie11, NULL, screen, &posvie);
+      SDL_BlitSurface(texte3, NULL, screen, &postexte3);
+      SDL_BlitSurface(texte4, NULL, screen, &postexte4);
       if (die2 != 2 && die3 != 3)
       {
         SDL_BlitSurface(texte1, NULL, lvl1, &postexte);
@@ -1161,12 +1168,16 @@ void play(int *jouer)
       }
       if (die == 3)
       {
-        
+        postexte3.x = 595;
+        postexte3.y = 410;
+        postexte4.x = 715;
+        postexte4.y = 410;
         texte2 = TTF_RenderText_Solid(fontTest2, "GAME OVER", fontColor2);
         SDL_BlitSurface(texte2, NULL, screen, &postexte2);
+        SDL_BlitSurface(texte3, NULL, screen, &postexte3);
+        SDL_BlitSurface(texte4, NULL, screen, &postexte4);
         *jouer = 0;
-        SDL_Delay(1500);
-       
+        SDL_Delay(2000);
       }
 
       SDL_Flip(lvl1);
