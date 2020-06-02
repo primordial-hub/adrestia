@@ -438,6 +438,7 @@ void settings_RETURN()
       SDL_BlitSurface(imageLOAD1, NULL, screen, &posLOAD);
       SDL_BlitSurface(imageSETTINGS1, NULL, screen, &posSETTINGS);
       SDL_BlitSurface(imageEXIT1, NULL, screen, &posEXIT);
+      poslogo.x = 1220;
       fs = 1;
       break;
     case 1:
@@ -452,6 +453,7 @@ void settings_RETURN()
       SDL_BlitSurface(imageLOAD1, NULL, screen, &posLOAD);
       SDL_BlitSurface(imageSETTINGS1, NULL, screen, &posSETTINGS);
       SDL_BlitSurface(imageEXIT1, NULL, screen, &posEXIT);
+      poslogo.x = 1280;
       fs = 0;
 
       break;
@@ -561,7 +563,7 @@ void settings_affichage()
         SDL_BlitSurface(imageLOAD1, NULL, screen, &posLOAD);
         SDL_BlitSurface(imageSETTINGS1, NULL, screen, &posSETTINGS);
         SDL_BlitSurface(imageEXIT1, NULL, screen, &posEXIT);
-
+        poslogo.x = 1220;
         fs = 1;
         break;
       case 1:
@@ -576,7 +578,7 @@ void settings_affichage()
         SDL_BlitSurface(imageLOAD1, NULL, screen, &posLOAD);
         SDL_BlitSurface(imageSETTINGS1, NULL, screen, &posSETTINGS);
         SDL_BlitSurface(imageEXIT1, NULL, screen, &posEXIT);
-
+        poslogo.x = 1280;
         fs = 0;
         break;
       }
@@ -771,21 +773,7 @@ void setjouersouris(int *jouer)
 void play(int *jouer)
 {
 
-  personnage1 per;
-  SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL, *texte4 = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL;
-  SDL_Rect camera, posvie, postexte, poslvl1, postexte2, postexte3, postexte4;
-  enemy enemy1, enemy2, enemy3;
-  // box box1, box2, box3, box4;
-  personnage mario, mario1;
-  TTF_Font *fontTest1, *fontTest2;
-  SDL_Color fontColor1 = {0, 0, 0};
-  SDL_Color fontColor2 = {255, 0, 0};
-  Uint32 start;
   bool b[2] = {0, 0};
-
-  const int fps = 30;
-  int a = 1, vitesse = 10, x = 0, y = 0, j = 0, x1, y1, die = 0, check, test = 0, test1 = 0, r = 0, test2 = 370, aaa = 0, die1, die2, die3;
-
   per = init_perso();
   posvie.x = 1;
   posvie.y = 1;
@@ -838,12 +826,11 @@ void play(int *jouer)
   per.position_init.y = 570;
   per.position_init.w = 375;
   per.position_init.h = 570 + 150;
-  int pit = 0;
 
-  int ii;
-  int nitro = 0;
-  char str[12];
+  SDL_Surface *rot;
+  SDL_Rect posrot;
 
+  rot = IMG_Load("imperso/per.png");
   map = IMG_Load("imlvl1/maplvl1.png");
   lvll = IMG_Load("imlvl1/lvl1.png");
   lvl1 = IMG_Load("imlvl1/lvl1.png");
@@ -965,6 +952,11 @@ void play(int *jouer)
           a++;
         }
         break;
+
+        SDL_BlitSurface(rotation, NULL, screen, &per.posperso); //On affiche la rotation de la surface image.
+        SDL_FreeSurface(rotation);
+        SDL_Delay(1000);
+        per.posperso.x = per.posperso.x - 300;
       }
     }
 
@@ -1048,6 +1040,7 @@ void play(int *jouer)
     }
     if (die1 == 1 || die2 == 1 || die3 == 1)
     {
+
       SDL_Delay(1000);
       per.posperso.x = per.posperso.x - 300;
       per.posperso.w = per.posperso.w - 300;
@@ -1058,6 +1051,42 @@ void play(int *jouer)
       per.position_init.y = per.position_init.y - 300;
       per.position_init.h = per.position_init.h - 300;
       die++;
+      posrot.x = per.posperso.x;
+      posrot.y = per.posperso.y;
+      SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+
+      tempsActuel = SDL_GetTicks();
+      if (tempsActuel - tempsPrecedent > 30)
+      {
+        angle += 2; //On augmente l'angle pour que l'image tourne sur elle-même.
+
+        tempsPrecedent = tempsActuel;
+      }
+      else
+      {
+        SDL_Delay(30 - (tempsActuel - tempsPrecedent));
+      }
+
+      SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+
+      rotation = rotozoomSurface(rot, angle, 1.0, 1); //On transforme la surface image.
+
+      //On positionne l'image en fonction de sa taille.
+      //per.posperso.x = 200 - rotation->w / 2;
+      //per.posperso.y = 200 - rotation->h / 2;
+
+      SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
+      SDL_FreeSurface(rotation);
+      /*	while(angle <200)
+	{
+		angle+=5;
+		rotation = rotozoomSurface(per.perso, angle, 0, 0);
+		SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+		SDL_BlitSurface(rotation,NULL,screen,&per.posperso);
+		SDL_FreeSurface(rotation);
+		SDL_Delay(50);
+		SDL_Flip(screen);
+	}*/
       if (aaa < 301)
       {
         aaa = 0;
@@ -1401,6 +1430,7 @@ void menu()
 {
   int jouer = 0;
   init_sm();
+  
 
   int continuer = 1;
   SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);

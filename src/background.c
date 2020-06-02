@@ -17,9 +17,10 @@ SDL_Rect textePosition;
 void init_m()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Init(SDL_INIT_VIDEO);
     screen = SDL_SetVideoMode(1366, 800, 32, SDL_HWSURFACE);
     poslogo.x = 1220;
-    poslogo.y = 720;
+    poslogo.y = 1;
     poslogo2.x = 40;
     poslogo2.y = 150;
     posback.x = 0;
@@ -69,7 +70,7 @@ void init_m()
     posLOW.x = 1000;
     posLOW.y = 293;
     image = SDL_LoadBMP("images/img.bmp");
-    imageLOGO = SDL_LoadBMP("images/logo.bmp");
+    imageLOGO = SDL_LoadBMP("images/logo3.bmp");
     imageLOGO2 = SDL_LoadBMP("images/logo2.bmp");
     imageNEWGAME = IMG_Load("images/NEWGAME.png");
     imageNEWGAME1 = IMG_Load("images/NEWGAME1.png");

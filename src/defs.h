@@ -9,3 +9,4 @@
 #include <SDL/SDL_video.h>
 #include <math.h>
 #include <time.h>
+#include <SDL/SDL_rotozoom.h>
