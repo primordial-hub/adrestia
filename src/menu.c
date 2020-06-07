@@ -839,7 +839,7 @@ void play(int *jouer)
   vie11 = IMG_Load("imlvl1/lives.png");
   fontTest1 = TTF_OpenFont("font/fon.otf", 30);
   fontTest2 = TTF_OpenFont("font/fon.otf", 90);
-  texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);", fontColor1);
+  texte1 = TTF_RenderText_Solid(fontTest1, "dlrow olleH!", fontColor1);
   texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
   texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
 
@@ -1053,7 +1053,7 @@ void play(int *jouer)
       die++;
       posrot.x = per.posperso.x;
       posrot.y = per.posperso.y;
-      SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+     /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
       tempsActuel = SDL_GetTicks();
       if (tempsActuel - tempsPrecedent > 30)
@@ -1069,14 +1069,14 @@ void play(int *jouer)
 
       SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
 
-      rotation = rotozoomSurface(rot, angle, 1.0, 1); //On transforme la surface image.
+      rotation = rotozoomSurface(rot, angle, 1.0, 1); //On transforme la surface image.*/
 
       //On positionne l'image en fonction de sa taille.
       //per.posperso.x = 200 - rotation->w / 2;
       //per.posperso.y = 200 - rotation->h / 2;
 
-      SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
-      SDL_FreeSurface(rotation);
+     /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
+      SDL_FreeSurface(rotation);*/
       /*	while(angle <200)
 	{
 		angle+=5;
@@ -1192,7 +1192,7 @@ void play(int *jouer)
       {
         vie11 = IMG_Load("imlvl1/lives2.png");
         SDL_BlitSurface(vie11, NULL, screen, &posvie);
-        texte1 = TTF_RenderText_Solid(fontTest1, "printf(n/!dlrow olleH!);", fontColor1);
+        texte1 = TTF_RenderText_Solid(fontTest1, "dlrow olleH!", fontColor1);
         SDL_BlitSurface(texte1, NULL, screen, &postexte);
       }
       if (die == 3)
