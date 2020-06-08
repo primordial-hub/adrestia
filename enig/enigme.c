@@ -268,22 +268,7 @@ printf("%s|%c\n",B,B[0]);
     eq[strlen(A) + 2]=B[0];
     eq[strlen(A) + 3]='\0';
 }
-void suite_arithmetique(char general[20], int *U0, int *U1, int *Un, int *n)
-{
-    int i;
-char B[4];
-    (*U1) = 2;
-    (*U0) = 1;
-    strcpy(general, "Un+1=Un+2*Un-1");
-    srand(time(0));
-    (*n) = (rand() % 5) + 2;
-    for (i = 2; i <= (*n); i++)
-    {
-        (*Un) = (*U1) + 2 * (*U0);
-        (*U0) = (*U1);
-        (*U1) = (*Un);
-    }
-}
+
 
 /////////////////////////5edmet rima\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -435,8 +420,8 @@ int gestion_temp_enigme(Enigme *enig, SDL_Surface *screen, FILE *fic1)
             }
         }
 
-            tempsActuel = SDL_GetTicks();
-printf("%d\n",tempsActuel);
+            tempsActuel=SDL_GetTicks();
+             printf("%d\n",tempsActuel);
            if (enig->test == 0)
                 enig->resolution = resolution(fic1, enig);
 
@@ -542,31 +527,31 @@ void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1)
    SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
     int tmp_enig=2;
     enig->test = 0;
-    enig->surf_enig = IMG_Load("khal.png");
+    enig->surf_enig = IMG_Load("enigme.png");
     SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
-    enig->enigme_position.x = 0;
+    enig->enigme_position.x = 100;
     enig->enigme_position.y = 0;
     SDL_BlitSurface(enig->surf_enig, NULL, screen, &enig->enigme_position);
     
 
     enig->surf_choix_A = IMG_Load("1.png");
-    SDL_SetColorKey(enig->surf_choix_A, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_A->format, 255, 255, 255));
-    enig->choix_A_position.x = 0;
-    enig->choix_A_position.y = 120 + enig->surf_enig->h;
+    //SDL_SetColorKey(enig->surf_choix_A, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_A->format, 255, 255, 255));
+    enig->choix_A_position.x = 100;
+    enig->choix_A_position.y = 20 + enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_A, NULL, screen, &enig->choix_A_position);
     
 
     enig->surf_choix_B = IMG_Load("2.png");
     SDL_SetColorKey(enig->surf_choix_B, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_B->format, 255, 255, 255));
-    enig->choix_B_position.x = 10+enig->surf_choix_A->w;
-    enig->choix_B_position.y = 120 + enig->surf_enig->h;
+    enig->choix_B_position.x = 120+enig->surf_choix_A->w;
+    enig->choix_B_position.y = 20+ enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_B, NULL, screen, &enig->choix_B_position);
     
 
     enig->surf_choix_C = IMG_Load("3.png");
     SDL_SetColorKey(enig->surf_choix_C, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_C->format, 255, 255, 255));
-    enig->choix_C_position.x = 20 + (enig->surf_choix_A->w * 2);
-    enig->choix_C_position.y = 120 + enig->surf_enig->h;
+    enig->choix_C_position.x =140 + (enig->surf_choix_A->w * 2);
+    enig->choix_C_position.y =20+ enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_C, NULL, screen, &enig->choix_C_position);
     
 
@@ -795,4 +780,20 @@ SDL_Flip(screen);
     SDL_FreeSurface(enig->surf_choix_B);
     SDL_FreeSurface(enig->surf_choix_C);
     SDL_Quit();
+}
+void suite_arithmetique(char general[20], int *U0, int *U1, int *Un, int *n)
+{
+    int i;
+char B[4];
+    (*U1) = 2;
+    (*U0) = 1;
+    strcpy(general, "Un+1=Un+2*Un-1");
+    srand(time(0));
+    (*n) = (rand() % 5) + 2;
+    for (i = 2; i <= (*n); i++)
+    {
+        (*Un) = (*U1) + 2 * (*U0);
+        (*U0) = (*U1);
+        (*U1) = (*Un);
+    }
 }

@@ -23,10 +23,10 @@ int U0,U1,Un,n;
 float res_lin;
 //int r;
 enig.tmp_enig=1500;
-//int k;
+int k;
 SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
 SDL_Surface *screen=NULL;
-screen=SDL_SetVideoMode(600,600,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+screen=SDL_SetVideoMode(1300,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 SDL_Flip(screen);
 //afficher_img(&enig,screen,fic1);
 //afficher_suite(&enig,screen,general,&U0,&U1,&Un,&n,fic1);
@@ -51,7 +51,7 @@ while((r<0)||(r>4));
 switch(r){
 case 1:
 k=gestion_temp_jeu(screen);
-printf("%d\n",k);
+printf("%d\n",k);/*
 break;
 case 2:
 afficher_texte(enig,screen,fic1,fic);
