@@ -157,6 +157,7 @@ int graviti(int x, int c)
     {
         x = x + 20;
     }
+   
     return x;
 }
 

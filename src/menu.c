@@ -943,6 +943,10 @@ void play(int *jouer)
             per.position_init.y--;
             per.position_init.h--;
           } while (test != 250 && tellmewhattodo(map, per.posperso) != 5 && tellmewhattodo(map, per.posperso) != 9 && tellmewhattodo(map, per.posperso) != 8);
+          if (test == 250)
+          {
+            SDL_Delay(150);
+          }
         }
         test = 0;
         break;
@@ -1053,7 +1057,7 @@ void play(int *jouer)
       die++;
       posrot.x = per.posperso.x;
       posrot.y = per.posperso.y;
-     /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+      /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
       tempsActuel = SDL_GetTicks();
       if (tempsActuel - tempsPrecedent > 30)
@@ -1075,7 +1079,7 @@ void play(int *jouer)
       //per.posperso.x = 200 - rotation->w / 2;
       //per.posperso.y = 200 - rotation->h / 2;
 
-     /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
+      /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
       SDL_FreeSurface(rotation);*/
       /*	while(angle <200)
 	{
@@ -1430,7 +1434,6 @@ void menu()
 {
   int jouer = 0;
   init_sm();
-  
 
   int continuer = 1;
   SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
