@@ -8,6 +8,21 @@ personnage1 per2;
 SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL,*vie2 = NULL, *texte4 = NULL ,*textek4 = NULL, *rotation = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL, *textek3 = NULL, *textek2 = NULL, *textek1 = NULL;
 SDL_Rect camera,camera2, posvie,posvie2, postexte,postextek,poslvl1_2, poslvl1, postexte2,postextek2, postexte3,postextek3, postexte4,postextek4;
 enemy enemy1, enemy2, enemy3,enemyk3,enemyk, enemyk1, enemyk2 ;
+SDL_Surface *sauvgarder=NULL;
+  SDL_Surface *oui=NULL;
+  SDL_Surface *non=NULL;
+   SDL_Rect sauvgarderPosition;
+  SDL_Rect ouiPosition;
+  SDL_Rect nonPosition;
+SDL_Surface *chrono;
+SDL_Rect tmp_position;
+   
+    int intervall = 100, tempsPrecedentr = 0, tempsActuelr = 0;
+    
+    char tempsjeu[1000];
+
+
+
 // box box1, box2, box3, box4;
 personnage mario, mario1;
 TTF_Font *fontTest1, *fontTest2;
@@ -18,7 +33,8 @@ double angle = 0;
 const int fps = 30;
 int a = 1, tempsPrecedent = 0, tempsActuel = 0, pit = 0,pit2 = 0, ii,kk, nitro = 0, vitesse = 10,nitro2 = 0, vitesse2 = 10, x2=0,x = 0, y = 0, j = 0, die = 0,diek = 0, check,check2, testk = 0,test=0, testk1=0,test1 = 0, r = 0, test2 = 370,testk2 = 370, aaa = 0,kkk=0, die1, die2, die3, diek1, diek2, diek3;
 char str[12],str2[12];
-
+int sauvg=0 ,ktest=0;
+int tests=0;
 void down_menu(int *n, int *l, int *s, int *e, int *e1);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void up_menu(int *n, int *l, int *s, int *e, int *e1);

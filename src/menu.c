@@ -772,9 +772,33 @@ void setjouersouris(int *jouer)
 
 void play(int *jouer)
 {
+  if (ktest == 0)
+  {
+    per = init_perso();
+    camera.x = 0;
+    camera.y = 0;
+    camera.w = 1366;
+    camera.h = 800;
+    per.posperso.x = 300;
+    per.posperso.y = 570;
+    per.posperso.w = 375;
+    per.posperso.h = 570 + 150;
+    per.position_init.x = 300;
+    per.position_init.y = 570;
+    per.position_init.w = 375;
+    per.position_init.h = 570 + 150;
+  }
+  else if (ktest == 1)
+  {
+
+    FILE *f = NULL;
+    f = fopen("sauvgarder.txt", "r");
+    fscanf(f, "%hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd ", &per.posperso.x, &per.posperso.y, &per.posperso.w, &per.posperso.h, &camera.x, &camera.y, &camera.h, &camera.w, &per.position_init.x, &per.position_init.y, &per.position_init.h, &per.position_init.w);
+    fclose(f);
+  }
 
   bool b[2] = {0, 0};
-  per = init_perso();
+
   posvie.x = 1;
   posvie.y = 1;
   postexte.x = 500;
@@ -787,10 +811,7 @@ void play(int *jouer)
   postexte4.y = 37;
   poslvl1.x = 0;
   poslvl1.y = 0;
-  camera.x = 0;
-  camera.y = 0;
-  camera.w = 1366;
-  camera.h = 800;
+
   enemy1.posen.x = 1700;
   enemy1.posen.y = 655.5;
   enemy2.posen.x = 2716;
@@ -818,17 +839,23 @@ void play(int *jouer)
   enemy1.direction = 1;
   enemy2.direction = 1;
   enemy3.direction = 1;
-  per.posperso.x = 300;
-  per.posperso.y = 570;
-  per.posperso.w = 375;
-  per.posperso.h = 570 + 150;
-  per.position_init.x = 300;
-  per.position_init.y = 570;
-  per.position_init.w = 375;
-  per.position_init.h = 570 + 150;
 
   SDL_Surface *rot;
   SDL_Rect posrot;
+ tmp_position.x = 10;
+    tmp_position.y =670;
+  sauvgarderPosition.x = 400;
+  sauvgarderPosition.y = 50;
+
+  ouiPosition.x = 400;
+  ouiPosition.y = 100 + 442;
+
+  nonPosition.x = 420 + 225;
+  nonPosition.y = 100 + 442;
+
+  sauvgarder = IMG_Load("images/sauvgarder.png");
+  oui = IMG_Load("images/oui.png");
+  non = IMG_Load("images/non.png");
 
   rot = IMG_Load("imperso/per.png");
   map = IMG_Load("imlvl1/maplvl1.png");
@@ -842,7 +869,9 @@ void play(int *jouer)
   texte1 = TTF_RenderText_Solid(fontTest1, "dlrow olleH!", fontColor1);
   texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
   texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
-
+    sprintf(tempsjeu, "%d", SDL_GetTicks());
+    chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
+    SDL_BlitSurface(chrono, NULL, lvl1, &tmp_position);
   //box1.box = IMG_Load("imlvl1/lvl1box1.png");
   //mario.perso = IMG_Load("imlvl1/en2.png");
   //mario1.perso = IMG_Load("imlvl1/en2.png");
@@ -872,7 +901,7 @@ void play(int *jouer)
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
     check = tellmewhattodo(map, per.posperso);
-
+  tempsActuelr = SDL_GetTicks();
     SDL_PollEvent(&jj);
     switch (jj.type)
     {
@@ -892,9 +921,29 @@ void play(int *jouer)
         r = jj.button.x - (jj.button.x % 10);
 
         break;
+      case SDL_BUTTON_LEFT:
+
+        if ((jj.button.x > 420 && jj.button.x < 620) && (jj.button.y > 542 && jj.button.y < 597))
+
+        {
+          FILE *f = NULL;
+          f = fopen("sauvgarder.txt", "w");
+          fprintf(f, "%d %d %d %d %d %d %d %d %d %d %d %d ", per.posperso.x, per.posperso.y, per.posperso.w, per.posperso.h, camera.x, camera.y, camera.h, camera.w, per.position_init.x, per.position_init.y, per.position_init.h, per.position_init.w);
+          fclose(f);
+          tests = 1;
+          *jouer = 0;
+        }
+        else if ((jj.button.x > 640 && jj.button.x < 870) && (jj.button.y > 542 && jj.button.y < 595))
+          *jouer = 0;
+        tests = 1;
+
+        break;
       }
+
       break;
+
     case SDL_KEYDOWN:
+
     {
 
       switch (jj.key.keysym.sym)
@@ -914,6 +963,9 @@ void play(int *jouer)
         break;
       case SDLK_n:
         nitro = 1;
+        break;
+      case SDLK_s:
+        sauvg = 1;
         break;
       case SDLK_UP:
         if (check == 4 && check != 6 && check != 7)
@@ -943,10 +995,6 @@ void play(int *jouer)
             per.position_init.y--;
             per.position_init.h--;
           } while (test != 250 && tellmewhattodo(map, per.posperso) != 5 && tellmewhattodo(map, per.posperso) != 9 && tellmewhattodo(map, per.posperso) != 8);
-          if (test == 250)
-          {
-            SDL_Delay(150);
-          }
         }
         test = 0;
         break;
@@ -963,7 +1011,6 @@ void play(int *jouer)
         per.posperso.x = per.posperso.x - 300;
       }
     }
-
     break;
     case SDL_KEYUP:
       switch (jj.key.keysym.sym)
@@ -982,6 +1029,24 @@ void play(int *jouer)
         break;
       }
       break;
+      
+    }
+    if (tempsActuelr - tempsPrecedentr < intervall)
+            {
+                SDL_Delay(intervall - (tempsActuelr - tempsPrecedentr));
+            }
+
+           // SDL_FillRect(lvl1, NULL, SDL_MapRGB(lvl1->format, 0, 0, 0));
+           
+            tempsPrecedentr = tempsActuelr;
+    if (sauvg == 1 && tests == 0)
+    {
+
+      SDL_BlitSurface(sauvgarder, NULL, lvl1, &sauvgarderPosition);
+
+      SDL_BlitSurface(oui, NULL, lvl1, &ouiPosition);
+
+      SDL_BlitSurface(non, NULL, lvl1, &nonPosition);
     }
 
     if (nitro == 1)
@@ -1125,6 +1190,9 @@ void play(int *jouer)
         per.posperso.w = per.posperso.w + vitesse;
         x = x + vitesse;
         camera.x = camera.x + vitesse;
+        sauvgarderPosition.x = sauvgarderPosition.x + vitesse;
+        ouiPosition.x = ouiPosition.x + vitesse;
+        nonPosition.x = nonPosition.x + vitesse;
       }
       if ((b[1]) && (camera.x > 0) && check != 3 && check != 5 && check != 7 && check != 9 && test1 == 0)
       {
@@ -1132,6 +1200,9 @@ void play(int *jouer)
         per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
+        sauvgarderPosition.x = sauvgarderPosition.x - vitesse;
+        ouiPosition.x = ouiPosition.x - vitesse;
+        nonPosition.x = nonPosition.x - vitesse;
       }
       if ((b[1]) && (camera.x < 10 || camera.x > 5365 - 1366) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
       {
@@ -1149,8 +1220,14 @@ void play(int *jouer)
         per.posperso.w = per.posperso.w + vitesse;
         test1--;
       }
+
+     
       sprintf(str, "%d", aaa);
       texte4 = TTF_RenderText_Solid(fontTest1, str, fontColor1);
+
+          sprintf(tempsjeu, "%d ", tempsActuelr);
+            chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
+            SDL_BlitSurface(chrono, NULL,lvl1, &tmp_position);
 
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1);
@@ -1170,6 +1247,10 @@ void play(int *jouer)
       SDL_BlitSurface(vie11, NULL, screen, &posvie);
       SDL_BlitSurface(texte3, NULL, screen, &postexte3);
       SDL_BlitSurface(texte4, NULL, screen, &postexte4);
+
+
+
+
       if (die2 != 2 && die3 != 3)
       {
         SDL_BlitSurface(texte1, NULL, lvl1, &postexte);
@@ -1215,6 +1296,8 @@ void play(int *jouer)
 
       SDL_Flip(lvl1);
     }
+
+
     SDL_Flip(screen);
   }
   sb2 = 2;
@@ -1241,15 +1324,56 @@ void play(int *jouer)
   // SDL_FreeSurface(mario1.perso);
   SDL_FreeSurface(per.perso);
   SDL_FreeSurface(vie11);
+  SDL_FreeSurface(sauvgarder);
+  SDL_FreeSurface(oui);
+  SDL_FreeSurface(non);
+  SDL_FreeSurface(chrono);
 }
+
 void play2(int *jouer)
 {
+  if (ktest == 0)
+  {
+    per = init_perso();
+    per2 = init_perso();
+    per.posperso.x = 300 / 2;
+    per.posperso.y = 570;
+    per.posperso.w = 375 / 2;
+    per.posperso.h = 570 + 150;
+    per.position_init.x = 300 / 2;
+    per.position_init.y = 570;
+    per.position_init.w = 375;
+    per.position_init.h = 570 + 150;
+    ////////////////////////////////
+    per2.posperso.x = 683 + 300 / 2;
+    per2.posperso.y = 570;
+    per2.posperso.w = 375;
+    per2.posperso.h = 570 + 150;
+    per2.position_init.x = 683 + 300 / 2;
+    per2.position_init.y = 570;
+    per2.position_init.w = 683 + 375 / 2;
+    per2.position_init.h = 570 + 150;
+    camera.x = 0;
+    camera.y = 0;
+    camera.w = 1366 / 2;
+    camera.h = 800;
+    //
+    camera2.x = 0;
+    camera2.y = 0;
+    camera2.w = 1366 / 2;
+    camera2.h = 800;
+  }
+  else if (ktest == 1)
+  {
 
+    FILE *f = NULL;
+    f = fopen("sauvgarder.txt", "r");
+    fscanf(f, "%hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd ", &per.posperso.x, &per.posperso.y, &per.posperso.w, &per.posperso.h, &camera.x, &camera.y, &camera.h, &camera.w, &per.position_init.x, &per.position_init.y, &per.position_init.h, &per2.position_init.w, &per2.posperso.x, &per2.posperso.y, &per2.posperso.w, &per2.posperso.h, &camera2.x, &camera2.y, &camera2.h, &camera2.w, &per2.position_init.x, &per2.position_init.y, &per2.position_init.h, &per2.position_init.w);
+    fclose(f);
+  }
   bool b[2] = {0, 0};
-bool b2[2] = {0, 0};
+  bool b2[2] = {0, 0};
 
-  per = init_perso();
-  per2=init_perso();
   posvie.x = 1;
   posvie.y = 1;
   posvie2.x = 684;
@@ -1263,28 +1387,20 @@ bool b2[2] = {0, 0};
   postexte4.x = 120;
   postexte4.y = 37;
   //
-  postextek.x = 500+683;
+  postextek.x = 500 + 683;
   postextek.y = 50;
-  postextek2.x = 400+683;
+  postextek2.x = 400 + 683;
   postextek2.y = 300;
-  postextek3.x = 1+683;
+  postextek3.x = 1 + 683;
   postextek3.y = 37;
-  postextek4.x = 120+683;
+  postextek4.x = 120 + 683;
   postextek4.y = 37;
   //
   poslvl1.x = 0;
   poslvl1.y = 0;
   poslvl1_2.y = 0;
   poslvl1_2.x = 683;
-  camera.x = 0;
-  camera.y = 0;
-  camera.w = 1366/2;
-  camera.h = 800;
-//
-  camera2.x = 0;
-  camera2.y = 0;
-  camera2.w = 1366/2;
-  camera2.h = 800;
+
   enemy1.posen.x = 1700;
   enemy1.posen.y = 655.5;
   enemy2.posen.x = 2716;
@@ -1292,11 +1408,11 @@ bool b2[2] = {0, 0};
   enemy3.posen.x = 3069;
   enemy3.posen.y = 628;
 
-  enemyk1.posen.x = 1700+683;
+  enemyk1.posen.x = 1700 + 683;
   enemyk1.posen.y = 655.5;
-  enemyk2.posen.x = 2716+683;
+  enemyk2.posen.x = 2716 + 683;
   enemyk2.posen.y = 655.5;
-  enemyk3.posen.x = 3069+683;
+  enemyk3.posen.x = 3069 + 683;
   enemyk3.posen.y = 628;
   /*box1.posbox.x = 1578;
   box1.posbox.y = 600;
@@ -1319,37 +1435,34 @@ bool b2[2] = {0, 0};
   enemy1.direction = 1;
   enemy2.direction = 1;
   enemy3.direction = 1;
-   
+
   enemyk1.distance = 378;
   enemyk2.distance = 280;
   enemyk3.distance = 109;
-  enemyk1.position_initiale = 1712+683;
-  enemyk2.position_initiale = 2716+683;
-  enemyk3.position_initiale = 3069+683;
+  enemyk1.position_initiale = 1712 + 683;
+  enemyk2.position_initiale = 2716 + 683;
+  enemyk3.position_initiale = 3069 + 683;
   enemyk1.direction = 1;
   enemyk2.direction = 1;
   enemyk3.direction = 1;
-  per.posperso.x = 300/2;
-  per.posperso.y = 570;
-  per.posperso.w = 375/2;
-  per.posperso.h = 570 + 150;
-  per.position_init.x = 300/2;
-  per.position_init.y = 570;
-  per.position_init.w = 375;
-  per.position_init.h = 570 + 150;
-  ////////////////////////////////
-  per2.posperso.x = 683+300/2;
-  per2.posperso.y = 570;
-  per2.posperso.w = 375;
-  per2.posperso.h = 570 + 150;
-  per2.position_init.x = 683+300/2;
-  per2.position_init.y = 570;
-  per2.position_init.w = 683+375/2;
-  per2.position_init.h = 570 + 150;
+
+  sauvgarderPosition.x = 50;
+  sauvgarderPosition.y = 50;
+
+  ouiPosition.x = 50;
+  ouiPosition.y = 100 + 442;
+
+  nonPosition.x = 70 + 225;
+  nonPosition.y = 100 + 442;
+
+ 
+  sauvgarder = IMG_Load("images/sauvgarder.png");
+  oui = IMG_Load("images/oui.png");
+  non = IMG_Load("images/non.png");
 
   SDL_Surface *rot;
   SDL_Rect posrot;
-  SDL_Rect posrot2; 
+  SDL_Rect posrot2;
 
   rot = IMG_Load("imperso/per.png");
   map = IMG_Load("imlvl1/maplvl1.png");
@@ -1429,6 +1542,22 @@ bool b2[2] = {0, 0};
         r = jj.button.x - (jj.button.x % 10);
 
         break;
+      case SDL_BUTTON_LEFT:
+
+        if ((jj.button.x >170 && jj.button.x < 370) && (jj.button.y > 542 && jj.button.y < 597))
+        
+          {
+            FILE *f = NULL;
+            f = fopen("sauvgarder.txt", "w");
+            fprintf(f, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d ", per.posperso.x, per.posperso.y, per.posperso.w, per.posperso.h, camera.x, camera.y, camera.h, camera.w, per.position_init.x, per.position_init.y, per.position_init.h, per.position_init.w, per2.position_init.w, per2.posperso.x, per2.posperso.y, per2.posperso.h, camera2.x, camera2.y, camera2.h, camera2.w, per2.position_init.x, per2.position_init.y, per2.position_init.h, per2.position_init.w);
+            fclose(f);
+            tests = 1;
+            //*jouer = 0;
+          }
+          else if ((jj.button.x > 190 && jj.button.x < 420) && (jj.button.y > 542 && jj.button.y < 595))
+              *jouer = 0;
+          tests = 1;
+        
       }
       break;
     case SDL_KEYDOWN:
@@ -1449,10 +1578,13 @@ bool b2[2] = {0, 0};
       case SDLK_DOWN:
         // access = 2;
         break;
+      case SDLK_s:
+        sauvg = 1;
+     
       case SDLK_n:
         nitro = 1;
         break;
-case SDLK_UP:
+      case SDLK_UP:
         if (check == 4 && check != 6 && check != 7)
         {
 
@@ -1468,8 +1600,8 @@ case SDLK_UP:
         test = 0;
 
         break;
-/////////////////////////////
-     case SDLK_d:
+        /////////////////////////////
+      case SDLK_d:
         b2[0] = 1;
         per2.perso = IMG_Load("imperso/per.png");
         pit2 = 0;
@@ -1560,7 +1692,7 @@ case SDLK_UP:
         ii++;
         aaa = aaa + 30;
       }
-       if (ii == 10)
+      if (ii == 10)
       {
         ii = 0;
         vitesse = 10;
@@ -1569,8 +1701,19 @@ case SDLK_UP:
         nitro = 0;
       }
     }
-///////
-if (nitro2 == 1)
+    ///////
+    if (sauvg == 1 && tests == 0)
+    {
+
+      SDL_BlitSurface(sauvgarder, NULL, lvl1, &sauvgarderPosition);
+
+      SDL_BlitSurface(oui, NULL, lvl1, &ouiPosition);
+
+      SDL_BlitSurface(non, NULL, lvl1, &nonPosition);
+    }
+    
+
+    if (nitro2 == 1)
     {
 
       if (kk < 10)
@@ -1600,7 +1743,7 @@ if (nitro2 == 1)
         nitro2 = 0;
       }
     }
-     
+
     if (a % 2 == 0)
     {
       setjouersouris(jouer);
@@ -1653,7 +1796,7 @@ if (nitro2 == 1)
         aaa = aaa - 300;
       }
     }
-  if (diek1 == 1 || diek2 == 1 || diek3 == 1)
+    if (diek1 == 1 || diek2 == 1 || diek3 == 1)
     {
 
       SDL_Delay(1000);
@@ -1677,7 +1820,7 @@ if (nitro2 == 1)
         kkk = kkk - 300;
       }
     }
-   /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+    /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
       tempsActuel = SDL_GetTicks();
       if (tempsActuel - tempsPrecedent > 30)
@@ -1695,13 +1838,13 @@ if (nitro2 == 1)
 
       rotation = rotozoomSurface(rot, angle, 1.0, 1); //On transforme la surface image.*/
 
-      //On positionne l'image en fonction de sa taille.
-      //per.posperso.x = 200 - rotation->w / 2;
-      //per.posperso.y = 200 - rotation->h / 2;
+    //On positionne l'image en fonction de sa taille.
+    //per.posperso.x = 200 - rotation->w / 2;
+    //per.posperso.y = 200 - rotation->h / 2;
 
-     /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
+    /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
       SDL_FreeSurface(rotation);*/
-      /*	while(angle <200)
+    /*	while(angle <200)
 	{
 		angle+=5;
 		rotation = rotozoomSurface(per.perso, angle, 0, 0);
@@ -1711,7 +1854,6 @@ if (nitro2 == 1)
 		SDL_Delay(50);
 		SDL_Flip(screen);
 	}*/
-     
 
     per = tellmewhy(check, per);
     if (check == 2 || check == 8)
@@ -1729,8 +1871,7 @@ if (nitro2 == 1)
       camera.x = camera.x + 2;
     }
 
-
-   per2 = tellmewhy(check2, per2);
+    per2 = tellmewhy(check2, per2);
     if (check2 == 2 || check2 == 8)
     {
       per2.posperso.x = per2.posperso.x - 2;
@@ -1748,12 +1889,15 @@ if (nitro2 == 1)
 
     if (a % 2 != 0)
     {
-      if ((b[0]) && (camera.x < 5365 - (1366/2)) && check != 2 && check != 6 && check != 5 && check != 8 && test1 == 0)
+      if ((b[0]) && (camera.x < 5365 - (1366 / 2)) && check != 2 && check != 6 && check != 5 && check != 8 && test1 == 0)
       {
         per.posperso.x = per.posperso.x + vitesse;
         per.posperso.w = per.posperso.w + vitesse;
         x = x + vitesse;
         camera.x = camera.x + vitesse;
+        sauvgarderPosition.x = sauvgarderPosition.x + vitesse;
+        ouiPosition.x = ouiPosition.x + vitesse;
+        nonPosition.x = nonPosition.x + vitesse;
       }
       if ((b[1]) && (camera.x > 0) && check != 3 && check != 5 && check != 7 && check != 9 && test1 == 0)
       {
@@ -1761,8 +1905,11 @@ if (nitro2 == 1)
         per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
+        sauvgarderPosition.x = sauvgarderPosition.x - vitesse;
+        ouiPosition.x = ouiPosition.x - vitesse;
+        nonPosition.x = nonPosition.x - vitesse;
       }
-      if ((b[1]) && (camera.x < 10 || camera.x > 5365 - (1366/2)) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
+      if ((b[1]) && (camera.x < 10 || camera.x > 5365 - (1366 / 2)) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
       {
         per.position_init.x = per.position_init.x - vitesse;
         per.position_init.w = per.position_init.w - vitesse;
@@ -1770,7 +1917,7 @@ if (nitro2 == 1)
         per.posperso.w = per.posperso.w - vitesse;
         test1++;
       }
-      if (b[0] && (camera.x < 10 || camera.x > 5365 - (1366/2)) && check != 2 && check != 6 && check != 5 && check != 8)
+      if (b[0] && (camera.x < 10 || camera.x > 5365 - (1366 / 2)) && check != 2 && check != 6 && check != 5 && check != 8)
       {
         per.position_init.x = per.position_init.x + vitesse;
         per.position_init.w = per.position_init.w + vitesse;
@@ -1778,43 +1925,49 @@ if (nitro2 == 1)
         per.posperso.w = per.posperso.w + vitesse;
         test1--;
       }
-   if (a % 2 != 0)
-    {
-      if ((b2[0]) && (camera2.x < 5365 - (1366/2)) && check2 != 2 && check2 != 6 && check2 != 5 && check2 != 8 && testk1 == 0)
+      if (a % 2 != 0)
       {
-        per2.posperso.x = per2.posperso.x + vitesse2;
-        per2.posperso.w = per2.posperso.w + vitesse2;
-        x2 = x2 + vitesse2;
-        camera2.x = camera2.x + vitesse2;
+        if ((b2[0]) && (camera2.x < 5365 - (1366 / 2)) && check2 != 2 && check2 != 6 && check2 != 5 && check2 != 8 && testk1 == 0)
+        {
+          per2.posperso.x = per2.posperso.x + vitesse2;
+          per2.posperso.w = per2.posperso.w + vitesse2;
+          x2 = x2 + vitesse2;
+          camera2.x = camera2.x + vitesse2;
+          sauvgarderPosition.x = sauvgarderPosition.x + vitesse;
+          ouiPosition.x = ouiPosition.x + vitesse;
+          nonPosition.x = nonPosition.x + vitesse;
+        }
+        if ((b2[1]) && (camera2.x > 0) && check2 != 3 && check2 != 5 && check2 != 7 && check2 != 9 && testk1 == 0)
+        {
+          per2.posperso.w = per2.posperso.w - vitesse2;
+          per2.posperso.x = per2.posperso.x - vitesse2;
+          x2 = x2 - vitesse2;
+          camera2.x = camera2.x - vitesse2;
+          sauvgarderPosition.x = sauvgarderPosition.x - vitesse;
+          ouiPosition.x = ouiPosition.x - vitesse;
+          nonPosition.x = nonPosition.x - vitesse;
+        }
+        if ((b2[1]) && (camera2.x < 10 || camera2.x > 5365 - (1366 / 2)) && test1 < 29 && check2 != 3 && check2 != 5 && check2 != 7 && check2 != 9)
+        {
+          per2.position_init.x = per2.position_init.x - vitesse2;
+          per2.position_init.w = per2.position_init.w - vitesse2;
+          per2.posperso.x = per2.posperso.x - vitesse2;
+          per2.posperso.w = per2.posperso.w - vitesse2;
+          testk1++;
+        }
+        if (b2[0] && (camera2.x < 10 || camera2.x > 5365 - (1366 / 2)) && check2 != 2 && check2 != 6 && check2 != 5 && check2 != 8)
+        {
+          per2.position_init.x = per2.position_init.x + vitesse2;
+          per2.position_init.w = per2.position_init.w + vitesse2;
+          per2.posperso.x = per2.posperso.x + vitesse2;
+          per2.posperso.w = per2.posperso.w + vitesse2;
+          testk1--;
+        }
       }
-      if ((b2[1]) && (camera2.x > 0) && check2 != 3 && check2 != 5 && check2 != 7 && check2 != 9 && testk1 == 0)
-      {
-        per2.posperso.w = per2.posperso.w - vitesse2;
-        per2.posperso.x = per2.posperso.x - vitesse2;
-        x2 = x2 - vitesse2;
-        camera2.x = camera2.x - vitesse2;
-      }
-      if ((b2[1]) && (camera2.x < 10 || camera2.x > 5365 - (1366/2)) && test1 < 29 && check2 != 3 && check2 != 5 && check2 != 7 && check2 != 9)
-      {
-        per2.position_init.x = per2.position_init.x - vitesse2;
-        per2.position_init.w = per2.position_init.w - vitesse2;
-        per2.posperso.x = per2.posperso.x - vitesse2;
-        per2.posperso.w = per2.posperso.w - vitesse2;
-        testk1++;
-      }
-      if (b2[0] && (camera2.x < 10 || camera2.x > 5365 - (1366/2)) && check2 != 2 && check2 != 6 && check2 != 5 && check2 != 8)
-      {
-        per2.position_init.x = per2.position_init.x + vitesse2;
-        per2.position_init.w = per2.position_init.w + vitesse2;
-        per2.posperso.x = per2.posperso.x + vitesse2;
-        per2.posperso.w = per2.posperso.w + vitesse2;
-        testk1--;
-      }
-}
       sprintf(str, "%d", aaa);
       texte4 = TTF_RenderText_Solid(fontTest1, str, fontColor1);
- 
-        sprintf(str2, "%d", kkk);
+
+      sprintf(str2, "%d", kkk);
       textek4 = TTF_RenderText_Solid(fontTest1, str2, fontColor1);
 
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
@@ -1823,7 +1976,7 @@ if (nitro2 == 1)
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1_2);
       enemy1 = deplacement_aleatoire(enemy1);
       enemy2 = deplacement_aleatoire(enemy2);
-      
+
       enemyk1 = deplacement_aleatoire(enemyk1);
       enemyk2 = deplacement_aleatoire(enemyk2);
       SDL_BlitSurface(enemy1.en, NULL, lvl1, &enemy1.posen);
@@ -1851,7 +2004,7 @@ if (nitro2 == 1)
       {
         SDL_BlitSurface(texte1, NULL, lvl1, &postexte);
       }
-     if (diek2 != 2 && diek3 != 3)
+      if (diek2 != 2 && diek3 != 3)
       {
         SDL_BlitSurface(textek1, NULL, lvl1, &postextek);
       }
@@ -1868,7 +2021,7 @@ if (nitro2 == 1)
         enemy3 = deplacement_aleatoire(enemy3);
         SDL_BlitSurface(enemy3.en, NULL, lvl1, &enemy3.posen);
       }
-      
+
       if (enemyk3.direction % 2 == 0)
       {
         enemyk3.en = IMG_Load("imlvl1/en2.png");
@@ -1906,7 +2059,7 @@ if (nitro2 == 1)
         *jouer = 0;
         SDL_Delay(2000);
       }
-       if (diek == 1)
+      if (diek == 1)
       {
         vie2 = IMG_Load("imlvl1/lives1.png");
         SDL_BlitSurface(vie2, NULL, screen, &posvie2);
@@ -1920,9 +2073,9 @@ if (nitro2 == 1)
       }
       if (diek == 3)
       {
-        postextek3.x = (595/2)+683;
+        postextek3.x = (595 / 2) + 683;
         postextek3.y = 410;
-        postextek4.x = (715/2)+683;
+        postextek4.x = (715 / 2) + 683;
         postextek4.y = 410;
         texte2 = TTF_RenderText_Solid(fontTest2, "GAME OVER", fontColor2);
         SDL_BlitSurface(textek2, NULL, screen, &postextek2);
@@ -1965,6 +2118,9 @@ if (nitro2 == 1)
   SDL_FreeSurface(per2.perso);
   SDL_FreeSurface(vie11);
   SDL_FreeSurface(vie2);
+  SDL_FreeSurface(sauvgarder);
+  SDL_FreeSurface(oui);
+  SDL_FreeSurface(non);
 }
 void down_menu(int *n, int *l, int *s, int *e, int *e1)
 {
@@ -2128,6 +2284,8 @@ void choix_menu1(int *jouer, int *x1, int *y1, int box_x, int box_h, int box_w, 
     *x1 = 0;
     *y1 = 0;
     Mix_PlayChannel(1, son, 0);
+    *jouer = 1;
+    ktest = 1;
   }
   if ((*x1 > box_x) && (*x1 < box_x + box_w) && (*y1 > box_y2) && (*y1 < box_y2 + box_h))
   {
