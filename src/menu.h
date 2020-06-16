@@ -3,10 +3,10 @@
 #include "perso.h"
 #include "enigmes.h"
 
-personnage1 per;
-SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL, *texte4 = NULL, *rotation = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL;
-SDL_Rect camera, posvie, postexte, poslvl1, postexte2, postexte3, postexte4;
-enemy enemy1, enemy2, enemy3;
+personnage1 per,per2;
+SDL_Surface *lvl1 = NULL,*textek2=NULL,*vie2=NULL,*textek1=NULL,*textek3=NULL,*textek4=NULL, *lvll = NULL, *vie11 = NULL, *texte4 = NULL, *rotation = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL;
+SDL_Rect camera,posvie2,postextek,postextek2,postextek3,postextek4,poslvl1_2,camera2, posvie, postexte, poslvl1, postexte2, postexte3, postexte4;
+enemy enemy1, enemy2, enemy3,enemyk1,enemyk2,enemyk3;
 // box box1, box2, box3, box4;
 personnage mario, mario1;
 TTF_Font *fontTest1, *fontTest2;
@@ -15,8 +15,9 @@ SDL_Color fontColor2 = {255, 0, 0};
 Uint32 start;
 double angle = 0;
 const int fps = 30;
-int a = 1, tempsPrecedent = 0, tempsActuel = 0, pit = 0, ii, nitro = 0, vitesse = 10, x = 0, y = 0, j = 0, die = 0, check, test = 0, test1 = 0, r = 0, test2 = 370, aaa = 0, die1, die2, die3;
+int a = 1,kkk,diek1,diek2,diek3,check2,pit2,nitro2,testk,kk,vitesse2,x2,diek,testk1, tempsPrecedent = 0, tempsActuel = 0, pit = 0, ii, nitro = 0, vitesse = 10, x = 0, y = 0, j = 0, die = 0, check, test = 0, test1 = 0, r = 0, test2 = 370, aaa = 0, die1, die2, die3;
 char str[12];
+char str2[12];
 
 void down_menu(int *n, int *l, int *s, int *e, int *e1);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
