@@ -30,9 +30,9 @@ screen=SDL_SetVideoMode(1300,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 SDL_Flip(screen);
 //afficher_img(&enig,screen,fic1);
 //afficher_suite(&enig,screen,general,&U0,&U1,&Un,&n,fic1);
-//afficher_lin(&enig,screen,&res_lin,eq,fic1);
+afficher_lin(&enig,screen,&res_lin,eq,fic1);
  //test(screen,general,&U0,&U1,&Un,&n);
-afficher_texte(&enig,screen,fic1,fic);
+//afficher_texte(&enig,screen,fic1,fic);
 
 /*TTF_Font *fontTest;
     fontTest = TTF_OpenFont("khal.otf", 10);
