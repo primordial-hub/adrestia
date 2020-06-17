@@ -939,11 +939,13 @@ void play(int *jouer)
           fclose(f);
           tests = 1;
           *jouer = 0;
+          sauvg=0;
         }
         else if ((jj.button.x > 640 && jj.button.x < 870) && (jj.button.y > 542 && jj.button.y < 595))
         {
           *jouer = 0;
            tests = 1;
+           sauvg=0;
         }
 
         break;
