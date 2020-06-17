@@ -843,7 +843,31 @@ void play(int *jouer)
   enemy1.direction = 1;
   enemy2.direction = 1;
   enemy3.direction = 1;
-
+///////////
+  int die4;
+ enemy enemy4,enemy41;
+ personnage1 permini;
+SDL_Surface *lvl1mini=NULL;
+  SDL_Rect poslvl1,poslvl1mini;
+enemy4.posen.x =1500;
+  enemy4.posen.y = 628;
+enemy4.direction =1;
+enemy4.distance = 280;
+ enemy4.position_initiale =1220;
+SDL_Surface *fire,*fire2;
+  SDL_Rect posfire;
+ int firee=1,direct=1,alea=1;
+  enemy4.en = IMG_Load("imlvl1/en2.png");
+  enemy41.en = IMG_Load("imlvl1/en21.png");
+  fire = IMG_Load("imlvl1/fire.png");
+  fire2 = IMG_Load("imlvl1/fire2.png");
+poslvl1mini.x=50;
+  poslvl1mini.y=10;
+ lvl1mini = IMG_Load("imlvl1/lvl1mini.png");
+  permini.perso = IMG_Load("imperso/permini.png");
+permini.posperso.x=55;
+permini.posperso.y=67;
+////////////
   SDL_Surface *rot;
   SDL_Rect posrot;
   tmp_position.x = 10;
@@ -1273,7 +1297,37 @@ void play(int *jouer)
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1);
       enemy1 = deplacement_aleatoire(enemy1);
       enemy2 = deplacement_aleatoire(enemy2);
-
+       
+////////////////////////////////////////////////////////////////////////////////////////////
+   if ((enemy4.posen.x-per.posperso.x>400)||(per.posperso.x>1300))
+ {enemy4=deplacement_aleatoire(enemy4);
+  if (enemy4.direction % 2 == 0)
+      {
+        enemy4 = deplacement_aleatoire(enemy4);
+        SDL_BlitSurface(enemy4.en, NULL, lvl1, &enemy4.posen);
+      }
+      else if (enemy4.direction % 2 == 1)
+      {
+       
+        enemy4 = deplacement_aleatoire(enemy4);
+        SDL_BlitSurface(enemy41.en, NULL, lvl1, &enemy4.posen);
+      } }
+     else 
+       {  enemy4=automatisation (per,enemy4,lvl1,&posfire,&firee,&direct,&alea);  
+     if (direct==1)
+       {SDL_BlitSurface(enemy4.en, NULL,lvl1, &enemy4.posen);}
+     else if (direct==2)
+          {SDL_BlitSurface(enemy41.en, NULL,lvl1, &enemy4.posen);}
+   if (firee == 2)
+    {if (direct==1)
+       {SDL_BlitSurface(fire,NULL,lvl1,&posfire);}
+     else if (direct==2)
+          {SDL_BlitSurface(fire2,NULL,lvl1,&posfire);}
+    }} 
+    permini.posperso.x=(55+(camera.x+(per.posperso.x*0.1)));
+   SDL_BlitSurface(lvl1mini, NULL, lvl1, &poslvl1mini);
+       SDL_BlitSurface(permini.perso, NULL,lvl1, &permini.posperso); 
+///////////////////////////////////////////////////////////////////////////////////
       SDL_BlitSurface(enemy1.en, NULL, lvl1, &enemy1.posen);
       SDL_BlitSurface(enemy2.en, NULL, lvl1, &enemy2.posen);
       //mario = access_box1(box1, mario, access);
@@ -1384,7 +1438,10 @@ void play(int *jouer)
   SDL_FreeSurface(oui);
   SDL_FreeSurface(non);
   SDL_FreeSurface(chrono);
-
+ SDL_FreeSurface(enemy4.en);
+ SDL_FreeSurface(enemy41.en);
+ SDL_FreeSurface(permini.perso);
+  SDL_FreeSurface(lvl1mini);
   SDL_FreeSurface(enig->surf_enig);
   SDL_FreeSurface(enig->surf_choix_A);
   SDL_FreeSurface(enig->surf_choix_B);

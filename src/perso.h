@@ -25,3 +25,4 @@ int callenemy(personnage1 per, enemy en);
 //int frapjump(personnage1 per, enemy en);
 int depdouris(int x, int c, int check);
 int depsouris(int cam, int r);
+enemy automatisation (personnage1 per, enemy en4,SDL_Surface *lvl1,SDL_Rect *posfire,int *firee,int *direct,int *alea);

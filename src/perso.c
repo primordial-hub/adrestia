@@ -268,3 +268,42 @@ int depsouris(int cam, int r)
         return 0;
     }
 }
+
+enemy automatisation (personnage1 per, enemy en4,SDL_Surface *lvl1,SDL_Rect *posfire,int *firee,int *direct,int *alea)
+{ int dis=900,dis2=300;
+  
+  if (per.posperso.x<en4.posen.x)
+        en4.direction=1;
+  else if (per.posperso.x>en4.posen.x)
+        en4.direction=2;
+  if (en4.direction==1)
+ {if (((per.posperso.x+dis)>en4.posen.x)&& ((en4.posen.x-per.posperso.x)>100))
+   {   *firee=1;
+       //*alea=2;
+      en4.posen.x-=7;
+    if ((en4.posen.x-per.posperso.x)<dis2)
+   {
+   posfire->x=en4.posen.x-70;
+  posfire->y=en4.posen.y+10;
+    *firee=2;
+    
+
+   }
+    }}
+  else if (en4.direction==2)
+ {if (((per.posperso.x-en4.posen.x)<dis)&&((per.posperso.x-en4.posen.x)<100))
+   {   *firee=1;
+      en4.posen.x+=7;
+    if ((per.posperso.x-en4.posen.x)<dis2)
+   {
+   posfire->x=en4.posen.x+55;
+  posfire->y=en4.posen.y+12;
+    *firee=2;
+    
+
+   }
+    }}
+*direct=en4.direction;
+  
+return en4;
+}
