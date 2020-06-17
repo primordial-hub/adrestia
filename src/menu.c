@@ -686,6 +686,7 @@ void setjouersouris(int *jouer)
       if (setj % 2 == 1)
       {
         sauvg = 1;
+        tests=0;
       }
       if (setj % 2 == 0)
       {
@@ -703,6 +704,7 @@ void setjouersouris(int *jouer)
   break;
   case SDL_QUIT:
     sauvg = 1;
+    test=0;
     break;
   }
   setjouer = IMG_Load("images/setjouer0.png");
@@ -745,6 +747,7 @@ void setjouersouris(int *jouer)
     x3 = 0;
     y3 = 0;
     sauvg = 1;
+    test=0;
     setjouer1 = IMG_Load("images/exitjouer.png");
     SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
     SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
@@ -772,6 +775,7 @@ void setjouersouris(int *jouer)
 
 void play(int *jouer)
 {
+ 
   if (ktest == 0)
   {
     per = init_perso();
@@ -787,7 +791,7 @@ void play(int *jouer)
     per.position_init.y = 570;
     per.position_init.w = 375;
     per.position_init.h = 570 + 150;
-    tests = 0;
+ 
   }
   else if (ktest == 1)
   {
@@ -796,6 +800,7 @@ void play(int *jouer)
     f = fopen("sauvgarder.txt", "r");
     fscanf(f, "%hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd ", &per.posperso.x, &per.posperso.y, &per.posperso.w, &per.posperso.h, &camera.x, &camera.y, &camera.h, &camera.w, &per.position_init.x, &per.position_init.y, &per.position_init.h, &per.position_init.w);
     fclose(f);
+   
   }
 
   bool b[2] = {0, 0};
@@ -883,6 +888,7 @@ void play(int *jouer)
     SDL_BlitSurface(lvl1, &camera, screen, NULL);
     SDL_BlitSurface(enemy1.en, NULL, screen, &enemy1.posen);
     SDL_BlitSurface(enemy2.en, NULL, screen, &enemy2.posen);
+    SDL_BlitSurface(per.perso, NULL, screen, &per.position_init);
   }
   SDL_Flip(screen);
   SDL_EnableKeyRepeat(10, 10);
@@ -937,7 +943,7 @@ void play(int *jouer)
         else if ((jj.button.x > 640 && jj.button.x < 870) && (jj.button.y > 542 && jj.button.y < 595))
         {
           *jouer = 0;
-          tests = 1;
+           tests = 1;
         }
 
         break;
