@@ -685,7 +685,7 @@ void setjouersouris(int *jouer)
     case SDLK_RETURN:
       if (setj % 2 == 1)
       {
-        *jouer = 0;
+        sauvg = 1;
       }
       if (setj % 2 == 0)
       {
@@ -702,7 +702,7 @@ void setjouersouris(int *jouer)
   }
   break;
   case SDL_QUIT:
-    *jouer = 0;
+    sauvg = 1;
     break;
   }
   setjouer = IMG_Load("images/setjouer0.png");
@@ -744,7 +744,7 @@ void setjouersouris(int *jouer)
     setj = 1;
     x3 = 0;
     y3 = 0;
-    *jouer = 0;
+    sauvg = 1;
     setjouer1 = IMG_Load("images/exitjouer.png");
     SDL_BlitSurface(setjouer, NULL, screen, &possetjouer);
     SDL_BlitSurface(setjouer1, NULL, screen, &posexitj);
@@ -787,6 +787,7 @@ void play(int *jouer)
     per.position_init.y = 570;
     per.position_init.w = 375;
     per.position_init.h = 570 + 150;
+    tests = 0;
   }
   else if (ktest == 1)
   {
@@ -842,8 +843,8 @@ void play(int *jouer)
 
   SDL_Surface *rot;
   SDL_Rect posrot;
- tmp_position.x = 10;
-    tmp_position.y =670;
+  tmp_position.x = 10;
+  tmp_position.y = 670;
   sauvgarderPosition.x = 400;
   sauvgarderPosition.y = 50;
 
@@ -869,9 +870,9 @@ void play(int *jouer)
   texte1 = TTF_RenderText_Solid(fontTest1, "dlrow olleH!", fontColor1);
   texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
   texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
-    sprintf(tempsjeu, "%d", SDL_GetTicks());
-    chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
-    SDL_BlitSurface(chrono, NULL, lvl1, &tmp_position);
+  sprintf(tempsjeu, "%d", SDL_GetTicks());
+  chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
+  SDL_BlitSurface(chrono, NULL, lvl1, &tmp_position);
   //box1.box = IMG_Load("imlvl1/lvl1box1.png");
   //mario.perso = IMG_Load("imlvl1/en2.png");
   //mario1.perso = IMG_Load("imlvl1/en2.png");
@@ -901,12 +902,12 @@ void play(int *jouer)
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
     check = tellmewhattodo(map, per.posperso);
-  tempsActuelr = SDL_GetTicks();
+    tempsActuelr = SDL_GetTicks();
     SDL_PollEvent(&jj);
     switch (jj.type)
     {
     case SDL_QUIT:
-      *jouer = 0;
+      sauvg = 1;
     case SDL_MOUSEBUTTONUP:
       x = jj.button.x;
       y = jj.button.y;
@@ -934,8 +935,10 @@ void play(int *jouer)
           *jouer = 0;
         }
         else if ((jj.button.x > 640 && jj.button.x < 870) && (jj.button.y > 542 && jj.button.y < 595))
+        {
           *jouer = 0;
-        tests = 1;
+          tests = 1;
+        }
 
         break;
       }
@@ -963,9 +966,6 @@ void play(int *jouer)
         break;
       case SDLK_n:
         nitro = 1;
-        break;
-      case SDLK_s:
-        sauvg = 1;
         break;
       case SDLK_UP:
         if (check == 4 && check != 6 && check != 7)
@@ -1004,11 +1004,6 @@ void play(int *jouer)
           a++;
         }
         break;
-
-        SDL_BlitSurface(rotation, NULL, screen, &per.posperso); //On affiche la rotation de la surface image.
-        SDL_FreeSurface(rotation);
-        SDL_Delay(1000);
-        per.posperso.x = per.posperso.x - 300;
       }
     }
     break;
@@ -1029,23 +1024,12 @@ void play(int *jouer)
         break;
       }
       break;
-      
     }
-    if (tempsActuelr - tempsPrecedentr < intervall)
-            {
-                SDL_Delay(intervall - (tempsActuelr - tempsPrecedentr));
-            }
-
-           // SDL_FillRect(lvl1, NULL, SDL_MapRGB(lvl1->format, 0, 0, 0));
-           
-            tempsPrecedentr = tempsActuelr;
     if (sauvg == 1 && tests == 0)
     {
 
       SDL_BlitSurface(sauvgarder, NULL, lvl1, &sauvgarderPosition);
-
       SDL_BlitSurface(oui, NULL, lvl1, &ouiPosition);
-
       SDL_BlitSurface(non, NULL, lvl1, &nonPosition);
     }
 
@@ -1221,13 +1205,12 @@ void play(int *jouer)
         test1--;
       }
 
-     
       sprintf(str, "%d", aaa);
       texte4 = TTF_RenderText_Solid(fontTest1, str, fontColor1);
 
-          sprintf(tempsjeu, "%d ", tempsActuelr);
-            chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
-            SDL_BlitSurface(chrono, NULL,lvl1, &tmp_position);
+      sprintf(tempsjeu, "%d ", tempsActuelr);
+      chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
+      SDL_BlitSurface(chrono, NULL, lvl1, &tmp_position);
 
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1);
@@ -1247,9 +1230,6 @@ void play(int *jouer)
       SDL_BlitSurface(vie11, NULL, screen, &posvie);
       SDL_BlitSurface(texte3, NULL, screen, &postexte3);
       SDL_BlitSurface(texte4, NULL, screen, &postexte4);
-
-
-
 
       if (die2 != 2 && die3 != 3)
       {
@@ -1296,7 +1276,6 @@ void play(int *jouer)
 
       SDL_Flip(lvl1);
     }
-
 
     SDL_Flip(screen);
   }
@@ -1455,7 +1434,6 @@ void play2(int *jouer)
   nonPosition.x = 70 + 225;
   nonPosition.y = 100 + 442;
 
- 
   sauvgarder = IMG_Load("images/sauvgarder.png");
   oui = IMG_Load("images/oui.png");
   non = IMG_Load("images/non.png");
@@ -1527,7 +1505,7 @@ void play2(int *jouer)
     switch (jj.type)
     {
     case SDL_QUIT:
-      *jouer = 0;
+      sauvg = 1;
     case SDL_MOUSEBUTTONUP:
       x = jj.button.x;
       y = jj.button.y;
@@ -1544,20 +1522,21 @@ void play2(int *jouer)
         break;
       case SDL_BUTTON_LEFT:
 
-        if ((jj.button.x >170 && jj.button.x < 370) && (jj.button.y > 542 && jj.button.y < 597))
-        
-          {
-            FILE *f = NULL;
-            f = fopen("sauvgarder.txt", "w");
-            fprintf(f, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d ", per.posperso.x, per.posperso.y, per.posperso.w, per.posperso.h, camera.x, camera.y, camera.h, camera.w, per.position_init.x, per.position_init.y, per.position_init.h, per.position_init.w, per2.position_init.w, per2.posperso.x, per2.posperso.y, per2.posperso.h, camera2.x, camera2.y, camera2.h, camera2.w, per2.position_init.x, per2.position_init.y, per2.position_init.h, per2.position_init.w);
-            fclose(f);
-            tests = 1;
-            //*jouer = 0;
-          }
-          else if ((jj.button.x > 190 && jj.button.x < 420) && (jj.button.y > 542 && jj.button.y < 595))
-              *jouer = 0;
+        if ((jj.button.x > 170 && jj.button.x < 370) && (jj.button.y > 542 && jj.button.y < 597))
+
+        {
+          FILE *f = NULL;
+          f = fopen("sauvgarder.txt", "w");
+          fprintf(f, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d ", per.posperso.x, per.posperso.y, per.posperso.w, per.posperso.h, camera.x, camera.y, camera.h, camera.w, per.position_init.x, per.position_init.y, per.position_init.h, per.position_init.w, per2.position_init.w, per2.posperso.x, per2.posperso.y, per2.posperso.h, camera2.x, camera2.y, camera2.h, camera2.w, per2.position_init.x, per2.position_init.y, per2.position_init.h, per2.position_init.w);
+          fclose(f);
           tests = 1;
-        
+          //*jouer = 0;
+        }
+        else if ((jj.button.x > 190 && jj.button.x < 420) && (jj.button.y > 542 && jj.button.y < 595))
+        {
+          *jouer = 0;
+          tests = 1;
+        }
       }
       break;
     case SDL_KEYDOWN:
@@ -1578,9 +1557,6 @@ void play2(int *jouer)
       case SDLK_DOWN:
         // access = 2;
         break;
-      case SDLK_s:
-        sauvg = 1;
-     
       case SDLK_n:
         nitro = 1;
         break;
@@ -1611,7 +1587,7 @@ void play2(int *jouer)
         per2.perso = IMG_Load("imperso/per2.png");
         pit2 = 1;
         break;
-      case SDLK_t:
+      case SDLK_f:
         nitro2 = 1;
         break;
       case SDLK_SPACE:
@@ -1635,11 +1611,6 @@ void play2(int *jouer)
           a++;
         }
         break;
-
-        SDL_BlitSurface(rotation, NULL, screen, &per.posperso); //On affiche la rotation de la surface image.
-        SDL_FreeSurface(rotation);
-        SDL_Delay(1000);
-        per.posperso.x = per.posperso.x - 300;
       }
     }
 
@@ -1706,12 +1677,9 @@ void play2(int *jouer)
     {
 
       SDL_BlitSurface(sauvgarder, NULL, lvl1, &sauvgarderPosition);
-
       SDL_BlitSurface(oui, NULL, lvl1, &ouiPosition);
-
       SDL_BlitSurface(non, NULL, lvl1, &nonPosition);
     }
-    
 
     if (nitro2 == 1)
     {
