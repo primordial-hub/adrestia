@@ -31,7 +31,7 @@ SDL_Color fontColor2 = {255, 0, 0};
 Uint32 start;
 double angle = 0;
 const int fps = 30;
-int a = 1, tempsPrecedent = 0, tempsActuel = 0, pit = 0,pit2 = 0, ii,kk, nitro = 0, vitesse = 10,nitro2 = 0, vitesse2 = 10, x2=0,x = 0, y = 0, j = 0, die = 0,diek = 0, check,check2, testk = 0,test=0, testk1=0,test1 = 0, r = 0, test2 = 370,testk2 = 370, aaa = 0,kkk=0, die1, die2, die3, diek1, diek2, diek3;
+int tesst=0,tesst1=0,tesst2=0,a = 1, tempsPrecedent = 0, tempsActuel = 0, pit = 0,pit2 = 0, ii,kk, nitro = 0, vitesse = 10,nitro2 = 0, vitesse2 = 10, x2=0,x = 0, y = 0, j = 0, die = 0,diek = 0, check,check2, testk = 0,test=0, testk1=0,test1 = 0, r = 0, test2 = 370,testk2 = 370, aaa = 0,kkk=0, die1, die2, die3, diek1, diek2, diek3;
 char str[12],str2[12];
 int sauvg=0 ,ktest=0;
 int tests=0;
