@@ -28,9 +28,10 @@ SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
 SDL_Surface *screen=NULL;
 screen=SDL_SetVideoMode(1300,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 SDL_Flip(screen);
+k=gestion_temp_jeu(screen);
 //afficher_img(&enig,screen,fic1);
 //afficher_suite(&enig,screen,general,&U0,&U1,&Un,&n,fic1);
-afficher_lin(&enig,screen,&res_lin,eq,fic1);
+//afficher_lin(&enig,screen,&res_lin,eq,fic1);
  //test(screen,general,&U0,&U1,&Un,&n);
 //afficher_texte(&enig,screen,fic1,fic);
 

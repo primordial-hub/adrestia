@@ -524,53 +524,38 @@ SDL_Flip(screen);
 
 void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1)
 { 
-   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
+   
     int tmp_enig=2;
     enig->test = 0;
-    enig->surf_enig = IMG_Load("enigme.png");
+    enig->surf_enig = IMG_Load("images/enigme.png");
     SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
     enig->enigme_position.x = 100;
     enig->enigme_position.y = 0;
-    SDL_BlitSurface(enig->surf_enig, NULL, screen, &enig->enigme_position);
+    SDL_BlitSurface(enig->surf_enig, NULL,screen, &enig->enigme_position);
     
 
-    enig->surf_choix_A = IMG_Load("1.png");
+    enig->surf_choix_A = IMG_Load("images/1.png");
     //SDL_SetColorKey(enig->surf_choix_A, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_A->format, 255, 255, 255));
     enig->choix_A_position.x = 100;
     enig->choix_A_position.y = 20 + enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_A, NULL, screen, &enig->choix_A_position);
     
 
-    enig->surf_choix_B = IMG_Load("2.png");
+    enig->surf_choix_B = IMG_Load("images/2.png");
     SDL_SetColorKey(enig->surf_choix_B, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_B->format, 255, 255, 255));
     enig->choix_B_position.x = 120+enig->surf_choix_A->w;
     enig->choix_B_position.y = 20+ enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_B, NULL, screen, &enig->choix_B_position);
     
 
-    enig->surf_choix_C = IMG_Load("3.png");
+    enig->surf_choix_C = IMG_Load("images/3.png");
     SDL_SetColorKey(enig->surf_choix_C, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_C->format, 255, 255, 255));
     enig->choix_C_position.x =140 + (enig->surf_choix_A->w * 2);
     enig->choix_C_position.y =20+ enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_C, NULL, screen, &enig->choix_C_position);
     
 
-   
-    while (1)
-    {
-        SDL_Event event;
-        SDL_PollEvent(&event);
-        if (event.type == SDL_QUIT)
-        {
-            break;
-        }
-        else if (event.type == SDL_KEYDOWN)
-        {
-            if (event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                break;
-            }
-        }
+        
 if(tmp_enig ==2){
         SDL_BlitSurface(enig->surf_enig, NULL, screen, &enig->enigme_position);
         SDL_BlitSurface(enig->surf_choix_A, NULL, screen, &enig->choix_A_position);
@@ -597,13 +582,13 @@ if(tmp_enig ==2){
     }
 SDL_Flip(screen);
     }
-    SDL_FreeSurface(screen);
+   
     SDL_FreeSurface(enig->surf_enig);
     SDL_FreeSurface(enig->surf_choix_A);
     SDL_FreeSurface(enig->surf_choix_B);
     SDL_FreeSurface(enig->surf_choix_C);
 
-    SDL_Quit();
+    
 }
 void afficher_suite(Enigme *enig, SDL_Surface *screen, char general[20], int *U0, int *U1, int *Un, int *n, FILE *fic1)
 {TTF_Init();
