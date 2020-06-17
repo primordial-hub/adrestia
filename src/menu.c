@@ -858,6 +858,9 @@ void play(int *jouer)
 
   nonPosition.x = 420 + 225;
   nonPosition.y = 100 + 442;
+ 
+ FILE *fic1=NULL;
+ Enigme *enig;
 
   sauvgarder = IMG_Load("images/sauvgarder.png");
   oui = IMG_Load("images/oui.png");
@@ -882,6 +885,29 @@ void play(int *jouer)
   //mario.perso = IMG_Load("imlvl1/en2.png");
   //mario1.perso = IMG_Load("imlvl1/en2.png");
   //box2.box = IMG_Load("imlvl1/lvl1box2.png");
+/*eq_linaire(res_lin, eq);
+    printf("%s",eq);
+    enig->surf_enig = TTF_RenderText_Solid(fontTest1, eq,fontColor1 );
+    enig->enigme_position.x = 100;
+    enig->enigme_position.y = 100;
+    SDL_BlitSurface(enig->surf_enig, NULL,lvl1, &enig->enigme_position);
+
+    enig->surf_choix_A = TTF_RenderText_Solid(fontTest1, "10",fontColor1 );
+    enig->choix_A_position.x = 100;
+    enig->choix_A_position.y = 200;
+    SDL_BlitSurface(enig->surf_choix_A, NULL, lvl1, &enig->choix_A_position);
+
+    sprintf(B, "%.2f", *res_lin);
+     printf("%.2f", *res_lin);
+    enig->surf_choix_B = TTF_RenderText_Solid(fontTest1, B,fontColor1 );
+    enig->choix_B_position.x = 150;
+    enig->choix_B_position.y = 200;
+    SDL_BlitSurface(enig->surf_choix_B, NULL, lvl1, &enig->choix_B_position);
+
+    enig->surf_choix_C = TTF_RenderText_Solid(fontTest1, "15",fontColor1 );
+    enig->choix_C_position.x = 200;
+    enig->choix_C_position.y = 200;
+    SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);*/
 
   if (*jouer == 1)
   {
@@ -893,6 +919,33 @@ void play(int *jouer)
   SDL_Flip(screen);
   SDL_EnableKeyRepeat(10, 10);
 
+enig->surf_enig = IMG_Load("enig/enigme.png");
+    SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
+    enig->enigme_position.x = 300;
+    enig->enigme_position.y = 0;
+    SDL_BlitSurface(enig->surf_enig, NULL, lvl1, &enig->enigme_position);
+    
+
+    enig->surf_choix_A = IMG_Load("enig/1.png");
+    SDL_SetColorKey(enig->surf_choix_A, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_A->format, 255, 255, 255));
+    enig->choix_A_position.x = 300;
+    enig->choix_A_position.y = 551 ;
+    SDL_BlitSurface(enig->surf_choix_A, NULL, lvl1, &enig->choix_A_position);
+    
+
+    enig->surf_choix_B = IMG_Load("enig/2.png");
+    SDL_SetColorKey(enig->surf_choix_B, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_B->format, 255, 255, 255));
+    enig->choix_B_position.x = 310+140;
+    enig->choix_B_position.y = 551;
+    SDL_BlitSurface(enig->surf_choix_B, NULL, lvl1, &enig->choix_B_position);
+    
+
+    enig->surf_choix_C = IMG_Load("enig/3.png");
+    SDL_SetColorKey(enig->surf_choix_C, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_C->format, 255, 255, 255));
+    enig->choix_C_position.x = 320+280; 
+    enig->choix_C_position.y = 551; 
+    SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);
+    
   SDL_Event jj;
 
   while (*jouer == 1)
@@ -903,13 +956,14 @@ void play(int *jouer)
     {
       texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
     }
-
+afficher_img(enig,lvl1,fic1,yossri);
     die1 = callenemy(per, enemy1);
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
     check = tellmewhattodo(map, per.posperso);
     tempsActuelr = SDL_GetTicks();
     SDL_PollEvent(&jj);
+    
     switch (jj.type)
     {
     case SDL_QUIT:
@@ -1239,6 +1293,29 @@ void play(int *jouer)
       SDL_BlitSurface(texte3, NULL, screen, &postexte3);
       SDL_BlitSurface(texte4, NULL, screen, &postexte4);
 
+
+      /*if(tmp_enig ==2){
+
+        SDL_BlitSurface(enig->surf_enig, NULL, lvl1, &enig->enigme_position);
+        SDL_BlitSurface(enig->surf_choix_A, NULL, lvl1, &enig->choix_A_position);
+        SDL_BlitSurface(enig->surf_choix_B, NULL, lvl1, &enig->choix_B_position);
+        SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);
+        SDL_Flip(screen);}
+
+    tmp_enig = gestion_temp_enigme(enig, screen, fic1);
+    if (tmp_enig == 0)
+    {
+        enig->surf_enig = TTF_RenderText_Solid(fontTest1,"echec", fontColor1);
+        SDL_BlitSurface(enig->surf_enig, NULL, lvl1, &enig->enigme_position);
+    }
+    if(tmp_enig == 1)
+    {
+        enig->surf_enig = TTF_RenderText_Solid(fontTest1,"bravo", fontColor1);
+        SDL_BlitSurface(enig->surf_enig, NULL, lvl1, &enig->enigme_position);
+    }*/
+
+
+
       if (die2 != 2 && die3 != 3)
       {
         SDL_BlitSurface(texte1, NULL, lvl1, &postexte);
@@ -1315,6 +1392,11 @@ void play(int *jouer)
   SDL_FreeSurface(oui);
   SDL_FreeSurface(non);
   SDL_FreeSurface(chrono);
+
+    SDL_FreeSurface(enig->surf_enig);
+    SDL_FreeSurface(enig->surf_choix_A);
+    SDL_FreeSurface(enig->surf_choix_B);
+    SDL_FreeSurface(enig->surf_choix_C);
 }
 
 void play2(int *jouer)

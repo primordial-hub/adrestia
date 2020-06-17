@@ -115,7 +115,7 @@ int resolution(FILE *fic1, Enigme *enig)
     int test, x, y, n;
     char reponse_corr[5];
     enig->resolution = 0;
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
+   /* if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
     {
         printf("%s", Mix_GetError());
     }
@@ -123,7 +123,7 @@ int resolution(FILE *fic1, Enigme *enig)
     Mix_Chunk *sonWin;
     sonWin = Mix_LoadWAV("sonWin.wav");
     Mix_Chunk *sonLose;
-    sonLose = Mix_LoadWAV("sonLose.wav");
+    sonLose = Mix_LoadWAV("sonLose.wav");*/
 
    /* extrere_reponse(fic1, enig);
     printf("%c",enig->reponse_corr );
@@ -152,10 +152,10 @@ int resolution(FILE *fic1, Enigme *enig)
                     if (/*((x > enig->choix_A_position.x && x < enig->choix_A_position.x + 20) && (y > enig->choix_A_position.y && y < enig->choix_A_position.y + 50)) || (*/event.key.keysym.sym == SDLK_a)//)
                     {
                         n = 1;
-                        Mix_PlayChannel(1, sonWin, 0);
+                        //Mix_PlayChannel(1, sonWin, 0);
                     }
                     else if (event.key.keysym.sym != SDLK_a)
-                        {Mix_PlayChannel(1, sonLose, 0);
+                        {//Mix_PlayChannel(1, sonLose, 0);
                         n=0;}
                     break;
 
@@ -163,10 +163,10 @@ int resolution(FILE *fic1, Enigme *enig)
                     if (/*((x > enig->choix_B_position.x && x < enig->choix_B_position.x + 20) && (y > enig->choix_B_position.y && y < enig->choix_B_position.y + 50)) || */(event.key.keysym.sym == SDLK_b))
                     {
                         n = 1;
-                        Mix_PlayChannel(1, sonWin, 0);
+                        //Mix_PlayChannel(1, sonWin, 0);
                     }
                     else if (event.key.keysym.sym != SDLK_b)
-                        {Mix_PlayChannel(1, sonLose, 0);
+                        {//Mix_PlayChannel(1, sonLose, 0);
                         n=0;}
                     break;
 
@@ -174,19 +174,20 @@ int resolution(FILE *fic1, Enigme *enig)
                     if (/*((x > enig->choix_C_position.x && x < enig->choix_C_position.x + 20) && (y > enig->choix_C_position.y && y < enig->choix_C_position.y + 50)) || */(event.key.keysym.sym == SDLK_c))
                     {
                         n = 1;
-                        Mix_PlayChannel(1, sonWin, 0);
+                        //Mix_PlayChannel(1, sonWin, 0);
                     }
                     else if (event.key.keysym.sym != SDLK_c)
                        {n=0;
-                        Mix_PlayChannel(1, sonLose, 0);}
+                        //Mix_PlayChannel(1, sonLose, 0);
+                        }
                 }
                 return n;
             //}
         
     }
-    Mix_FreeChunk(sonLose);
+    /*Mix_FreeChunk(sonLose);
     Mix_FreeChunk(sonWin);
-    SDL_CloseAudio();
+    SDL_CloseAudio();*/
     
 }
 
@@ -438,12 +439,12 @@ SDL_Flip(screen);
     SDL_Quit();
 }
 
-void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1)
+void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1,int yossri)
 { 
    
     int tmp_enig=2;
     enig->test = 0;
-    enig->surf_enig = IMG_Load("enig/enigme.png");
+   /* enig->surf_enig = IMG_Load("enig/enigme.png");
     SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
     enig->enigme_position.x = 0;
     enig->enigme_position.y = 0;
@@ -469,13 +470,13 @@ void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1)
     enig->choix_C_position.x = 20 + (enig->surf_choix_A->w * 2);
     enig->choix_C_position.y = 120 + enig->surf_enig->h;
     SDL_BlitSurface(enig->surf_choix_C, NULL, screen, &enig->choix_C_position);
-    
+    */
 
    
    
 
 if(tmp_enig ==2){
-    printf("waaaa3");
+    
         SDL_BlitSurface(enig->surf_enig, NULL, screen, &enig->enigme_position);
         SDL_BlitSurface(enig->surf_choix_A, NULL, screen, &enig->choix_A_position);
         SDL_BlitSurface(enig->surf_choix_B, NULL, screen, &enig->choix_B_position);
@@ -484,23 +485,25 @@ if(tmp_enig ==2){
         }
  tmp_enig = gestion_temp_enigme(enig, screen, fic1);
   
-    if (tmp_enig == 0)
+    if (tmp_enig == 0 && yossri==0)
     {
         enig->surf_enig = IMG_Load("enig/echec.png");
         SDL_BlitSurface(enig->surf_enig, NULL, screen, &enig->enigme_position);
         enig->surf_choix_A = IMG_Load("");
         enig->surf_choix_B = IMG_Load("");
         enig->surf_choix_C = IMG_Load("");
+yossri=1;
     }
 
     else
-    if (tmp_enig == 1)
+    if (tmp_enig == 1 && yossri==0)
     {
         enig->surf_enig = IMG_Load("enig/bravo.png");
         SDL_BlitSurface(enig->surf_enig, NULL, screen, &enig->enigme_position);
         enig->surf_choix_A = IMG_Load("");
         enig->surf_choix_B = IMG_Load("");
         enig->surf_choix_C = IMG_Load("");
+yossri=1;
     }
    
 
@@ -593,7 +596,7 @@ void afficher_lin(Enigme *enig, SDL_Surface *screen, float *res_lin, char eq[20]
     char B[10];
     enig->test = 1;
     TTF_Font *fontTest;
-    fontTest = TTF_OpenFont("khal.otf",20);
+    fontTest = TTF_OpenFont("enig/khal.otf",20);
     SDL_Color Color_enigme = {0, 255, 255};
 
     eq_linaire(res_lin, eq);

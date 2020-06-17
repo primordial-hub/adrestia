@@ -37,7 +37,7 @@ int resolution_math(Enigme *enig);
 int resolution(FILE *fic1, Enigme *enig);
 
 void afficher_texte(Enigme *enig, SDL_Surface *screen, FILE *fic1, FILE *fic);
-void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1);
+void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1,int yossri);
 void afficher_lin(Enigme *enig, SDL_Surface *screen, float *res_lin, char eq[20], FILE *fic1);
 void afficher_suite(Enigme *enig, SDL_Surface *screen, char general[20], int *U0, int *U1, int *Un, int *n, FILE *fic1);
 
