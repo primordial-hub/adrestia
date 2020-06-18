@@ -893,28 +893,28 @@ void play(int *jouer)
   //mario1.perso = IMG_Load("imlvl1/en2.png");
   //box2.box = IMG_Load("imlvl1/lvl1box2.png");
   /*eq_linaire(res_lin, eq);
-    printf("%s",eq);
-    enig->surf_enig = TTF_RenderText_Solid(fontTest1, eq,fontColor1 );
-    enig->enigme_position.x = 100;
-    enig->enigme_position.y = 100;
-    SDL_BlitSurface(enig->surf_enig, NULL,lvl1, &enig->enigme_position);
+  printf("%s", eq);
+  enig->surf_enig = TTF_RenderText_Solid(fontTest1, eq, fontColor1);
+  enig->enigme_position.x = 100;
+  enig->enigme_position.y = 100;
+  SDL_BlitSurface(enig->surf_enig, NULL, lvl1, &enig->enigme_position);
 
-    enig->surf_choix_A = TTF_RenderText_Solid(fontTest1, "10",fontColor1 );
-    enig->choix_A_position.x = 100;
-    enig->choix_A_position.y = 200;
-    SDL_BlitSurface(enig->surf_choix_A, NULL, lvl1, &enig->choix_A_position);
+  enig->surf_choix_A = TTF_RenderText_Solid(fontTest1, "10", fontColor1);
+  enig->choix_A_position.x = 100;
+  enig->choix_A_position.y = 200;
+  SDL_BlitSurface(enig->surf_choix_A, NULL, lvl1, &enig->choix_A_position);
 
-    sprintf(B, "%.2f", *res_lin);
-     printf("%.2f", *res_lin);
-    enig->surf_choix_B = TTF_RenderText_Solid(fontTest1, B,fontColor1 );
-    enig->choix_B_position.x = 150;
-    enig->choix_B_position.y = 200;
-    SDL_BlitSurface(enig->surf_choix_B, NULL, lvl1, &enig->choix_B_position);
+  sprintf(B, "%.2f", *res_lin);
+  printf("%.2f", *res_lin);
+  enig->surf_choix_B = TTF_RenderText_Solid(fontTest1, B, fontColor1);
+  enig->choix_B_position.x = 150;
+  enig->choix_B_position.y = 200;
+  SDL_BlitSurface(enig->surf_choix_B, NULL, lvl1, &enig->choix_B_position);
 
-    enig->surf_choix_C = TTF_RenderText_Solid(fontTest1, "15",fontColor1 );
-    enig->choix_C_position.x = 200;
-    enig->choix_C_position.y = 200;
-    SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);*/
+  enig->surf_choix_C = TTF_RenderText_Solid(fontTest1, "15", fontColor1);
+  enig->choix_C_position.x = 200;
+  enig->choix_C_position.y = 200;
+  SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);*/
 
   if (*jouer == 1)
   {
@@ -925,8 +925,8 @@ void play(int *jouer)
   }
   SDL_Flip(screen);
   SDL_EnableKeyRepeat(10, 10);
-  /* hedha eli bech tna7ilou el commentaire
-  enig->surf_enig = IMG_Load("enig/enigme.png");
+  // hedha eli bech tna7ilou el commentaire
+  /*enig->surf_enig = IMG_Load("enig/enigme.png");
   SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
   enig->enigme_position.x = 300;
   enig->enigme_position.y = 0;
@@ -948,14 +948,13 @@ void play(int *jouer)
   SDL_SetColorKey(enig->surf_choix_C, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_choix_C->format, 255, 255, 255));
   enig->choix_C_position.x = 320 + 280;
   enig->choix_C_position.y = 551;
-  SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);
-*/
+  SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);*/
 
   SDL_Event jj;
 
   while (*jouer == 1)
   { //// ya ashref hedha el xo mat7ebech to93d eetaswira mte3ha rek7a 7awel feha w 7ot condition bech tatla3
-    // xo(lvl1, &player, &c, &t, M);
+  
     aaa++;
 
     if (aaa > 1000)
@@ -963,7 +962,11 @@ void play(int *jouer)
       texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
     }
     // w hedhi enigme a3mel condtion bechyatla3 na7na 3amlinou yatla3 toul w na7i el commentaire 3ali lfou9
-    //afficher_img(enig, lvl1, fic1, yossri);
+    if (check == 1)
+    {
+     // afficher_img(enig, lvl1, fic1, yossri);
+       //xo(lvl1, &player, &c, &t, M);
+    }
     die1 = callenemy(per, enemy1);
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
@@ -1388,7 +1391,6 @@ void play(int *jouer)
         SDL_Delay(2000);
         *jouer = 0;
       }
-
     }
 
     SDL_Flip(screen);
@@ -1459,9 +1461,9 @@ void play2(int *jouer)
     camera.w = 1366 / 2;
     camera.h = 800;
     //
-    camera2.x = 0;
+    camera2.x =  1366 / 2;
     camera2.y = 0;
-    camera2.w = 1366 / 2;
+    camera2.w = 1366;
     camera2.h = 800;
   }
   else if (ktest == 1)
@@ -1713,7 +1715,7 @@ void play2(int *jouer)
       case SDLK_f:
         nitro2 = 1;
         break;
-      case SDLK_SPACE:
+      case SDLK_z:
         if (check2 == 4 && check2 != 6 && check2 != 7)
         {
 
@@ -1840,29 +1842,7 @@ void play2(int *jouer)
       setjouersouris(jouer);
     }
 
-    if (r != 0 && test1 == 0)
-    {
-      test2 = depdouris(test2, depsouris(test2, r), check);
-      per.posperso.x = (depdouris(per.posperso.x, depsouris(test2, r), check));
-      per.posperso.w = (depdouris(per.posperso.w, depsouris(test2, r), check));
-      camera.x = (depdouris(camera.x, depsouris(test2, r), check));
-      x = (depdouris(x, depsouris(test2, r), check));
-
-      if (depsouris(test2, r) == 1)
-      {
-        per.perso = IMG_Load("imperso/per.png");
-      }
-
-      if (depsouris(test2, r) == 2)
-      {
-        per.perso = IMG_Load("imperso/per2.png");
-      }
-      if (test2 == r)
-      {
-        r = 0;
-        test2 = 370;
-      }
-    }
+   
     if (die1 == 1 || die2 == 1 || die3 == 1)
     {
 
