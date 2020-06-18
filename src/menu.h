@@ -5,25 +5,33 @@
 
 personnage1 per;
 personnage1 per2;
-SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL,*vie2 = NULL, *texte4 = NULL ,*textek4 = NULL, *rotation = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL, *textek3 = NULL, *textek2 = NULL, *textek1 = NULL;
-SDL_Rect camera,camera2, posvie,posvie2, postexte,postextek,poslvl1_2, poslvl1, postexte2,postextek2, postexte3,postextek3, postexte4,postextek4;
-enemy enemy1, enemy2, enemy3,enemyk3,enemyk, enemyk1, enemyk2 ;
-SDL_Surface *sauvgarder=NULL;
-  SDL_Surface *oui=NULL;
-  SDL_Surface *non=NULL;
-   SDL_Rect sauvgarderPosition;
-  SDL_Rect ouiPosition;
-  SDL_Rect nonPosition;
+SDL_Surface *lvl1 = NULL, *lvll = NULL, *vie11 = NULL, *vie2 = NULL, *texte4 = NULL, *textek4 = NULL, *rotation = NULL, *texte3 = NULL, *texte2 = NULL, *texte1 = NULL, *map = NULL, *textek3 = NULL, *textek2 = NULL, *textek1 = NULL;
+SDL_Rect camera, camera2, posvie, posvie2, postexte, postextek, poslvl1_2, poslvl1, postexte2, postextek2, postexte3, postextek3, postexte4, postextek4;
+enemy enemy1, enemy2, enemy3, enemyk3, enemyk, enemyk1, enemyk2;
+SDL_Surface *sauvgarder = NULL;
+SDL_Surface *oui = NULL;
+SDL_Surface *non = NULL;
+SDL_Rect sauvgarderPosition;
+SDL_Rect ouiPosition;
+SDL_Rect nonPosition;
 SDL_Surface *chrono;
 SDL_Rect tmp_position;
-   char player = 'o';
-   int c=0,t;
-    char M[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
-    int intervall = 100, tempsPrecedentr = 0, tempsActuelr = 0;
-    
-    char tempsjeu[1000];
-
-
+char player = 'o';
+int c = 0, t;
+char M[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
+int intervall = 100, tempsPrecedentr = 0, tempsActuelr = 0;
+int die4;
+enemy enemy4, enemy41;
+personnage1 permini;
+SDL_Surface *lvl1mini = NULL;
+SDL_Rect poslvl1, poslvl1mini;
+SDL_Surface *fire, *fire2;
+SDL_Rect posfire;
+int firee = 1, direct = 1, alea = 1;
+SDL_Surface *rot;
+SDL_Rect posrot;
+FILE *fic1 = NULL;
+Enigme *enig;
 
 // box box1, box2, box3, box4;
 personnage mario, mario1;
@@ -33,10 +41,10 @@ SDL_Color fontColor2 = {255, 0, 0};
 Uint32 start;
 double angle = 0;
 const int fps = 30;
-int tesst=0,tesst1=0,tesst2=0,a = 1, tempsPrecedent = 0, tempsActuel = 0, pit = 0,pit2 = 0, ii,kk, nitro = 0, vitesse = 10,nitro2 = 0, vitesse2 = 10, x2=0,x = 0, y = 0, j = 0, die = 0,diek = 0, check,check2, testk = 0,test=0, testk1=0,test1 = 0, r = 0, test2 = 370,testk2 = 370, aaa = 0,kkk=0, die1, die2, die3, diek1, diek2, diek3;
-char str[12],str2[12];
-int sauvg=0 ,ktest=0;
-int tests=0;
+int tesst = 0, tesst1 = 0, tesst2 = 0, a = 1, tempsPrecedent = 0, tempsActuel = 0, pit = 0, pit2 = 0, ii, kk, nitro = 0, vitesse = 10, nitro2 = 0, vitesse2 = 10, x2 = 0, x = 0, y = 0, j = 0, die = 0, diek = 0, check, check2, testk = 0, test = 0, testk1 = 0, test1 = 0, r = 0, test2 = 370, testk2 = 370, aaa = 0, kkk = 0, die1, die2, die3, diek1, diek2, diek3;
+char str[12], str2[12];
+int sauvg = 0, ktest = 0;
+int tests = 0;
 void down_menu(int *n, int *l, int *s, int *e, int *e1);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void up_menu(int *n, int *l, int *s, int *e, int *e1);
@@ -61,11 +69,11 @@ extern SDL_Rect possetjouer;
 extern int sett, x3, y3;
 extern SDL_Rect possetj, posexitj;
 void setjouersouris(int *jouer);
- 
-int tmp_enig,yossri=0;
-    char B[10];
-    float *res_lin;
- char eq[20];
+
+int tmp_enig, yossri = 0;
+char B[10];
+float *res_lin;
+char eq[20];
 
 void down_menusettings(int *sb1, int *sb2, int *sb3, int *sb4);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,4 +91,4 @@ void settings_RIGHT();
 void settings_RETURN();
 void settings_affichage();
 void settings();
-#define TEMPS       30
+#define TEMPS 30

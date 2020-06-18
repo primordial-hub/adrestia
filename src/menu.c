@@ -596,7 +596,7 @@ void settings()
   switch (event1.type)
   {
   case SDL_QUIT:
-      continuer = 0;
+    continuer = 0;
   case SDL_MOUSEMOTION:
     sx = event.motion.x;
     sy = event.motion.y;
@@ -843,35 +843,25 @@ void play(int *jouer)
   enemy1.direction = 1;
   enemy2.direction = 1;
   enemy3.direction = 1;
-///////////
-  int die4;
- enemy enemy4,enemy41;
- personnage1 permini;
-SDL_Surface *lvl1mini=NULL;
-  SDL_Rect poslvl1,poslvl1mini;
-enemy4.posen.x =1500;
+  ///////////
+
+  enemy4.posen.x = 1500;
   enemy4.posen.y = 628;
-enemy4.direction =1;
-enemy4.distance = 280;
- enemy4.position_initiale =1220;
-SDL_Surface *fire,*fire2;
-  SDL_Rect posfire;
- int firee=1,direct=1,alea=1;
+  enemy4.direction = 1;
+  enemy4.distance = 280;
+  enemy4.position_initiale = 1220;
   enemy4.en = IMG_Load("imlvl1/en2.png");
   enemy41.en = IMG_Load("imlvl1/en21.png");
   fire = IMG_Load("imlvl1/fire.png");
   fire2 = IMG_Load("imlvl1/fire2.png");
-poslvl1mini.x=50;
-  poslvl1mini.y=10;
- lvl1mini = IMG_Load("imlvl1/lvl1mini.png");
+  poslvl1mini.x = 750;
+  poslvl1mini.y = 10;
+  lvl1mini = IMG_Load("imlvl1/lvl1mini.png");
   permini.perso = IMG_Load("imperso/permini.png");
-permini.posperso.x=55;
-permini.posperso.y=67;
-////////////
-  SDL_Surface *rot;
-  SDL_Rect posrot;
-  tmp_position.x = 10;
-  tmp_position.y = 670;
+  permini.posperso.x = 755;
+  permini.posperso.y = 67;
+  ////////////
+
   sauvgarderPosition.x = 400;
   sauvgarderPosition.y = 50;
 
@@ -880,9 +870,6 @@ permini.posperso.y=67;
 
   nonPosition.x = 420 + 225;
   nonPosition.y = 100 + 442;
-
-  FILE *fic1 = NULL;
-  Enigme *enig;
 
   sauvgarder = IMG_Load("images/sauvgarder.png");
   oui = IMG_Load("images/oui.png");
@@ -900,9 +887,7 @@ permini.posperso.y=67;
   texte1 = TTF_RenderText_Solid(fontTest1, "dlrow olleH!", fontColor1);
   texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
   texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
-  sprintf(tempsjeu, "%d", SDL_GetTicks());
-  chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
-  SDL_BlitSurface(chrono, NULL, lvl1, &tmp_position);
+
   //box1.box = IMG_Load("imlvl1/lvl1box1.png");
   //mario.perso = IMG_Load("imlvl1/en2.png");
   //mario1.perso = IMG_Load("imlvl1/en2.png");
@@ -940,7 +925,7 @@ permini.posperso.y=67;
   }
   SDL_Flip(screen);
   SDL_EnableKeyRepeat(10, 10);
-/* hedha eli bech tna7ilou el commentaire
+  /* hedha eli bech tna7ilou el commentaire
   enig->surf_enig = IMG_Load("enig/enigme.png");
   SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
   enig->enigme_position.x = 300;
@@ -966,12 +951,11 @@ permini.posperso.y=67;
   SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);
 */
 
-
   SDL_Event jj;
 
   while (*jouer == 1)
-  {//// ya ashref hedha el xo mat7ebech to93d eetaswira mte3ha rek7a 7awel feha w 7ot condition bech tatla3
-    xo(lvl1,&player,&c,&t,M);
+  { //// ya ashref hedha el xo mat7ebech to93d eetaswira mte3ha rek7a 7awel feha w 7ot condition bech tatla3
+    // xo(lvl1, &player, &c, &t, M);
     aaa++;
 
     if (aaa > 1000)
@@ -1014,15 +998,13 @@ permini.posperso.y=67;
           f = fopen("sauvgarder.txt", "w");
           fprintf(f, "%d %d %d %d %d %d %d %d %d %d %d %d ", per.posperso.x, per.posperso.y, per.posperso.w, per.posperso.h, camera.x, camera.y, camera.h, camera.w, per.position_init.x, per.position_init.y, per.position_init.h, per.position_init.w);
           fclose(f);
-          tests = 1;
-          *jouer = 0;
           sauvg = 0;
+          *jouer = 0;
         }
         else if ((jj.button.x > 640 && jj.button.x < 870) && (jj.button.y > 542 && jj.button.y < 595))
         {
-          *jouer = 0;
-          tests = 1;
           sauvg = 0;
+          *jouer = 0;
         }
 
         break;
@@ -1110,13 +1092,13 @@ permini.posperso.y=67;
       }
       break;
     }
-    
-    if (sauvg == 1 && tests == 0)
+
+    if (sauvg == 1)
     {
 
-      SDL_BlitSurface(sauvgarder, NULL, lvl1, &sauvgarderPosition);
-      SDL_BlitSurface(oui, NULL, lvl1, &ouiPosition);
-      SDL_BlitSurface(non, NULL, lvl1, &nonPosition);
+      SDL_BlitSurface(sauvgarder, NULL, screen, &sauvgarderPosition);
+      SDL_BlitSurface(oui, NULL, screen, &ouiPosition);
+      SDL_BlitSurface(non, NULL, screen, &nonPosition);
     }
 
     if (nitro == 1)
@@ -1260,9 +1242,6 @@ permini.posperso.y=67;
         per.posperso.w = per.posperso.w + vitesse;
         x = x + vitesse;
         camera.x = camera.x + vitesse;
-        sauvgarderPosition.x = sauvgarderPosition.x + vitesse;
-        ouiPosition.x = ouiPosition.x + vitesse;
-        nonPosition.x = nonPosition.x + vitesse;
       }
       if ((b[1]) && (camera.x > 0) && check != 3 && check != 5 && check != 7 && check != 9 && test1 == 0)
       {
@@ -1270,9 +1249,6 @@ permini.posperso.y=67;
         per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
-        sauvgarderPosition.x = sauvgarderPosition.x - vitesse;
-        ouiPosition.x = ouiPosition.x - vitesse;
-        nonPosition.x = nonPosition.x - vitesse;
       }
       if ((b[1]) && (camera.x < 10 || camera.x > 5365 - 1366) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
       {
@@ -1294,53 +1270,56 @@ permini.posperso.y=67;
       sprintf(str, "%d", aaa);
       texte4 = TTF_RenderText_Solid(fontTest1, str, fontColor1);
 
-      sprintf(tempsjeu, "%d ", tempsActuelr);
-      chrono = TTF_RenderText_Solid(fontTest1, tempsjeu, fontColor1);
-      SDL_BlitSurface(chrono, NULL, lvl1, &tmp_position);
-
       SDL_BlitSurface(lvl1, &camera, screen, NULL);
       SDL_BlitSurface(lvll, NULL, lvl1, &poslvl1);
       enemy1 = deplacement_aleatoire(enemy1);
       enemy2 = deplacement_aleatoire(enemy2);
-       
-////////////////////////////////////////////////////////////////////////////////////////////
-   if ((enemy4.posen.x-per.posperso.x>400)||(per.posperso.x>1300))
- {enemy4=deplacement_aleatoire(enemy4);
-  if (enemy4.direction % 2 == 0)
+
+      ////////////////////////////////////////////////////////////////////////////////////////////
+      if ((enemy4.posen.x - per.posperso.x > 400) || (per.posperso.x > 1300))
       {
         enemy4 = deplacement_aleatoire(enemy4);
-        SDL_BlitSurface(enemy4.en, NULL, lvl1, &enemy4.posen);
+        if (enemy4.direction % 2 == 0)
+        {
+          enemy4 = deplacement_aleatoire(enemy4);
+          SDL_BlitSurface(enemy4.en, NULL, lvl1, &enemy4.posen);
+        }
+        else if (enemy4.direction % 2 == 1)
+        {
+
+          enemy4 = deplacement_aleatoire(enemy4);
+          SDL_BlitSurface(enemy41.en, NULL, lvl1, &enemy4.posen);
+        }
       }
-      else if (enemy4.direction % 2 == 1)
+      else
       {
-       
-        enemy4 = deplacement_aleatoire(enemy4);
-        SDL_BlitSurface(enemy41.en, NULL, lvl1, &enemy4.posen);
-      } }
-     else 
-       {  enemy4=automatisation (per,enemy4,lvl1,&posfire,&firee,&direct,&alea);  
-     if (direct==1)
-       {SDL_BlitSurface(enemy4.en, NULL,lvl1, &enemy4.posen);}
-     else if (direct==2)
-          {SDL_BlitSurface(enemy41.en, NULL,lvl1, &enemy4.posen);}
-   if (firee == 2)
-    {if (direct==1)
-       {SDL_BlitSurface(fire,NULL,lvl1,&posfire);}
-     else if (direct==2)
-          {SDL_BlitSurface(fire2,NULL,lvl1,&posfire);}
-    }} 
-    permini.posperso.x=(55+(camera.x+(per.posperso.x*0.1)));
-   SDL_BlitSurface(lvl1mini, NULL, lvl1, &poslvl1mini);
-       SDL_BlitSurface(permini.perso, NULL,lvl1, &permini.posperso); 
-///////////////////////////////////////////////////////////////////////////////////
+        enemy4 = automatisation(per, enemy4, lvl1, &posfire, &firee, &direct, &alea);
+        if (direct == 1)
+        {
+          SDL_BlitSurface(enemy4.en, NULL, lvl1, &enemy4.posen);
+        }
+        else if (direct == 2)
+        {
+          SDL_BlitSurface(enemy41.en, NULL, lvl1, &enemy4.posen);
+        }
+        if (firee == 2)
+        {
+          if (direct == 1)
+          {
+            SDL_BlitSurface(fire, NULL, lvl1, &posfire);
+          }
+          else if (direct == 2)
+          {
+            SDL_BlitSurface(fire2, NULL, lvl1, &posfire);
+          }
+        }
+      }
+      permini.posperso.x = (755 + (camera.x * 0.1 + (per.posperso.x * 0.01)));
+      SDL_BlitSurface(lvl1mini, NULL, screen, &poslvl1mini);
+      SDL_BlitSurface(permini.perso, NULL, screen, &permini.posperso);
+      ///////////////////////////////////////////////////////////////////////////////////
       SDL_BlitSurface(enemy1.en, NULL, lvl1, &enemy1.posen);
       SDL_BlitSurface(enemy2.en, NULL, lvl1, &enemy2.posen);
-      //mario = access_box1(box1, mario, access);
-      //mario1 = access_box2(box2, mario1, access);
-      //SDL_BlitSurface(mario.perso, NULL, lvl1, &mario.posperso);
-      //SDL_BlitSurface(mario1.perso, NULL, lvl1, &mario1.posperso);
-      // SDL_BlitSurface(box1.box, NULL, lvl1, &box1.posbox);
-      //SDL_BlitSurface(box2.box, NULL, lvl1, &box2.posbox);
       //////////////////////////////
       SDL_BlitSurface(per.perso, NULL, screen, &per.position_init);
       SDL_BlitSurface(vie11, NULL, screen, &posvie);
@@ -1406,11 +1385,10 @@ permini.posperso.y=67;
         SDL_BlitSurface(texte2, NULL, screen, &postexte2);
         SDL_BlitSurface(texte3, NULL, screen, &postexte3);
         SDL_BlitSurface(texte4, NULL, screen, &postexte4);
-        *jouer = 0;
         SDL_Delay(2000);
+        *jouer = 0;
       }
 
-      SDL_Flip(lvl1);
     }
 
     SDL_Flip(screen);
@@ -1443,14 +1421,14 @@ permini.posperso.y=67;
   SDL_FreeSurface(oui);
   SDL_FreeSurface(non);
   SDL_FreeSurface(chrono);
- SDL_FreeSurface(enemy4.en);
- SDL_FreeSurface(enemy41.en);
- SDL_FreeSurface(permini.perso);
+  SDL_FreeSurface(enemy4.en);
+  SDL_FreeSurface(enemy41.en);
+  SDL_FreeSurface(permini.perso);
   SDL_FreeSurface(lvl1mini);
-  SDL_FreeSurface(enig->surf_enig);
+  /*SDL_FreeSurface(enig->surf_enig);
   SDL_FreeSurface(enig->surf_choix_A);
   SDL_FreeSurface(enig->surf_choix_B);
-  SDL_FreeSurface(enig->surf_choix_C);
+  SDL_FreeSurface(enig->surf_choix_C);*/
 }
 
 void play2(int *jouer)
@@ -1643,6 +1621,7 @@ void play2(int *jouer)
     diek1 = callenemy(per2, enemyk1);
     diek2 = callenemy(per2, enemyk2);
     diek3 = callenemy(per2, enemyk3);
+
     check = tellmewhattodo(map, per.posperso);
     check2 = tellmewhattodo(map, per2.posperso);
     SDL_PollEvent(&jj);
@@ -1820,9 +1799,9 @@ void play2(int *jouer)
     if (sauvg == 1 && tests == 0)
     {
 
-      SDL_BlitSurface(sauvgarder, NULL, lvl1, &sauvgarderPosition);
-      SDL_BlitSurface(oui, NULL, lvl1, &ouiPosition);
-      SDL_BlitSurface(non, NULL, lvl1, &nonPosition);
+      SDL_BlitSurface(sauvgarder, NULL, screen, &sauvgarderPosition);
+      SDL_BlitSurface(oui, NULL, screen, &ouiPosition);
+      SDL_BlitSurface(non, NULL, screen, &nonPosition);
     }
 
     if (nitro2 == 1)
@@ -2007,9 +1986,6 @@ void play2(int *jouer)
         per.posperso.w = per.posperso.w + vitesse;
         x = x + vitesse;
         camera.x = camera.x + vitesse;
-        sauvgarderPosition.x = sauvgarderPosition.x + vitesse;
-        ouiPosition.x = ouiPosition.x + vitesse;
-        nonPosition.x = nonPosition.x + vitesse;
       }
       if ((b[1]) && (camera.x > 0) && check != 3 && check != 5 && check != 7 && check != 9 && test1 == 0)
       {
@@ -2017,9 +1993,6 @@ void play2(int *jouer)
         per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
-        sauvgarderPosition.x = sauvgarderPosition.x - vitesse;
-        ouiPosition.x = ouiPosition.x - vitesse;
-        nonPosition.x = nonPosition.x - vitesse;
       }
       if ((b[1]) && (camera.x < 10 || camera.x > 5365 - (1366 / 2)) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
       {
@@ -2045,9 +2018,6 @@ void play2(int *jouer)
           per2.posperso.w = per2.posperso.w + vitesse2;
           x2 = x2 + vitesse2;
           camera2.x = camera2.x + vitesse2;
-          sauvgarderPosition.x = sauvgarderPosition.x + vitesse;
-          ouiPosition.x = ouiPosition.x + vitesse;
-          nonPosition.x = nonPosition.x + vitesse;
         }
         if ((b2[1]) && (camera2.x > 0) && check2 != 3 && check2 != 5 && check2 != 7 && check2 != 9 && testk1 == 0)
         {
@@ -2055,9 +2025,6 @@ void play2(int *jouer)
           per2.posperso.x = per2.posperso.x - vitesse2;
           x2 = x2 - vitesse2;
           camera2.x = camera2.x - vitesse2;
-          sauvgarderPosition.x = sauvgarderPosition.x - vitesse;
-          ouiPosition.x = ouiPosition.x - vitesse;
-          nonPosition.x = nonPosition.x - vitesse;
         }
         if ((b2[1]) && (camera2.x < 10 || camera2.x > 5365 - (1366 / 2)) && test1 < 29 && check2 != 3 && check2 != 5 && check2 != 7 && check2 != 9)
         {
@@ -2193,8 +2160,8 @@ void play2(int *jouer)
         SDL_BlitSurface(textek2, NULL, screen, &postextek2);
         SDL_BlitSurface(textek3, NULL, screen, &postextek3);
         SDL_BlitSurface(textek4, NULL, screen, &postextek4);
-        *jouer = 0;
         SDL_Delay(2000);
+        *jouer = 0;
       }
 
       SDL_Flip(lvl1);
@@ -2396,11 +2363,11 @@ void choix_menu1(int *jouer, int *x1, int *y1, int box_x, int box_h, int box_w, 
     *x1 = 0;
     *y1 = 0;
     Mix_PlayChannel(1, son, 0);
-    if(tesst1=1)
-    *jouer = 1;
-    else if(tesst2=1)
-    *jouer =2;
-    
+    if (tesst1 == 1)
+      *jouer = 1;
+    else if (tesst2 == 1)
+      *jouer = 2;
+
     ktest = 1;
   }
   if ((*x1 > box_x) && (*x1 < box_x + box_w) && (*y1 > box_y2) && (*y1 < box_y2 + box_h))
@@ -2516,7 +2483,7 @@ void menu()
     switch (event.type)
     {
     case SDL_QUIT:
-        if (tesst == 1)
+      if (tesst == 1)
       {
         tesst = 0;
       }
@@ -2532,17 +2499,13 @@ void menu()
       {
         if ((x > 60 && x < 60 + 353) && (y > 250 && y < 250 + 40))
         {
-
           SDL_BlitSurface(solo3, NULL, screen, &possolo);
-
           SDL_BlitSurface(multijoueurs, NULL, screen, &posmultijoueurs);
           SDL_Flip(screen);
         }
         if ((x > 877 && x < 877 + 353) && (y > 250 && y < 250 + 40))
         {
-
           SDL_BlitSurface(multijoueurs3, NULL, screen, &posmultijoueurs);
-
           SDL_BlitSurface(solo, NULL, screen, &possolo);
           SDL_Flip(screen);
         }
@@ -2628,11 +2591,11 @@ void menu()
         y11 = event.button.y;
         if ((x1 > 60 && x1 < 60 + 353) && (y11 > 250 && y11 < 250 + 40))
         {
-          
+
           solo2 = IMG_Load("src/Solo.png");
           SDL_BlitSurface(solo2, NULL, screen, &possolo);
           SDL_BlitSurface(multijoueurs, NULL, screen, &posmultijoueurs);
-          tesst1=1;
+          tesst1 = 1;
           jouer = 1;
           tesst = 0;
         }
@@ -2640,7 +2603,7 @@ void menu()
         {
           SDL_BlitSurface(multijoueurs2, NULL, screen, &posmultijoueurs);
           SDL_BlitSurface(solo, NULL, screen, &possolo);
-          tesst2=1;
+          tesst2 = 1;
           jouer = 2;
           tesst = 0;
         }
@@ -2670,15 +2633,13 @@ void menu()
     }
     SDL_BlitSurface(texte, NULL, screen, &textePosition);
     SDL_Flip(screen);
-   
-
-    if (jouer == 1)
-    {
-      play(&jouer);
-    }
     if (jouer == 2)
     {
       play2(&jouer);
+    }
+    if (jouer == 1)
+    {
+      play(&jouer);
     }
   }
   //**********************************************************************
