@@ -940,7 +940,7 @@ permini.posperso.y=67;
   }
   SDL_Flip(screen);
   SDL_EnableKeyRepeat(10, 10);
-
+/* hedha eli bech tna7ilou el commentaire
   enig->surf_enig = IMG_Load("enig/enigme.png");
   SDL_SetColorKey(enig->surf_enig, SDL_SRCCOLORKEY, SDL_MapRGB(enig->surf_enig->format, 255, 255, 255));
   enig->enigme_position.x = 300;
@@ -964,18 +964,22 @@ permini.posperso.y=67;
   enig->choix_C_position.x = 320 + 280;
   enig->choix_C_position.y = 551;
   SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);
+*/
+
 
   SDL_Event jj;
 
   while (*jouer == 1)
-  {
+  {//// ya ashref hedha el xo mat7ebech to93d eetaswira mte3ha rek7a 7awel feha w 7ot condition bech tatla3
+    xo(lvl1,&player,&c,&t,M);
     aaa++;
 
     if (aaa > 1000)
     {
       texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
     }
-    afficher_img(enig, lvl1, fic1, yossri);
+    // w hedhi enigme a3mel condtion bechyatla3 na7na 3amlinou yatla3 toul w na7i el commentaire 3ali lfou9
+    //afficher_img(enig, lvl1, fic1, yossri);
     die1 = callenemy(per, enemy1);
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
@@ -1106,6 +1110,7 @@ permini.posperso.y=67;
       }
       break;
     }
+    
     if (sauvg == 1 && tests == 0)
     {
 
@@ -2623,7 +2628,7 @@ void menu()
         y11 = event.button.y;
         if ((x1 > 60 && x1 < 60 + 353) && (y11 > 250 && y11 < 250 + 40))
         {
-          printf("mmmmm");
+          
           solo2 = IMG_Load("src/Solo.png");
           SDL_BlitSurface(solo2, NULL, screen, &possolo);
           SDL_BlitSurface(multijoueurs, NULL, screen, &posmultijoueurs);
@@ -2665,7 +2670,7 @@ void menu()
     }
     SDL_BlitSurface(texte, NULL, screen, &textePosition);
     SDL_Flip(screen);
-    printf("%d", jouer);
+   
 
     if (jouer == 1)
     {

@@ -16,7 +16,9 @@ SDL_Surface *sauvgarder=NULL;
   SDL_Rect nonPosition;
 SDL_Surface *chrono;
 SDL_Rect tmp_position;
-   
+   char player = 'o';
+   int c=0,t;
+    char M[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
     int intervall = 100, tempsPrecedentr = 0, tempsActuelr = 0;
     
     char tempsjeu[1000];

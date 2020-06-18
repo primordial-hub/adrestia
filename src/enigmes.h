@@ -27,6 +27,13 @@ typedef struct
     CHOIX choix_extr;
 } Enigme;
 
+void xo(SDL_Surface *screen,char *player,int *c,int *t, char M[3][3]);
+void initXo(char M[3][3]);
+void printForMe(char M[3][3]);
+void playk2(char *player, char M[3][3], int x, int y, SDL_Surface *kx, SDL_Rect x_position, SDL_Surface *screen);
+void play1(char *player, char M[3][3], int *c, int *t, SDL_Surface *ko, SDL_Rect o_position, SDL_Surface *screen,int test);
+void play3(char *player, char M[3][3], int *c, SDL_Surface *ko, SDL_Rect o_position, SDL_Surface *screen, int test);
+int whowin(char M[3][3]);
 
 void enregistrer_enigme(FILE *fic);
 void extrere_enigme(FILE *fic, Enigme *enig);

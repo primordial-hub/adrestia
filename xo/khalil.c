@@ -8,19 +8,16 @@
 #include <SDL/SDL_audio.h>
 #include <SDL/SDL_video.h>
 #include "xo.h"
-int main()
+void xo(SDL_Surface *screen)
 {
     char M[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
     char player = 'x';
     int i, x, y, c = 0,t,test=0;
     char B[20];
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    SDL_Surface *screen = NULL;
-    screen = SDL_SetVideoMode(1300, 800, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    SDL_Flip(screen);
-    TTF_Init();
+    
+    
     TTF_Font *fontTest1;
-    fontTest1 = TTF_OpenFont("khal.otf", 30);
+    fontTest1 = TTF_OpenFont("xo/khal.otf", 30);
     SDL_Color fontColor = {0, 255, 255};
     SDL_Surface *kx = NULL;
     SDL_Rect x_position;
@@ -30,29 +27,23 @@ int main()
     SDL_Rect tab_position;
     SDL_Surface *khal=NULL;
     SDL_Rect a_position;
-                ko = IMG_Load("o.png");
-                kx = IMG_Load("x.png");
-                joueur = IMG_Load("tab.png");
+                ko = IMG_Load("xo/o.png");
+                kx = IMG_Load("xo/x.png");
+                joueur = IMG_Load("xo/tab.png");
                 SDL_SetColorKey(joueur, SDL_SRCCOLORKEY, SDL_MapRGB(joueur->format, 255, 255, 255));
                 tab_position.x = 300;
                 tab_position.y = 70;
                SDL_BlitSurface(joueur, NULL, screen, &tab_position);
-    while (1)
-    {
+   
         SDL_Event event;
         SDL_WaitEvent(&event);
-        if (event.type == SDL_QUIT)
-        {
-            break;
-        }
+        
         if (player == 'o')
                     {
-                        play3(&player,M,&c,ko,o_position,screen,test);
+                        play1(&player,M,&c, &t,ko,o_position,screen,test);
                     }
         if (event.type == SDL_MOUSEBUTTONDOWN)
         {
-            if (event.button.button == SDLK_ESCAPE)
-            {break;} 
             
                     
             if (event.button.button == SDL_BUTTON_LEFT)
@@ -104,13 +95,10 @@ i=whowin(M);
             }
         }
         SDL_Flip(screen);
-    }
+    
     SDL_FreeSurface(khal);
     SDL_FreeSurface(kx);
     SDL_FreeSurface(ko);
-    SDL_FreeSurface(screen);
     SDL_FreeSurface(joueur);
-    TTF_Quit();
-    SDL_Quit();
-    return 0;
+  
 }
