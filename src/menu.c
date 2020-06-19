@@ -888,6 +888,8 @@ void play(int *jouer)
   texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
   texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
 
+  int haha=0;
+
   //box1.box = IMG_Load("imlvl1/lvl1box1.png");
   //mario.perso = IMG_Load("imlvl1/en2.png");
   //mario1.perso = IMG_Load("imlvl1/en2.png");
@@ -915,7 +917,7 @@ void play(int *jouer)
   enig->choix_C_position.x = 200;
   enig->choix_C_position.y = 200;
   SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);*/
-
+ 
   if (*jouer == 1)
   {
     SDL_BlitSurface(lvl1, &camera, screen, NULL);
@@ -954,7 +956,7 @@ void play(int *jouer)
 
   while (*jouer == 1)
   { //// ya ashref hedha el xo mat7ebech to93d eetaswira mte3ha rek7a 7awel feha w 7ot condition bech tatla3
-  
+
     aaa++;
 
     if (aaa > 1000)
@@ -962,10 +964,16 @@ void play(int *jouer)
       texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
     }
     // w hedhi enigme a3mel condtion bechyatla3 na7na 3amlinou yatla3 toul w na7i el commentaire 3ali lfou9
-    if (check == 1)
+    if (check == 1&&haha==0)
     {
-     // afficher_img(enig, lvl1, fic1, yossri);
-       //xo(lvl1, &player, &c, &t, M);
+      // afficher_img(enig, lvl1, fic1, yossri);
+      xo(screen);
+      haha=1;
+
+    }
+    if (check==1 && haha==1)
+    {
+      check=4;
     }
     die1 = callenemy(per, enemy1);
     die2 = callenemy(per, enemy2);
@@ -1461,7 +1469,7 @@ void play2(int *jouer)
     camera.w = 1366 / 2;
     camera.h = 800;
     //
-    camera2.x =  1366 / 2;
+    camera2.x = 1366 / 2;
     camera2.y = 0;
     camera2.w = 1366;
     camera2.h = 800;
@@ -1842,7 +1850,6 @@ void play2(int *jouer)
       setjouersouris(jouer);
     }
 
-   
     if (die1 == 1 || die2 == 1 || die3 == 1)
     {
 
@@ -2619,6 +2626,7 @@ void menu()
     }
     if (jouer == 1)
     {
+       
       play(&jouer);
     }
   }

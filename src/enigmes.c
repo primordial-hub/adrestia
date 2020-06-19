@@ -1209,12 +1209,14 @@ int whowin(char M[3][3])
         return 3;
     return 0;
 }
-void xo(SDL_Surface *screen, char *player, int *c, int *t, char M[3][3])
+void xo(SDL_Surface *screen)
 {
-
-    int i, x, y, test = 0;
+    char M[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
+    char player = 'o';
+    int i, x, y, c = 0,t,test=0,haja=1;
     char B[20];
-
+   
+    
     TTF_Font *fontTest1;
     fontTest1 = TTF_OpenFont("xo/khal.otf", 30);
     SDL_Color fontColor = {0, 255, 255};
@@ -1222,48 +1224,55 @@ void xo(SDL_Surface *screen, char *player, int *c, int *t, char M[3][3])
     SDL_Rect x_position;
     SDL_Surface *ko = NULL;
     SDL_Rect o_position;
-    ko = IMG_Load("xo/o.png");
-    kx = IMG_Load("xo/x.png");
-
-    SDL_Surface *khal = NULL;
-    SDL_Rect a_position;
     SDL_Surface *joueur = NULL;
     SDL_Rect tab_position;
-    joueur = IMG_Load("xo/tab.png");
-    SDL_SetColorKey(joueur, SDL_SRCCOLORKEY, SDL_MapRGB(joueur->format, 255, 255, 255));
-    tab_position.x = 300;
-    tab_position.y = 70;
-    SDL_BlitSurface(joueur, NULL, screen, &tab_position);
-
-    SDL_Event event;
-    SDL_WaitEvent(&event);
-
-    if (event.type == SDL_MOUSEBUTTONDOWN)
+    SDL_Surface *khal=NULL;
+    SDL_Rect a_position;
+                ko = IMG_Load("xo/o.png");
+                kx = IMG_Load("xo/x.png");
+                joueur = IMG_Load("xo/tab.png");
+                SDL_SetColorKey(joueur, SDL_SRCCOLORKEY, SDL_MapRGB(joueur->format, 255, 255, 255));
+                tab_position.x = 300;
+                tab_position.y = 70;
+               SDL_BlitSurface(joueur, NULL, screen, &tab_position);
+    while (haja==1)
     {
-
-        if (event.button.button == SDL_BUTTON_LEFT)
+        SDL_Event event;
+        SDL_WaitEvent(&event);
+        if (event.type == SDL_QUIT)
         {
-            x = event.button.x;
-            y = event.button.y;
-            SDL_BlitSurface(joueur, NULL, screen, &tab_position);
-
-            /*while (whowin(M) == 0)
-                { */
-            test = 0;
-            if ((*player) == 'o')
+            break;
+        }
+        if (player == 'o')
+                    {
+               play1(&player,M,&c,&t,ko,o_position,screen,test);
+                    }
+        if (event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            if (event.button.button == SDLK_ESCAPE)
+            {break;} 
+            
+                    
+            if (event.button.button == SDL_BUTTON_LEFT)
             {
-                play1(player, M, c, t, ko, o_position, screen, test);
-            }
-            else if ((*player) == 'x')
-            {
-                playk2(player, M, x, y, kx, x_position, screen);
-            }
-            printForMe(M);
-            //}
-            i = whowin(M);
-            if (i != 0)
-            {
-                switch (i)
+                x = event.button.x;
+                y = event.button.y;
+                SDL_BlitSurface(joueur, NULL, screen, &tab_position);
+  
+                
+                //while (whowin(M) == 0)
+                //{  
+                    test=0;
+                   
+                     if (player == 'x')
+                    {
+                        playk2(&player, M, x, y,kx, x_position, screen);
+                    }
+                    printForMe(M);
+                //}
+i=whowin(M);
+    if(i!=0)
+                {switch (i)
                 {
                 case 1:
                     strcpy(B, "player x win");
@@ -1272,6 +1281,7 @@ void xo(SDL_Surface *screen, char *player, int *c, int *t, char M[3][3])
                     a_position.y = 200;
                     SDL_BlitSurface(khal, NULL, screen, &a_position);
                     printf("player x win\n");
+haja=0;
                     break;
                 case 2:
                     strcpy(B, "PC win");
@@ -1280,6 +1290,7 @@ void xo(SDL_Surface *screen, char *player, int *c, int *t, char M[3][3])
                     a_position.y = 200;
                     SDL_BlitSurface(khal, NULL, screen, &a_position);
                     printf("PC win\n");
+haja=0;
                     break;
                 case 3:
                     strcpy(B, "matche NULL");
@@ -1288,15 +1299,18 @@ void xo(SDL_Surface *screen, char *player, int *c, int *t, char M[3][3])
                     a_position.y = 200;
                     SDL_BlitSurface(khal, NULL, screen, &a_position);
                     printf("matche NULL\n");
-                    break;
+haja=0;
+                    break;}
                 }
             }
         }
+        SDL_Flip(screen);
     }
-    SDL_Flip(screen);
-
     SDL_FreeSurface(khal);
     SDL_FreeSurface(kx);
     SDL_FreeSurface(ko);
+   
     SDL_FreeSurface(joueur);
+   
+    
 }

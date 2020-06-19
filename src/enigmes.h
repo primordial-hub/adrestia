@@ -27,11 +27,11 @@ typedef struct
     CHOIX choix_extr;
 } Enigme;
 
-void xo(SDL_Surface *screen,char *player,int *c,int *t, char M[3][3]);
+void xo(SDL_Surface *screen);
 void initXo(char M[3][3]);
 void printForMe(char M[3][3]);
 void playk2(char *player, char M[3][3], int x, int y, SDL_Surface *kx, SDL_Rect x_position, SDL_Surface *screen);
-void play1(char *player, char M[3][3], int *c, int *t, SDL_Surface *ko, SDL_Rect o_position, SDL_Surface *screen,int test);
+void play1(char *player, char M[3][3], int *c, int *t, SDL_Surface *ko, SDL_Rect o_position, SDL_Surface *screen, int test);
 void play3(char *player, char M[3][3], int *c, SDL_Surface *ko, SDL_Rect o_position, SDL_Surface *screen, int test);
 int whowin(char M[3][3]);
 
@@ -44,7 +44,7 @@ int resolution_math(Enigme *enig);
 int resolution(FILE *fic1, Enigme *enig);
 
 void afficher_texte(Enigme *enig, SDL_Surface *screen, FILE *fic1, FILE *fic);
-void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1,int yossri);
+void afficher_img(Enigme *enig, SDL_Surface *screen, FILE *fic1, int yossri);
 void afficher_lin(Enigme *enig, SDL_Surface *screen, float *res_lin, char eq[20], FILE *fic1);
 void afficher_suite(Enigme *enig, SDL_Surface *screen, char general[20], int *U0, int *U1, int *Un, int *n, FILE *fic1);
 
@@ -54,3 +54,4 @@ int gestion_temp_jeu(SDL_Surface *screen);
 void eq_linaire(float *res_lin, char eq[20]);
 void suite_arithmetique(char general[20], int *U0, int *U1, int *Un, int *n);
 void polynome_2(char eq1[11]);
+
