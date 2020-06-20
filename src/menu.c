@@ -888,7 +888,7 @@ void play(int *jouer)
   texte3 = TTF_RenderText_Solid(fontTest1, "Score:", fontColor1);
   texte4 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
 
-  int haha=0;
+  int haha = 0;
 
   //box1.box = IMG_Load("imlvl1/lvl1box1.png");
   //mario.perso = IMG_Load("imlvl1/en2.png");
@@ -917,7 +917,7 @@ void play(int *jouer)
   enig->choix_C_position.x = 200;
   enig->choix_C_position.y = 200;
   SDL_BlitSurface(enig->surf_choix_C, NULL, lvl1, &enig->choix_C_position);*/
- 
+
   if (*jouer == 1)
   {
     SDL_BlitSurface(lvl1, &camera, screen, NULL);
@@ -964,21 +964,22 @@ void play(int *jouer)
       texte1 = TTF_RenderText_Solid(fontTest1, " ", fontColor1);
     }
     // w hedhi enigme a3mel condtion bechyatla3 na7na 3amlinou yatla3 toul w na7i el commentaire 3ali lfou9
-    if (check == 1&&haha==0)
+    if (check == 1 && haha == 0)
     {
       // afficher_img(enig, lvl1, fic1, yossri);
       xo(screen);
-      haha=1;
-
+      haha = 1;
     }
-    if (check==1 && haha==1)
+    if (check == 1 && haha == 1)
     {
-      check=4;
+      check = 4;
     }
     die1 = callenemy(per, enemy1);
     die2 = callenemy(per, enemy2);
     die3 = callenemy(per, enemy3);
+    die4 = callenemy(per, enemy4);
     check = tellmewhattodo(map, per.posperso);
+
     tempsActuelr = SDL_GetTicks();
     SDL_PollEvent(&jj);
 
@@ -1170,7 +1171,7 @@ void play(int *jouer)
         test2 = 370;
       }
     }
-    if (die1 == 1 || die2 == 1 || die3 == 1)
+    if (die1 == 1 || die2 == 1 || die3 == 1 || die4)
     {
 
       SDL_Delay(1000);
@@ -1388,6 +1389,7 @@ void play(int *jouer)
       }
       if (die == 3)
       {
+        ktest=0;
         postexte3.x = 595;
         postexte3.y = 410;
         postexte4.x = 715;
@@ -2626,7 +2628,7 @@ void menu()
     }
     if (jouer == 1)
     {
-       
+
       play(&jouer);
     }
   }
