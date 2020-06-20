@@ -957,7 +957,7 @@ void play(int *jouer)
   while (*jouer == 1)
   { //// ya ashref hedha el xo mat7ebech to93d eetaswira mte3ha rek7a 7awel feha w 7ot condition bech tatla3
 
-    aaa++;
+    
 
     if (aaa > 1000)
     {
@@ -1034,6 +1034,7 @@ void play(int *jouer)
         b[0] = 1;
         per.perso = IMG_Load("imperso/per.png");
         pit = 0;
+        aaa++;
         break;
       case SDLK_LEFT:
         b[1] = 1;
@@ -1052,6 +1053,7 @@ void play(int *jouer)
 
           do
           {
+            aaa++;
             test++;
             per.posperso.y--;
             per.posperso.h--;
@@ -1068,6 +1070,7 @@ void play(int *jouer)
 
           do
           {
+            aaa++;
             test++;
             per.posperso.y--;
             per.posperso.h--;
@@ -2393,13 +2396,13 @@ void menu()
   posmultijoueurs.y = 250;
   posfenetre.x = 0;
   posfenetre.y = 0;
-  fenetre = IMG_Load("src/st.jpg");
-  solo = IMG_Load("src/Solo.png");
-  multijoueurs = IMG_Load("src/Multijoueurs.png");
-  solo2 = IMG_Load("src/Solo.png");
-  multijoueurs2 = IMG_Load("src/Multijoueurs.png");
-  multijoueurs3 = IMG_Load("src/Multijoueurs2.png");
-  solo3 = IMG_Load("src/Solo2.png");
+  fenetre = IMG_Load("images/st.jpg");
+  solo = IMG_Load("images/Solo.png");
+  multijoueurs = IMG_Load("images/Multijoueurs.png");
+  solo2 = IMG_Load("images/Solo.png");
+  multijoueurs2 = IMG_Load("images/Multijoueurs.png");
+  multijoueurs3 = IMG_Load("images/Multijoueurs2.png");
+  solo3 = IMG_Load("images/Solo2.png");
   int jouer = 0;
   init_sm();
 
