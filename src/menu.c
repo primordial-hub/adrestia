@@ -1038,30 +1038,27 @@ void play(int *jouer)
         break;
       case SDLK_LEFT:
         b[1] = 1;
-        per.perso = IMG_Lo
-
-      switch (jj.key.keysym.sym)
-      {
-      case SDLK_RIGHT:
-        b[0] = 1;
-        per.perso = IMG_Load("imperso/per.png");
-        pit = 0;
-        aaa++;
-        break;
-      case SDLK_LEFT:
-        b[1] = 1;
         per.perso = IMG_Load("imperso/per2.png");
         pit = 1;
+        break;
+      case SDLK_DOWN:
+        // access = 2;
+        break;
+      case SDLK_n:
+        nitro = 1;
+        break;
+      case SDLK_UP:
+        if (check == 4 && check != 6 && check != 7)
+        {
 
           do
           {
             aaa++;
             test++;
-            per.posperso.yni
-          {
-            aaa++;
-            test++;
-            per.posperso.ynit.h--;
+            per.posperso.y--;
+            per.posperso.h--;
+            per.position_init.y--;
+            per.position_init.h--;
           } while (test != 250 && tellmewhattodo(map, per.posperso) != 5 && tellmewhattodo(map, per.posperso) != 9 && tellmewhattodo(map, per.posperso) != 8);
         }
         test = 0;
@@ -1083,19 +1080,25 @@ void play(int *jouer)
         }
         test = 0;
         break;
-        test = 0;
-
-        break;
-      case SDLK_SPACE:
-        if (check == 4 && check != 6 && check != 7)
+      case SDLK_ESCAPE:
+        if (sett != 1)
         {
-
-          do
-          {
-            aaa++;
-            test++;
-            per.posperso.y--;
-            per.posperso.h
+          a++;
+        }
+        break;
+      }
+    }
+    break;
+    case SDL_KEYUP:
+      switch (jj.key.keysym.sym)
+      {
+      case SDLK_RIGHT:
+        b[0] = 0;
+        break;
+      case SDLK_LEFT:
+        b[1] = 0;
+        break;
+      case SDLK_UP:
 
         break;
       case SDLK_DOWN:
@@ -1103,19 +1106,25 @@ void play(int *jouer)
         break;
       }
       break;
-        test = 0;
+    }
 
-        break;
-      case SDLK_SPACE:
-        if (check == 4 && check != 6 && check != 7)
+    if (sauvg == 1)
+    {
+
+      SDL_BlitSurface(sauvgarder, NULL, screen, &sauvgarderPosition);
+      SDL_BlitSurface(oui, NULL, screen, &ouiPosition);
+      SDL_BlitSurface(non, NULL, screen, &nonPosition);
+    }
+
+    if (nitro == 1)
+    {
+
+      if (ii < 10)
+      {
+        if (pit == 0)
         {
-
-          do
-          {
-            aaa++;
-            test++;
-            per.posperso.y--;
-            per.posperso.hLoad("imperso/per.png");
+          b[0] = 1;
+          per.perso = IMG_Load("imperso/per.png");
         }
         if (pit == 1)
         {
@@ -1141,141 +1150,6 @@ void play(int *jouer)
     {
       setjouersouris(jouer);
     }
-
-    if (r != 0 && test1 == 0)
-    {
-      test2 = depdouris(test2, depsouris(test2, r), check);
-      per.posperso.x = (depdouris(per.posperso.x, depsouris(test2, r), check));
-      per.posperso.w = (depdouris(per.posperso.w, depsouris(test2, r), check));
-      camera.x = (depdouris(camera.x, depsouris(test2, r), check));
-      x = (depdouris(x, depsouris(test2, r), check));
-
-      if (depsouris(test2, r) == 1)
-      {
-        per.perso = IMG_Load("imperso/per.png");
-      }
-
-      }
-      if (test2 == r)
-      {
-        r = 0;
-        test2 = 370;
-      }
-    }
-    if (die1 == 1 || die2 == 1 || die3 == 1 || die4)
-    {
-
-      SDL_Delay(1000);
-      per.posperso.x = per.posperso.x - 300;
-      per.posperso.w = per.posperso.w - 300;
-      x = x - 300;
-      camera.x = camera.x - 300;
-      per.posperso.y = per.posperso.y - 300;
-      per.posperso.h = per.posperso.h - 300;
-      per.position_init.y = per.position_init.y - 300;
-      per.position_init.h = per.position_init.h - 300;
-      die++;
-      posrot.x = per.posperso.x;
-      posrot.y = per.posperso.y;
-      /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-
-      tempsActuel = SDL_GetTicks();
-      if (tempsActuel - tempsPrecedent > 30)
-      {
-        angle += 2; //On augmente l'angle pour que l'image tourne sur elle-même.
-
-        tempsPrecedent = tempsActuel;
-      }
-      else
-      {
-        SDL_Delay(30 - (tempsActuel - tempsPrecedent));
-      }
-
-      SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
-
-      rotation = rotozoomSurface(rot, angle, 1.0, 1); //On transforme la surface image.*/
-
-      //On positionne l'image en fonction de sa taille.
-      //per.posperso.x = 200 - rotation->w / 2;
-      //per.posperso.y = 200 - rotation->h / 2;
-
-      /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
-      SDL_FreeSurface(rotation);*/
-      /*	while(angle <200)
-	{
-		angle+=5;
-		rotation = rotozoomSurface(per.perso, angle, 0, 0);
-		SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-		SDL_BlitSurface(rotation,NULL,screen,&per.posperso);
-      if (depsouris(test2, r) == 2)
-      {
-        per.perso = IMG_Load("imperso/per2.png");
-      }
-      if (test2 == r)
-      {
-        r = 0;
-        test2 = 370;
-      }
-    }
-    if (die1 == 1 || die2 == 1 || die3 == 1 || die4)
-    {
-
-      SDL_Delay(1000);
-      per.posperso.x = per.posperso.x - 300;
-      per.posperso.w = per.posperso.w - 300;
-      x = x - 300;
-      camera.x = camera.x - 300;
-      per.posperso.y = per.posperso.y - 300;
-      per.posperso.h = per.posperso.h - 300;
-      per.position_init.y = per.position_init.y - 300;
-      per.position_init.h = per.position_init.h - 300;
-      die++;
-      posrot.x = per.posperso.x;
-      posrot.y = per.posperso.y;
-      /* SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-
-      tempsActuel = SDL_GetTicks();
-      if (tempsActuel - tempsPrecedent > 30)
-      {
-        angle += 2; //On augmente l'angle pour que l'image tourne sur elle-même.
-
-        tempsPrecedent = tempsActuel;
-      }
-      else
-      {
-        SDL_Delay(30 - (tempsActuel - tempsPrecedent));
-      }
-
-      SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
-
-      rotation = rotozoomSurface(rot, angle, 1.0, 1); //On transforme la surface image.*/
-
-      //On positionne l'image en fonction de sa taille.
-      //per.posperso.x = 200 - rotation->w / 2;
-      //per.posperso.y = 200 - rotation->h / 2;
-
-      /* SDL_BlitSurface(rotation, NULL, screen, &posrot); //On affiche la rotation de la surface image.
-      SDL_FreeSurface(rotation);*/
-      /*	while(angle <200)
-	{
-		angle+=5;
-		rotation = rotozoomSurface(per.perso, angle, 0, 0);
-		SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-		SDL_BlitSurface(rotation,NULL,screen,&per.posperso);
-		SDL_FreeSurface(rotation);
-		SDL_Delay(50);
-		SDL_Flip(screen);
-	}*/
-      if (aaa < 301)
-      {
-        aaa = 0;
-      }
-      if (aaa > 300)
-      {
-        aaa = aaa - 300;
-      }
-    }
-
 
     if (r != 0 && test1 == 0)
     {
@@ -1390,10 +1264,6 @@ void play(int *jouer)
         per.posperso.x = per.posperso.x - vitesse;
         x = x - vitesse;
         camera.x = camera.x - vitesse;
-      }
-      if ((b[1]) && (camera.x < 10 || camera.x > 5365 - 1366) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
-      {
-        per.position_init
       }
       if ((b[1]) && (camera.x < 10 || camera.x > 5365 - 1366) && test1 < 29 && check != 3 && check != 5 && check != 7 && check != 9)
       {
